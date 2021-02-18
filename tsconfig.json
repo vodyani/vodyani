@@ -1,0 +1,29 @@
+{
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.js",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": false,
+    "incremental": false,
+    "declaration": true,
+    "sourceMap": false,
+    "module": "CommonJS",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@lib": ["src/lib"],
+      "@common": ["src/common"],
+      "@modules": ["src/modules"],
+      "@modules/*": ["src/modules/*"],
+    }
+  }
+}

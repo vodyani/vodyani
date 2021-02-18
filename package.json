@@ -1,0 +1,45 @@
+{
+	"name": "nest-server",
+	"description": "nest-server",
+	"version": "1.0.0",
+	"author": "chogath@163.com",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"repository": {},
+	"scripts": {
+		"build": "tsc",
+		"lint": "eslint ./src",
+		"start": "node dist/main.js",
+		"dev": "tsc && node dist/main.js"
+	},
+	"dependencies": {
+		"@acheetahk/cloudtools": "^2.4.5",
+		"@acheetahk/nest-tools": "^2.8.1",
+		"@nestjs/common": "^7.6.5",
+		"@nestjs/core": "^7.6.5",
+		"@nestjs/platform-express": "^7.6.5",
+		"@nestjs/swagger": "^4.7.2",
+		"@types/ioredis": "^4.19.4",
+		"@types/module-alias": "^2.0.0",
+		"@types/node": "^14.14.7",
+		"class-transformer": "^0.3.1",
+		"class-validator": "^0.12.2",
+		"helmet": "^4.2.0",
+		"ioredis": "^4.22.0",
+		"module-alias": "^2.2.2",
+		"moment": "^2.29.1",
+		"reflect-metadata": "^0.1.13",
+		"rimraf": "^3.0.2",
+		"rxjs": "^6.5.4",
+		"sequelize": "^5.22.3",
+		"sequelize-typescript": "^1.1.0",
+		"typescript": "^4.0.5"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.6.0",
+		"@typescript-eslint/parser": "^4.6.0",
+		"eslint": "^7.12.1",
+		"ts-node": "^9.0.0"
+	},
+	"license": "ISC"
+}
