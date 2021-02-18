@@ -2,4 +2,4 @@
 
 > Nest.js Api
 
-[doc](docs/en.md) | [中文文档](docs/cn.md)
+[English docs](docs/en.md) | [中文文档](docs/cn.md)
