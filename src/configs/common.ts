@@ -1,10 +1,10 @@
 export const common = {
   database: {
-    username: 'root',
-    password: 'root',
-    database: 'nest-server',
+    username: 'postgres',
+    password: 'postgres',
+    database: 'postgres',
     host: 'localhost',
-    port: 3006,
+    port: 5432,
     logging: false,
     dialect: 'postgres',
     pool: { max: 50 },
