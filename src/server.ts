@@ -88,7 +88,7 @@ export class Server {
 
     let message = `[${this.configs.appname}]`;
 
-    message += ` -- SERVER START`;
+    message += ` -- SERVER START WITH`;
     message += ` -- ENV: ${this.configs.env}`;
     message += ` -- LISTEN PORT: ${this.configs.port}`;
 
