@@ -1,6 +1,6 @@
 # Nest-Server
 
-> Nest.js server template
+> 🚀 probably the best scaffolding for nest.js server-side development
 
 [English Docs](docs/en.md) | [中文文档](docs/cn.md)
 
