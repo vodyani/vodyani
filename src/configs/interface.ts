@@ -16,7 +16,7 @@ export interface IoRedisOptions {
   expiredTime?: number;
 }
 
-export interface GlobalConfigs {
+export interface Configs {
   env: string;
   port: string| number;
   appname: string;

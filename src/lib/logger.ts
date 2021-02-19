@@ -1,31 +1,20 @@
 import { SLS } from '@acheetahk/cloudtools';
 
 /**
- * global logger instance
+ * Init logger
  */
-class Logger {
-  /**
-   * init logger instance
-   */
-  constructor(
-    private env: string = 'dev',
-    private appname: string = 'api',
-    private options: SLS.SLSType.SLSOptions = null,
-  ) {}
-
-  /**
-   * get logger instance
-   */
-  public async get(): Promise<SLS.SLSLogger | SLS.SimpleLogger> {
-    return this.env !== 'dev'
-      ? new SLS.SLSLogger(this.appname, this.options)
-      : new SLS.SimpleLogger();
-  }
+interface LoggerParams {
+  env: string;
+  appname: string;
+  options: SLS.SLSType.SLSOptions;
 }
 
 /**
- * export namespace
+ * logger instance
  */
-export {
-  Logger, SLS,
+export const getLogger = (params?: LoggerParams) => {
+
+  return params && params.env !== 'dev'
+    ? new SLS.SLSLogger(params.appname, params.options)
+    : new SLS.SimpleLogger();
 };

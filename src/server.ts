@@ -1,37 +1,50 @@
 import * as helmet from 'helmet';
+import * as Entites from '@entities';
 import { CoreModule } from '@modules';
 import { NestFactory } from '@nestjs/core';
+import { SLS } from '@acheetahk/cloudtools';
+import { Configs, getConfigs } from '@configs';
 import { INestApplication } from '@nestjs/common';
-import { lib, Logger, SLS, Configs, GlobalConfigs } from '@lib';
+import { lib, getDatabase, getLogger, getRedis } from '@lib';
 import { Swagger, Filter, Pipe, Interceptor } from '@acheetahk/nest-tools';
 
 /**
- * nest.js server
+ * api server
  */
 export class Server {
 
+  private configs: Configs;
   private app: INestApplication;
-  private configs: GlobalConfigs;
   private logger: SLS.SLSLogger | SLS.SimpleLogger;
 
   /**
-   * init lib instance
+   * init lib store
    */
   async initLib() {
-    this.configs = await new Configs().get();
-    this.logger = await new Logger(this.configs.env, this.configs.appname, null).get();
+    const entities = [Entites.User];
 
-    lib.set('configs', this.configs);
-    lib.set('logger', this.logger);
-    // lib.set('redis', await new Redis(this.configs.redis).get());
-    // lib.set('database', await new Database(this.configs.database, entities).get());
+    const logger = getLogger();
+    const configs = getConfigs();
+    const redis = getRedis(configs.redis || {});
+    const database = getDatabase({ options: configs.database, entities });
+
+    lib.set('redis', redis);
+    lib.set('logger', logger);
+    lib.set('configs', configs);
+    lib.set('database', database);
+
+    logger.info(`[${configs.appname}] -- INIT LIB`);
   }
 
   /**
-   * init server app instance
+   * init app
    */
   async initApp() {
+    this.logger = lib.get('logger');
+    this.configs = lib.get('configs');
     this.app = await NestFactory.create(CoreModule, { cors: true });
+
+    this.logger.info(`[${this.configs.appname}] -- INIT APP`);
   }
 
   /**
@@ -72,6 +85,13 @@ export class Server {
     await this.useGlobalAop();
     await this.useGlobalSwagger();
     await this.app.listen(this.configs.port);
-    this.logger.info(`${this.configs.appname} Start With ${this.configs.env}: ${this.configs.port}`);
+
+    let message = `[${this.configs.appname}]`;
+
+    message += ` -- SERVER START`;
+    message += ` -- ENV: ${this.configs.env}`;
+    message += ` -- LISTEN PORT: ${this.configs.port}`;
+
+    this.logger.info(message);
   }
 }

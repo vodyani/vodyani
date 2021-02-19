@@ -1,25 +1,32 @@
 /**
- * global store
+ * Global lib store
  */
-export const libStore = <LibKeys>() => {
+const getLibStore = <KEY>() => {
   /**
    * Access the instance object using the map structure
    */
-  const store: Map<LibKeys, any> = new Map();
+  const store: Map<KEY, any> = new Map();
 
   /**
-   * get store instance
+   * Access in store
    */
-  const get = <T>(key: LibKeys): T => {
-    return store.get(key);
-  };
+  return {
+    get: <T>(key: KEY): T => {
+      return store.get(key);
+    },
 
-  /**
-   * set store instance
-   */
-  const set = <T>(key: LibKeys, value: T): void => {
-    store.set(key, value);
+    set: <T>(key: KEY, value: T): void => {
+      store.set(key, value);
+    },
   };
-
-  return { get, set };
 };
+
+/**
+ * Only declared keys can be used
+ */
+type LibKeys = 'database'| 'configs' | 'logger' | 'redis';
+
+/**
+ * global lib instance
+ */
+export const lib = getLibStore<LibKeys>();

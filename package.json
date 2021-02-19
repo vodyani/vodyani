@@ -28,6 +28,7 @@
 		"ioredis": "^4.22.0",
 		"module-alias": "^2.2.2",
 		"moment": "^2.29.1",
+		"pg": "^8.5.1",
 		"reflect-metadata": "^0.1.13",
 		"rimraf": "^3.0.2",
 		"rxjs": "^6.5.4",

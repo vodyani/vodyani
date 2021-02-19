@@ -1,30 +1,25 @@
 import { Sequelize, SequelizeOptions, ModelCtor, Model } from 'sequelize-typescript';
 
 /**
- * global database instance
+ * Init database
  */
-class Database {
-  /**
-   * init database instance
-   */
-  constructor(
-    private readonly options?: SequelizeOptions,
-    private readonly entities?: ModelCtor<Model<any, any>>[],
-  ) {}
-
-  /**
-   * get database instance
-   */
-  public async get(): Promise<Sequelize> {
-    const db = await new Sequelize(this.options);
-    await db.addModels(this.entities);
-    return db;
-  }
+interface DatabaseParams {
+  options?: SequelizeOptions,
+  entities?: ModelCtor<Model<any, any>>[],
 }
 
 /**
- * export namespace
+ * database instance
  */
-export {
-  Database, Sequelize, SequelizeOptions, ModelCtor, Model,
+export const getDatabase = (params: DatabaseParams) => {
+  if (
+    !params ||
+    !params.options ||
+    !params.options
+  ) return null;
+
+  const db = new Sequelize(params.options);
+  db.addModels(params.entities);
+  db.sync(); // It is not recommended to enable it in production
+  return db;
 };
