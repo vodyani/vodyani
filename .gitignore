@@ -4,6 +4,9 @@ node_modules
 # OS
 .DS_Store
 
+# vscode
+.vscode
+
 # Tests
 /coverage
 /.nyc_output
