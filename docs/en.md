@@ -11,32 +11,21 @@
 ## Project commands
 
 ``` shell
+# install dependencies
 npm install
 
-npm run dev
-
-npm run lint
-
-npm install --production
-
+# build
 npm run build
 
+# run on dev
+npm run dev
+
+# code detection
+npm run lint
+
+# install dependencies on production
+npm install --production
+
+# run on production
 npm run start
 ```
-
-## Project structure
-
-- **src/**
-  - **lib/**
-  - **common/**
-  - **modules/**
-    - module
-      - **controller/** (or **.ts**)
-      - **service/** (or **.ts**)
-      - **dao/** (or **.ts**)
-      - **dto/** (or **.ts**)
-      - index.ts
-    - index.ts
-  - alias.ts
-  - app.ts
-  - main.ts
