@@ -2,13 +2,15 @@
 
 > 🚀 probably the best scaffolding for nest.js server-side development
 
+## Project Docs
+
 [English Docs](docs/en.md) | [中文文档](docs/cn.md)
 
-## Architecture diagram
+## Project Architecture diagram
 
 ![architecture diagram](docs/img/server.png)
 
-## Structure
+## Project Structure
 
 - **src/**
   - **common/**
