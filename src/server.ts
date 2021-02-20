@@ -66,6 +66,10 @@ export class Server {
   async useGlobalSwagger() {
     const options = new DocumentBuilder().setTitle(this.configs.appname).build();
     const document = SwaggerModule.createDocument(this.app, options);
+
+    /**
+     * Declare document routing
+     */
     SwaggerModule.setup('/doc', this.app, document);
   }
 
