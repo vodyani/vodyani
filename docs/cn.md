@@ -29,3 +29,40 @@ npm install --production
 # 线上运行
 npm run start
 ```
+
+## 项目目录结构
+
+- **src/**
+  - **common/**
+    - **types/** (or **.ts**)
+    - **interfaces/** (or **.ts**)
+    - **constants/** (or **.ts**)
+  - **configs/**
+    - base.ts
+    - common.ts
+    - config.dev.ts
+    - config.test.ts
+    - config.pre.ts
+    - config.prod.ts
+    - interface.ts
+    - index.ts
+  - **entities/**
+    - base.ts
+    - index.ts
+    - **YOUR ENTITY**.ts
+  - **lib/**
+    - database.ts
+    - logger.ts
+    - store.ts
+    - redis.ts
+    - index.ts
+  - **modules/**
+    - index.ts
+    - module
+      - **controller/** (or **.ts**)
+      - **service/** (or **.ts**)
+      - **dao/** (or **.ts**)
+      - **dto/** (or **.ts**)
+      - index.ts
+  - server.ts
+  - main.ts

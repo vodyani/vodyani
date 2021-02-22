@@ -1,5 +1,5 @@
 /**
- * server alias
+ * The initializer module references the alias
  */
 import { addAliases } from 'module-alias';
 
@@ -13,8 +13,8 @@ addAliases({
 });
 
 /**
- * create server
+ * After initializer module references alias, Creating a Server Application
  */
-import { Server } from './server';
+import { createServer } from './server';
 
-new Server().run();
+createServer();

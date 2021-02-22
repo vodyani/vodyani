@@ -1,25 +1,10 @@
-import { Sequelize, SequelizeOptions, ModelCtor, Model } from 'sequelize-typescript';
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-/**
- * Init database
- */
-interface DatabaseParams {
-  options?: SequelizeOptions,
-  entities?: ModelCtor<Model<any, any>>[],
-}
+import { User } from '@entities';
 
-/**
- * database instance
- */
-export const getDatabase = (params: DatabaseParams) => {
-  if (
-    !params ||
-    !params.options ||
-    !params.options
-  ) return null;
-
-  const db = new Sequelize(params.options);
-  db.addModels(params.entities);
-  db.sync(); // It is not recommended to enable it in production
+export const getDatabase = async (options: SequelizeOptions) => {
+  const db = new Sequelize(options);
+  db.addModels([User]);
+  await db.sync(); // It is not recommended to enable it in production
   return db;
 };

@@ -1,11 +1,11 @@
 import { Store } from '@sophons/nest-tools';
 
 /**
- * Only declared keys can be used
+ * Only declared variables can be used
  */
-type LibKeys = 'database'| 'configs' | 'logger' | 'redis';
+type StoreKeys = 'database'| 'configs' | 'logger' | 'redis';
 
 /**
- * global lib instance
+ * The Global Lib Store, where we manage the registration and reference of global variables
  */
-export const lib = Store.createStore<LibKeys>();
+export const libStore = Store.createStore<StoreKeys>();

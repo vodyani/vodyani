@@ -1,89 +1,48 @@
 import * as helmet from 'helmet';
-import * as Entites from '@entities';
+
 import { CoreModule } from '@modules';
+import { getConfigs } from '@configs';
 import { NestFactory } from '@nestjs/core';
-import { Configs, getConfigs } from '@configs';
-import { INestApplication } from '@nestjs/common';
-import { lib, getDatabase, getLogger, getRedis } from '@lib';
+import { Filter, Interceptor, Pipe } from '@sophons/nest-tools';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Filter, Interceptor, NestLogger, Pipe } from '@sophons/nest-tools';
+import { libStore, getDatabase, getLogger, getRedis } from '@lib';
 
-export class Server {
+/**
+ * In the startup function, the Server and Swagger document are initialized after declaring the Global Lib Store
+ */
+export const createServer = async () => {
+  /**
+   * Initialize the global variable
+   */
+  const logger = getLogger();
+  const configs = getConfigs();
 
-  private configs: Configs;
-  private logger: NestLogger;
-  private app: INestApplication;
+  libStore.set('logger', logger);
+  libStore.set('configs', configs);
+  libStore.set('redis', await getRedis(configs.redis));
+  libStore.set('database', await getDatabase(configs.database));
 
   /**
-   * init lib store
+   * Initialize the Server application and bind the middleware to the AOP processor
    */
-  async initLib() {
-    const logger = getLogger();
-    const configs = getConfigs();
-    const redis = getRedis(configs.redis || {});
-    const database = getDatabase({ options: configs.database, entities: [Entites.User] });
-
-    lib.set('redis', redis);
-    lib.set('logger', logger);
-    lib.set('configs', configs);
-    lib.set('database', database);
-
-    logger.info(`[${configs.appname}]: INIT LIB`);
-  }
+  const server = await NestFactory.create(CoreModule, { cors: true });
+  server.use(helmet());
+  server.useGlobalInterceptors(new Interceptor.RequestId(logger));
+  server.useGlobalPipes(new Pipe.ValidateDto());
+  server.useGlobalFilters(new Filter.RequestError(logger));
+  server.useGlobalInterceptors(new Interceptor.RequestLog(logger));
+  server.useGlobalInterceptors(new Interceptor.RequestFormat());
 
   /**
-   * init app
+   * Init swagger document
    */
-  async initApp() {
-    this.app = await NestFactory.create(CoreModule, { cors: true });
-    this.logger = lib.get<NestLogger>('logger');
-    this.configs = lib.get<Configs>('configs');
-
-    this.logger.info(`[${this.configs.appname}]: INIT APP`);
-  }
+  const doc = new DocumentBuilder().setTitle(configs.appname).build();
+  const swagger = SwaggerModule.createDocument(server, doc);
+  SwaggerModule.setup('/doc', server, swagger); // Declare swagger document routing
 
   /**
-   * use middleware
+   * Start the Server application, bind the port, and log info
    */
-  async useGlobalMiddleware() {
-    this.app.use(helmet());
-  }
-
-  /**
-   * use aop
-   */
-  async useGlobalAop() {
-    this.app.useGlobalInterceptors(new Interceptor.RequestId(this.logger));
-    this.app.useGlobalPipes(new Pipe.ValidateDto());
-    this.app.useGlobalFilters(new Filter.RequestError(this.logger));
-    this.app.useGlobalInterceptors(new Interceptor.RequestLog(this.logger));
-    this.app.useGlobalInterceptors(new Interceptor.RequestFormat());
-  }
-
-  /**
-   * use swagger
-   */
-  async useGlobalSwagger() {
-    const options = new DocumentBuilder().setTitle(this.configs.appname).build();
-    const document = SwaggerModule.createDocument(this.app, options);
-
-    /**
-     * Declare document routing
-     */
-    SwaggerModule.setup('/doc', this.app, document);
-  }
-
-  /**
-   * run server
-   */
-  async run() {
-    await this.initLib();
-    await this.initApp();
-    await this.useGlobalMiddleware();
-    await this.useGlobalAop();
-    await this.useGlobalSwagger();
-    await this.app.listen(this.configs.port);
-
-    this.logger.info(`[${this.configs.appname}]: SERVER START WITH ${this.configs.env} - ${this.configs.port}`);
-  }
-}
+  await server.listen(configs.port);
+  logger.info(`[${configs.appname}]: SERVER START WITH ${configs.env} - ${configs.port}`);
+};

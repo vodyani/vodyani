@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { HealthModule } from './health';
 import { UserModule } from './user';
+import { HealthModule } from './health';
 
 @Module({
   imports: [
     UserModule,
-    HealthModule,
+    HealthModule, // HealthModule Must be declared at the end
   ],
 })
 
