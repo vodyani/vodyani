@@ -1,17 +1,17 @@
-import { libStore } from '@lib';
 import { User } from '@entities';
+import { StoreKeys } from '@common';
 import { Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
+import { StoreProvider } from '@sophons/nest-tools';
 
 import { CreateUserDto, UpdateUserDto } from './dto';
 
 @Injectable()
 export class UserDao {
 
-  /**
-   * Self-managing dependencies
-   */
-  private readonly db = libStore.get<Sequelize>('database');
+  constructor(
+    private readonly store: StoreProvider<StoreKeys>,
+  ) {}
 
   async findOne(id: number) {
     const result = await User.findOne({ where: { id }});
@@ -24,10 +24,12 @@ export class UserDao {
   }
 
   async update(dto: UpdateUserDto) {
-    // Transaction execution
-    this.db.transaction(async (transaction) => {
-      const { id, name, email, phone } = dto;
-      await User.update({ name, email, phone }, { where: { id }, transaction });
-    });
+    this
+      .store
+      .get<Sequelize>('database')
+      .transaction(async (transaction) => {
+        const { id, name, email, phone } = dto;
+        await User.update({ name, email, phone }, { where: { id }, transaction });
+      });
   }
 }

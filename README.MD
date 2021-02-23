@@ -9,3 +9,40 @@
 ## Architecture diagram
 
 ![architecture diagram](docs/img/server.png)
+
+## Structure
+
+- **src/**
+  - **common/**
+    - **types/** (or **.ts**)
+    - **interfaces/** (or **.ts**)
+    - **constants/** (or **.ts**)
+  - **configs/**
+    - base.ts
+    - common.ts
+    - config.dev.ts
+    - config.test.ts
+    - config.pre.ts
+    - config.prod.ts
+    - interface.ts
+    - index.ts
+  - **entities/**
+    - base.ts
+    - index.ts
+    - **YOUR ENTITY**.ts
+  - **lib/**
+    - database.ts
+    - logger.ts
+    - redis.ts
+    - index.ts
+  - **modules/**
+    - index.ts
+    - **YOUR MODULE/**
+      - **controller/** (or **.ts**)
+      - **service/** (or **.ts**)
+      - **dao/** (or **.ts**)
+      - **dto/** (or **.ts**)
+      - module.ts
+      - index.ts
+  - server.ts
+  - main.ts

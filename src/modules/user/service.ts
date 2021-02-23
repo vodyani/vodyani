@@ -1,31 +1,27 @@
 import { Redis } from 'ioredis';
-import { libStore } from '@lib';
 import { Configs } from '@configs';
+import { StoreKeys } from '@common';
 import { Injectable } from '@nestjs/common';
+import { StoreProvider } from '@sophons/nest-tools';
 
 import { UserDao } from './dao';
 import { FindUserDto, CreateUserDto, UpdateUserDto } from './dto';
 
 @Injectable()
 export class UserService {
-
-  /**
-   * Self-managing dependencies
-   */
-  private readonly redis = libStore.get<Redis>('redis');
-  private readonly configs = libStore.get<Configs>('configs');
-
-  /**
-   * Use Ioc containers to manage dependencies
-   */
-  constructor(private readonly dao: UserDao) {}
+  constructor(
+    private readonly dao: UserDao,
+    private readonly store: StoreProvider<StoreKeys>,
+  ) {}
 
   async getAppname() {
-    const record = await this.redis.get('appname');
+    const redis = this.store.get<Redis>('redis');
+    const configs = this.store.get<Configs>('configs');
 
-    if (!record) {
-      await this.redis.set('appname', this.configs.appname);
-      return this.configs.appname;
+    const record = await redis.get('appname');
+    if (!await redis.get('appname')) {
+      await redis.set('appname', configs.appname);
+      return configs.appname;
     }
     return record;
   }

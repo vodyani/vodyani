@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
+import { HealthModule, StoreModule } from '@sophons/nest-tools';
 
 import { UserModule } from './user';
-import { HealthModule } from './health';
 
 @Module({
   imports: [
+    /**
+     * The common modules
+     */
+    StoreModule,
+    HealthModule,
+
+    /**
+     * The business logic modules
+     */
     UserModule,
-    HealthModule, // HealthModule Must be declared at the end
   ],
 })
 

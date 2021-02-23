@@ -1,3 +1,3 @@
 import { NestLogger } from '@sophons/nest-tools';
 
-export const getLogger = () => new NestLogger();
+export const getLogger = async () => new NestLogger();

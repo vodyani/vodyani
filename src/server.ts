@@ -1,30 +1,35 @@
 import * as helmet from 'helmet';
-
 import { CoreModule } from '@modules';
 import { getConfigs } from '@configs';
+import { StoreKeys } from '@common';
 import { NestFactory } from '@nestjs/core';
-import { Filter, Interceptor, Pipe } from '@sophons/nest-tools';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { libStore, getDatabase, getLogger, getRedis } from '@lib';
+import { getDatabase, getLogger, getRedis } from '@lib';
+import { Pipe, Filter, Interceptor, Swagger, StoreModule, StoreProvider } from '@sophons/nest-tools';
 
 /**
- * In the startup function, the Server and Swagger document are initialized after declaring the Global Lib Store
+ * In the startup function, the Server and Swagger document are initialized after declaring the Global Lib Store.
  */
 export const createServer = async () => {
   /**
-   * Initialize the global variable
-   */
-  const logger = getLogger();
-  const configs = getConfigs();
-  libStore.set('logger', logger);
-  libStore.set('configs', configs);
-  libStore.set('redis', await getRedis(configs.redis));
-  libStore.set('database', await getDatabase(configs.database));
-
-  /**
-   * Initialize the Server application and bind the middleware to the AOP processor
+   * Initialize server application and server store.
    */
   const app = await NestFactory.create(CoreModule, { cors: true });
+  const libStore: StoreProvider<StoreKeys> = app.select(StoreModule).get(StoreProvider, { strict: true });
+
+  /**
+   * Initialize the store instance.
+   */
+  const configs = await getConfigs();
+  const logger = await getLogger();
+
+  libStore.save('logger', await getLogger());
+  libStore.save('configs', await getConfigs());
+  libStore.save('redis', await getRedis(configs.redis));
+  libStore.save('database', await getDatabase(configs.database));
+
+  /**
+   * Initialize the server application middleware and aop handler.
+   */
   app.use(helmet());
   app.useGlobalInterceptors(new Interceptor.RequestId(logger));
   app.useGlobalPipes(new Pipe.ValidateDto());
@@ -33,15 +38,14 @@ export const createServer = async () => {
   app.useGlobalInterceptors(new Interceptor.RequestFormat());
 
   /**
-   * Init swagger document
+   * Create swagger document.
    */
-  const doc = new DocumentBuilder().setTitle(configs.appname).build();
-  const swagger = SwaggerModule.createDocument(app, doc);
-  SwaggerModule.setup('/doc', app, swagger); // Declare swagger document routing
+  Swagger.create(app);
 
   /**
-   * Start the Server application, bind the port, and log info
+   * Start the server application.
    */
   await app.listen(configs.port);
+
   logger.info(`[${configs.appname}]: SERVER START WITH ${configs.env} - ${configs.port}`);
 };

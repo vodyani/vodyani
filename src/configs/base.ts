@@ -13,7 +13,11 @@ const { NODE_ENV = 'dev', NODE_PORT = 3000, NODE_APP_NAME = 'api' } = process.en
 /**
  * get global configs
  */
-export const getConfigs = (env: string = NODE_ENV, appname: string = NODE_APP_NAME, port: string | number = NODE_PORT): Configs => {
+export const getConfigs = async (
+  env: string = NODE_ENV,
+  appname: string = NODE_APP_NAME,
+  port: string | number = NODE_PORT,
+) : Promise<Configs> => {
   const dict = { dev, test, pre, prod };
   return { env, port, appname, ...common, ...dict[env] };
 };
