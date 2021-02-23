@@ -1,7 +1,5 @@
 # Nest-Server
 
-> Nest.js Api
-
 ## Project depend on
 
 > For specific dependence, see package.json
