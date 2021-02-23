@@ -14,14 +14,21 @@ export const createServer = async () => {
    * Initialize server application and server store.
    */
   const app = await NestFactory.create(CoreModule, { cors: true });
+
+  /**
+   * `select(StoreModule).get`, just like a query, automatically searches for instances in each registration module.
+   *
+   * Here, we want to use a more restrictive retrieval mode.
+   * so we pass the `{ strict: true }` option object as the second argument to the get() method.
+   * You can then select a specific instance from the selected context.
+   */
   const libStore: StoreProvider<StoreKeys> = app.select(StoreModule).get(StoreProvider, { strict: true });
 
   /**
    * Initialize the store instance.
    */
-  const configs = await getConfigs();
   const logger = await getLogger();
-
+  const configs = await getConfigs();
   libStore.save('logger', await getLogger());
   libStore.save('configs', await getConfigs());
   libStore.save('redis', await getRedis(configs.redis));
@@ -42,10 +49,6 @@ export const createServer = async () => {
    */
   Swagger.create(app);
 
-  /**
-   * Start the server application.
-   */
   await app.listen(configs.port);
-
   logger.info(`[${configs.appname}]: SERVER START WITH ${configs.env} - ${configs.port}`);
 };
