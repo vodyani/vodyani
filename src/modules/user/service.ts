@@ -12,6 +12,7 @@ export class UserService {
   /**
    * Self-managing dependencies
    */
+  private readonly redis = libStore.get<Redis>('redis');
   private readonly configs = libStore.get<Configs>('configs');
 
   /**
@@ -20,10 +21,10 @@ export class UserService {
   constructor(private readonly dao: UserDao) {}
 
   async getAppname() {
-    const redis = libStore.get<Redis>('redis');
-    const record = await redis.get('appname');
+    const record = await this.redis.get('appname');
+
     if (!record) {
-      await redis.set('appname', this.configs.appname);
+      await this.redis.set('appname', this.configs.appname);
       return this.configs.appname;
     }
     return record;

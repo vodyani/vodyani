@@ -16,7 +16,6 @@ export const createServer = async () => {
    */
   const logger = getLogger();
   const configs = getConfigs();
-
   libStore.set('logger', logger);
   libStore.set('configs', configs);
   libStore.set('redis', await getRedis(configs.redis));
@@ -25,24 +24,24 @@ export const createServer = async () => {
   /**
    * Initialize the Server application and bind the middleware to the AOP processor
    */
-  const server = await NestFactory.create(CoreModule, { cors: true });
-  server.use(helmet());
-  server.useGlobalInterceptors(new Interceptor.RequestId(logger));
-  server.useGlobalPipes(new Pipe.ValidateDto());
-  server.useGlobalFilters(new Filter.RequestError(logger));
-  server.useGlobalInterceptors(new Interceptor.RequestLog(logger));
-  server.useGlobalInterceptors(new Interceptor.RequestFormat());
+  const app = await NestFactory.create(CoreModule, { cors: true });
+  app.use(helmet());
+  app.useGlobalInterceptors(new Interceptor.RequestId(logger));
+  app.useGlobalPipes(new Pipe.ValidateDto());
+  app.useGlobalFilters(new Filter.RequestError(logger));
+  app.useGlobalInterceptors(new Interceptor.RequestLog(logger));
+  app.useGlobalInterceptors(new Interceptor.RequestFormat());
 
   /**
    * Init swagger document
    */
   const doc = new DocumentBuilder().setTitle(configs.appname).build();
-  const swagger = SwaggerModule.createDocument(server, doc);
-  SwaggerModule.setup('/doc', server, swagger); // Declare swagger document routing
+  const swagger = SwaggerModule.createDocument(app, doc);
+  SwaggerModule.setup('/doc', app, swagger); // Declare swagger document routing
 
   /**
    * Start the Server application, bind the port, and log info
    */
-  await server.listen(configs.port);
+  await app.listen(configs.port);
   logger.info(`[${configs.appname}]: SERVER START WITH ${configs.env} - ${configs.port}`);
 };
