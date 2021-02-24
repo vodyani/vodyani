@@ -20,11 +20,7 @@
   - **configs/**
     - base.ts
     - common.ts
-    - config.dev.ts
-    - config.test.ts
-    - config.pre.ts
-    - config.prod.ts
-    - interface.ts
+    - config.*.ts
     - index.ts
   - **entities/**
     - base.ts
