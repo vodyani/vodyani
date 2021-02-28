@@ -17,9 +17,10 @@ export interface IoRedisOptions {
 }
 
 export interface Configs {
-  env: string;
-  port: string| number;
-  appname: string;
+  name?: string;
+  env?: string;
+  port?: string| number;
+  appname?: string;
   database?: SequlizeOptions;
   redis?: IoRedisOptions;
 }

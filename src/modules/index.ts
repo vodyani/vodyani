@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { HealthModule, StoreModule } from '@sophons/nest-tools';
 
-import { UserModule } from './user';
+import { OrderModule } from './order';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { UserModule } from './user';
     /**
      * The business logic modules
      */
-    UserModule,
+    OrderModule,
   ],
 })
 

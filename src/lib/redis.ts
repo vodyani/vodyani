@@ -1,3 +1,3 @@
-import * as IoRedis from 'ioredis';
+import { SuperRedis, RedisOptions } from '@sophons/redis';
 
-export const getRedis = async (options: IoRedis.RedisOptions = null) => new IoRedis(options);
+export const getRedis = async (options: RedisOptions = null) => SuperRedis.init(options);

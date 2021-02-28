@@ -1,17 +1,17 @@
 import * as helmet from 'helmet';
+import { StoreKeys } from '@common';
 import { CoreModule } from '@modules';
 import { getConfigs } from '@configs';
-import { StoreKeys } from '@common';
 import { NestFactory } from '@nestjs/core';
 import { getDatabase, getLogger, getRedis } from '@lib';
 import { Pipe, Filter, Interceptor, Swagger, StoreModule, StoreProvider } from '@sophons/nest-tools';
 
 /**
- * In the startup function, the Server and Swagger document are initialized after declaring the Global Lib Store.
+ * Start and bind the IOC module and the Global Store
  */
 export const createServer = async () => {
   /**
-   * Initialize server application and server store.
+   * Initialize server application.
    */
   const app = await NestFactory.create(CoreModule, { cors: true });
 
@@ -25,7 +25,7 @@ export const createServer = async () => {
   const libStore: StoreProvider<StoreKeys> = app.select(StoreModule).get(StoreProvider, { strict: true });
 
   /**
-   * Initialize the store instance.
+   * Initialize the store.
    */
   const logger = await getLogger();
   const configs = await getConfigs();

@@ -1,9 +1,7 @@
-export const dev = {
-  redis: {
-    host: 'localhost',
-    port: 6379,
-    expiredTime: 1500,
-  },
+import { Configs } from './interface';
+
+export const dev: Configs = {
+  name: 'dev',
   database: {
     username: 'postgres',
     password: 'postgres',
@@ -11,7 +9,6 @@ export const dev = {
     host: 'localhost',
     port: 5432,
     logging: false,
-    dialect: 'postgres',
     pool: { max: 50 },
   },
 };
