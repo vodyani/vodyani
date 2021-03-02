@@ -49,7 +49,8 @@ export const createServer = async () => {
    * Create swagger document.
    */
   const document = new DocumentBuilder().setTitle('server').build();
-  SwaggerModule.setup('/doc', app, SwaggerModule.createDocument(app, document));
+  const documentServer = SwaggerModule.createDocument(app, document);
+  SwaggerModule.setup('/doc', app, documentServer);
 
   await app.listen(configs.port);
   logger.info(`[${configs.appname}]: SERVER START WITH ${configs.env} - ${configs.port}`);
