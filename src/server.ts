@@ -4,7 +4,8 @@ import { CoreModule } from '@modules';
 import { getConfigs } from '@configs';
 import { NestFactory } from '@nestjs/core';
 import { getDatabase, getLogger, getRedis } from '@lib';
-import { Pipe, Filter, Interceptor, Swagger, StoreModule, StoreProvider } from '@sophons/nest-tools';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { Pipe, Filter, Interceptor, StoreModule, StoreProvider } from '@sophons/nest-tools';
 
 /**
  * Start and bind the IOC module and the Global Store
@@ -47,7 +48,8 @@ export const createServer = async () => {
   /**
    * Create swagger document.
    */
-  Swagger.create(app);
+  const document = new DocumentBuilder().setTitle('server').build();
+  SwaggerModule.setup('/doc', app, SwaggerModule.createDocument(app, document));
 
   await app.listen(configs.port);
   logger.info(`[${configs.appname}]: SERVER START WITH ${configs.env} - ${configs.port}`);

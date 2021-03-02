@@ -13,6 +13,7 @@ export const common: Configs = {
     host: 'localhost',
     port: 5432,
     logging: false,
+    dialect: 'postgres',
     pool: { max: 50 },
   },
 };

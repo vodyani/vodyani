@@ -1,21 +1,21 @@
-import { CHAR } from 'sequelize';
-import { Column, Table } from 'sequelize-typescript';
+import { Column, DataType, Default, Table } from 'sequelize-typescript';
 
 import { BaseModel } from './base';
 
 @Table({ tableName: 'Order', timestamps: true, freezeTableName: true })
 export class Order extends BaseModel<Order> {
+
+  @Default('default')
   @Column({
-    type: CHAR,
-    defaultValue: 'default',
     comment: 'order source',
+    type: DataType.STRING(60),
   })
   source: string;
 
+  @Default('0')
   @Column({
-    type: CHAR,
-    defaultValue: '0',
     comment: 'order code',
+    type: DataType.STRING(60),
   })
   code: string;
 }

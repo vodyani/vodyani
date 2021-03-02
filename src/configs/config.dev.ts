@@ -9,6 +9,7 @@ export const dev: Configs = {
     host: 'localhost',
     port: 5432,
     logging: false,
-    pool: { max: 50 },
+    dialect: 'postgres',
+    pool: { max: 1 },
   },
 };
