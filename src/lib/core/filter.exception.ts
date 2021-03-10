@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { Request, Response } from 'express';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import { headerNames, HttpStatusOptions, httpStatusOptions, ResponseBody } from '@common';
@@ -21,7 +22,7 @@ export class ExceptionCatchFilter implements ExceptionFilter {
     const request: Request = ctx.getRequest();
     const response: Response = ctx.getResponse();
     const { originalUrl, body, query, method, headers } = request;
-    const requestId = (request.headers[headerNames.requestId] as string);
+    const requestId = (request.headers[headerNames.requestId] || uuid()) as string;
 
     // Gets the instance code from the exception object
     const statusCode = exception instanceof HttpException ? exception.getStatus() : 400;

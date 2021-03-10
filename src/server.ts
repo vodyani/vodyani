@@ -24,15 +24,15 @@ export const createServer = async () => {
   const configs = app.select(ConfigModule).get(ConfigService, { strict: true });
   const logger = app.select(LoggerModule).get(Logger, { strict: true });
 
-  app.use(helmet());
-  app.useLogger(logger);
-  app.useGlobalInterceptors(app.select(CoreModule).get(LogInterceptor, { strict: true }));
-  app.useGlobalInterceptors(app.select(CoreModule).get(FormatInterceptor, { strict: true }));
-  app.useGlobalFilters(app.select(CoreModule).get(ExceptionCatchFilter, { strict: true }));
-  app.useGlobalPipes(app.select(CoreModule).get(DtoPipe, { strict: true }));
-
-  await app.listen(configs.info.port);
   if (configs.info.env !== 'prod') createSwagger(app);
 
+  app.use(helmet());
+  app.useLogger(logger);
+  app.useGlobalPipes(app.select(CoreModule).get(DtoPipe, { strict: true }));
+  app.useGlobalFilters(app.select(CoreModule).get(ExceptionCatchFilter, { strict: true }));
+  app.useGlobalInterceptors(app.select(CoreModule).get(LogInterceptor, { strict: true }));
+  app.useGlobalInterceptors(app.select(CoreModule).get(FormatInterceptor, { strict: true }));
+
+  await app.listen(configs.info.port);
   logger.info(`🚀 SERVER START WITH PORT: ${configs.info.port} 🚀 `);
 };
