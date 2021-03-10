@@ -1,15 +1,14 @@
-import { Order } from '@entities';
-import { StoreKeys } from '@common';
-import { Injectable } from '@nestjs/common';
+import { Order } from '@entity';
 import { Sequelize } from 'sequelize-typescript';
-import { StoreProvider } from '@sophons/nest-tools';
+import { PostgresqlService } from '@lib/postgresql';
+import { Inject, Injectable } from '@nestjs/common';
 
 import { CreateOrderDto, UpdateOrderDto } from './dto';
 
 @Injectable()
 export class OrderDao {
   constructor(
-    private readonly store: StoreProvider<StoreKeys>,
+    @Inject(PostgresqlService.local) private readonly postgresql: Sequelize,
   ) {}
 
   async findOne(id: number) {
@@ -23,11 +22,9 @@ export class OrderDao {
   }
 
   async update(dto: UpdateOrderDto) {
-    this.store
-      .get<Sequelize>('database')
-      .transaction(async (transaction) => {
-        const { id, source } = dto;
-        await Order.update({ source }, { where: { id }, transaction });
-      });
+    this.postgresql.transaction(async (transaction) => {
+      const { id, source } = dto;
+      await Order.update({ source }, { where: { id }, transaction });
+    });
   }
 }

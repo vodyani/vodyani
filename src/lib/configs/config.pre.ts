@@ -1,4 +1,4 @@
-import { Configs } from './interface';
+import { Configs } from '@common';
 
 export const pre: Configs = {
   name: 'pre',

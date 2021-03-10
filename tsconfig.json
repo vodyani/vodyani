@@ -21,10 +21,10 @@
     "baseUrl": ".",
     "paths": {
       "@lib": ["src/lib"],
+      "@lib/*": ["src/lib/*"],
+      "@entity": ["src/entity"],
       "@common": ["src/common"],
-      "@configs": ["src/configs"],
       "@modules": ["src/modules"],
-      "@entities": ["src/entities"],
       "@modules/*": ["src/modules/*"],
     }
   }

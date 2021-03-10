@@ -1,3 +1,11 @@
+import { ENV } from './type.configs';
+
+export interface LoggerOptions {
+  env: ENV;
+  appName?: string;
+  levels?: string[];
+}
+
 export interface SequlizeOptions {
   username?: string;
   password?: string;
@@ -14,13 +22,4 @@ export interface IoRedisOptions {
   port?: number;
   password?: string;
   expiredTime?: number;
-}
-
-export interface Configs {
-  name?: string;
-  env?: string;
-  port?: string| number;
-  appname?: string;
-  database?: SequlizeOptions;
-  redis?: IoRedisOptions;
 }

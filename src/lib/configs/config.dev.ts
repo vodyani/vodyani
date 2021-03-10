@@ -1,11 +1,7 @@
-import { Configs } from './interface';
+import { Configs } from '@common';
 
-export const common: Configs = {
-  redis: {
-    host: 'localhost',
-    port: 6379,
-    expiredTime: 1500,
-  },
+export const dev: Configs = {
+  name: 'dev',
   database: {
     username: 'postgres',
     password: 'postgres',
@@ -14,6 +10,6 @@ export const common: Configs = {
     port: 5432,
     logging: false,
     dialect: 'postgres',
-    pool: { max: 50 },
+    pool: { max: 1 },
   },
 };
