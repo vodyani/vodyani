@@ -2,7 +2,7 @@ import { defaultsDeep } from 'lodash';
 import { Injectable } from '@nestjs/common';
 import { ENV, envConstant, Configs } from '@common';
 
-import { dev, test, pre, prod, defaults } from './public';
+import { dev, test, pre, prod, defaults } from './shared';
 
 @Injectable()
 export class ConfigProvider {

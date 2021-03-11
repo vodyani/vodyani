@@ -44,11 +44,11 @@ export class LoggerProvider implements LoggerService {
    * Get Winston configuration information
    */
   private readonly getOptions = (): LoggerOptions => {
+    const silent = this.configs.info.env === 'dev'; // The local development environment disables write log
     const dirname = pathConstant.logs;
-    // The local development environment disables write log
-    const silent = this.configs.info.env === 'dev';
 
     return {
+      level: 'debug', // Only log less than the DEBUG level.
       exitOnError: false,
       handleExceptions: true,
       exceptionHandlers: new transports.File({ dirname, filename: 'stderr.log' }),

@@ -18,7 +18,7 @@ export class OrderService {
   async findOne(dto: FindOrderDto) {
     const result = await this.dao.findOne(Number(dto.id));
 
-    this.logger.info('[order createdAt]: ' + result.createdAt);
+    this.logger.debug('[order createdAt]: ' + result.createdAt);
     return result;
   }
 
