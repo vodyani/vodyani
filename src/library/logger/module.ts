@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@library/configs';
 
-import { Logger } from './service';
+import { SystemLogger } from './service';
 
 @Module({
-  exports: [Logger],
-  providers: [Logger],
+  imports: [ConfigModule],
+  exports: [SystemLogger],
+  providers: [SystemLogger],
 })
 export class LoggerModule {}

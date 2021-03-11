@@ -1,12 +1,12 @@
-import { HttpStatusOptions } from './interface.request';
+import { HttpStatusConstant } from './interface.request';
 
-export const headerNames = {
-  requestUserId: 'x-request-user-id',
-  requestToken: 'x-request-token',
+export const headersConstant = {
   requestId: 'x-request-id',
+  requestToken: 'x-request-token',
+  requestUserId: 'x-request-user-id',
 };
 
-export const httpStatusOptions: HttpStatusOptions = {
+export const httpStatusConstant: HttpStatusConstant = {
   language: 'en',
   status: new Map([
     [200, { code: 0, errorCode: 200, zh: '请求成功', en: 'Success' }],

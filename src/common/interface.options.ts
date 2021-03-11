@@ -1,11 +1,3 @@
-import { ENV } from './type.configs';
-
-export interface LoggerOptions {
-  env: ENV;
-  appName?: string;
-  levels?: string[];
-}
-
 export interface SequlizeOptions {
   username?: string;
   password?: string;

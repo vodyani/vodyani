@@ -1,10 +1,10 @@
 import { v4 as uuid } from 'uuid';
 import { Request, Response } from 'express';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
-import { headerNames, HttpStatusOptions, httpStatusOptions, ResponseBody } from '@common';
+import { headersConstant, httpStatusConstant, HttpStatusConstant, ResponseBody } from '@common';
 
 import { getIp } from '../utils';
-import { Logger } from '../logger';
+import { SystemLogger } from '../logger';
 
 /**
  * Catch exceptions during execution and log errors
@@ -13,16 +13,16 @@ import { Logger } from '../logger';
  */
 @Catch()
 export class ExceptionCatchFilter implements ExceptionFilter {
-  constructor(private readonly logger: Logger) {}
+  constructor(private readonly logger: SystemLogger) {}
 
-  private readonly options: HttpStatusOptions = httpStatusOptions
+  private readonly options: HttpStatusConstant = httpStatusConstant
 
   public catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const request: Request = ctx.getRequest();
     const response: Response = ctx.getResponse();
     const { originalUrl, body, query, method, headers } = request;
-    const requestId = (request.headers[headerNames.requestId] || uuid()) as string;
+    const requestId = (request.headers[headersConstant.requestId] || uuid()) as string;
 
     // Gets the instance code from the exception object
     const statusCode = exception instanceof HttpException ? exception.getStatus() : 400;

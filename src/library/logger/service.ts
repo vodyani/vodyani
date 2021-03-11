@@ -1,24 +1,20 @@
-import * as winston from 'winston';
-
-import { resolve } from 'path';
+import { pathConstant } from '@common';
+import { ConfigService } from '@library/configs';
 import { Injectable, LoggerService } from '@nestjs/common';
-import { LoggerOptions, envParamNames, ENV } from '@common';
+import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';
 
 /**
  * Use Winston as the default logging processor for your project
  */
 @Injectable()
-export class Logger implements LoggerService {
+export class SystemLogger implements LoggerService {
   /**
    * winston logger
    */
-  private readonly instance: winston.Logger;
+  private readonly instance: Logger;
 
-  public constructor() {
-    const env = process.env[envParamNames.env] as ENV || 'dev';
-    const appName = process.env[envParamNames.appName] || 'Nest-Server';
-
-    this.instance = winston.createLogger(this.getConfigs({ env, appName }));
+  public constructor(private readonly configs: ConfigService) {
+    this.instance = createLogger(this.getOptions());
   }
 
   /**
@@ -33,10 +29,12 @@ export class Logger implements LoggerService {
   /**
    * Formatted print output
    */
-  private readonly format = (info: winston.Logform.TransformableInfo, env: ENV, appName: string) => {
+  private readonly format = (info: Logform.TransformableInfo) => {
     const pid = process.pid;
     const message = info.message;
     const timestamp = info.timestamp;
+    const env = this.configs.info.env;
+    const appName = this.configs.info.appName;
     const level = info.level.toLocaleUpperCase();
 
     return `[${appName}] ${pid} - ${timestamp} [${env}] ${level}: ${message}`;
@@ -45,44 +43,42 @@ export class Logger implements LoggerService {
   /**
    * Get Winston configuration information
    */
-  private readonly getConfigs = (options: LoggerOptions): winston.LoggerOptions => {
-    const { env, appName } = options;
-
-    // The local development environment does not log files
-    const silent = options.env === 'dev';
-    const dirname = resolve(__dirname, '../../../logs');
+  private readonly getOptions = (): LoggerOptions => {
+    const dirname = pathConstant.logs;
+    // The local development environment disables write log
+    const silent = this.configs.info.env === 'dev';
 
     return {
       exitOnError: false,
       handleExceptions: true,
-      exceptionHandlers: new winston.transports.File({ dirname, filename: 'stderr.log' }),
+      exceptionHandlers: new transports.File({ dirname, filename: 'stderr.log' }),
 
       transports: [
-        new winston.transports.Console({
-          format: winston.format.combine(
-            winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-            winston.format.printf(message => this.format(message, env, appName)),
-            winston.format.colorize({ all: true }),
+        new transports.Console({
+          format: format.combine(
+            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+            format.printf(message => this.format(message)),
+            format.colorize({ all: true }),
           ),
         }),
-        new winston.transports.File({
+        new transports.File({
           silent,
           dirname,
           level: 'info',
           filename: 'stdout.log',
-          format: winston.format.combine(
-            winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-            winston.format.printf(message => this.format(message, env, appName)),
+          format: format.combine(
+            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+            format.printf(message => this.format(message)),
           ),
         }),
-        new winston.transports.File({
+        new transports.File({
           silent,
           dirname,
           level: 'error',
           filename: 'stderr.log',
-          format: winston.format.combine(
-            winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-            winston.format.printf(info => this.format(info, env, appName)),
+          format: format.combine(
+            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+            format.printf(message => this.format(message)),
           ),
         }),
       ],

@@ -13,14 +13,14 @@ export interface ResponseBody<T> {
   timestamp: number;
 }
 
-export interface HttpStatusOptions {
-  language?: 'zh' | 'en';
-  status?: Map<number, StatusInfo>;
-}
-
-export interface StatusInfo {
+export interface HttpStatusConstantInfo {
   zh: string;
   en: string;
   code: number;
   errorCode: number;
+}
+
+export interface HttpStatusConstant {
+  language?: 'zh' | 'en';
+  status?: Map<number, HttpStatusConstantInfo>;
 }

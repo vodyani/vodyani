@@ -1,12 +1,10 @@
+import { ENV } from './type';
 import { SequlizeOptions, IoRedisOptions } from './interface.options';
 
-import { ENV } from './type.configs';
-
 export interface Configs {
-  name?: string;
   env?: ENV;
+  appName?: string;
   port?: string| number;
-  appname?: string;
-  database?: SequlizeOptions;
   redis?: IoRedisOptions;
+  database?: SequlizeOptions;
 }

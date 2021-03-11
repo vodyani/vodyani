@@ -12,7 +12,7 @@ export class RedisService {
         inject: [ConfigService],
 
         useFactory: async (configs: ConfigService) => {
-          const redisClient = SuperRedis.init(configs.info.redis);
+          const redisClient = new SuperRedis(configs.info.redis);
           return redisClient;
         },
       },
