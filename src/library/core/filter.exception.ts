@@ -4,7 +4,7 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/co
 import { headersConstant, httpStatusConstant, HttpStatusConstant, ResponseBody } from '@common';
 
 import { getIp } from '../utils';
-import { SystemLogger } from '../logger';
+import { LoggerProvider } from '../logger';
 
 /**
  * Catch exceptions during execution and log errors
@@ -13,7 +13,7 @@ import { SystemLogger } from '../logger';
  */
 @Catch()
 export class ExceptionCatchFilter implements ExceptionFilter {
-  constructor(private readonly logger: SystemLogger) {}
+  constructor(private readonly logger: LoggerProvider) {}
 
   private readonly options: HttpStatusConstant = httpStatusConstant
 

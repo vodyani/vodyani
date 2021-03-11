@@ -1,5 +1,6 @@
 import { SuperRedis } from '@sophons/redis';
-import { RedisService } from '@library/redis';
+import { RedisProvider } from '@library/redis';
+import { LoggerProvider } from '@library/logger';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { OrderDao } from './dao';
@@ -7,13 +8,17 @@ import { FindOrderDto, CreateOrderDto, UpdateOrderDto } from './dto';
 
 @Injectable()
 export class OrderService {
+
   constructor(
     private readonly dao: OrderDao,
-    @Inject(RedisService.local) private readonly client: SuperRedis,
+    private readonly logger: LoggerProvider,
+    @Inject(RedisProvider.local) private readonly client: SuperRedis,
   ) {}
 
   async findOne(dto: FindOrderDto) {
     const result = await this.dao.findOne(Number(dto.id));
+
+    this.logger.info('[order createdAt]: ' + result.createdAt);
     return result;
   }
 

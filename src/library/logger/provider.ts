@@ -1,5 +1,5 @@
 import { pathConstant } from '@common';
-import { ConfigService } from '@library/configs';
+import { ConfigProvider } from '@library/configs';
 import { Injectable, LoggerService } from '@nestjs/common';
 import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';
 
@@ -7,13 +7,13 @@ import { Logform, Logger, createLogger, format, LoggerOptions, transports } from
  * Use Winston as the default logging processor for your project
  */
 @Injectable()
-export class SystemLogger implements LoggerService {
+export class LoggerProvider implements LoggerService {
   /**
    * winston logger
    */
   private readonly instance: Logger;
 
-  public constructor(private readonly configs: ConfigService) {
+  public constructor(private readonly configs: ConfigProvider) {
     this.instance = createLogger(this.getOptions());
   }
 

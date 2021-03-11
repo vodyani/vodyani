@@ -5,7 +5,7 @@ import { ENV, envConstant, Configs } from '@common';
 import { dev, test, pre, prod, defaults } from './public';
 
 @Injectable()
-export class ConfigService {
+export class ConfigProvider {
 
   public readonly info: Configs;
 

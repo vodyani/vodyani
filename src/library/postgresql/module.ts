@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@library/configs';
 
-import { PostgresqlService } from './service';
+import { PostgresqlProvider } from './provider';
 
 @Module({
   imports: [ConfigModule],
-  exports: [...PostgresqlService.getProviders()],
-  providers: [...PostgresqlService.getProviders()],
+  exports: [...PostgresqlProvider.getProviders()],
+  providers: [...PostgresqlProvider.getProviders()],
 })
 export class PostgresqlModule {}

@@ -3,8 +3,8 @@ import * as helmet from 'helmet';
 import { CoreModule } from '@modules/core';
 import { NestFactory } from '@nestjs/core';
 import { INestApplication } from '@nestjs/common';
-import { SystemLogger, LoggerModule } from '@library/logger';
-import { ConfigModule, ConfigService } from '@library/configs';
+import { LoggerProvider, LoggerModule } from '@library/logger';
+import { ConfigModule, ConfigProvider } from '@library/configs';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { DtoPipe, ExceptionCatchFilter, FormatInterceptor, LogInterceptor } from '@library/core';
 
@@ -13,8 +13,8 @@ import { DtoPipe, ExceptionCatchFilter, FormatInterceptor, LogInterceptor } from
  */
 export const createServer = async () => {
   const app = await NestFactory.create(CoreModule, { cors: true });
-  const configs = app.select(ConfigModule).get(ConfigService);
-  const logger = app.select(LoggerModule).get(SystemLogger);
+  const configs = app.select(ConfigModule).get(ConfigProvider);
+  const logger = app.select(LoggerModule).get(LoggerProvider);
   const context = app.select(CoreModule);
 
   app.use(helmet());

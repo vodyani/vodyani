@@ -1,17 +1,17 @@
 import { SuperRedis } from '@sophons/redis';
-import { ConfigService } from '@library/configs';
+import { ConfigProvider } from '@library/configs';
 
-export class RedisService {
+export class RedisProvider {
 
-  public static local = 'localRedisClient';
+  public static local = 'localRedis';
 
   public static getProviders() {
     return [
       {
         provide: this.local,
-        inject: [ConfigService],
+        inject: [ConfigProvider],
 
-        useFactory: async (configs: ConfigService) => {
+        useFactory: async (configs: ConfigProvider) => {
           const redisClient = new SuperRedis(configs.info.redis);
           return redisClient;
         },

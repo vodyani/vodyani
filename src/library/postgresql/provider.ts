@@ -1,8 +1,8 @@
 import { Order } from '@entity';
-import { ConfigService } from '@library/configs';
+import { ConfigProvider } from '@library/configs';
 import { Sequelize } from 'sequelize-typescript';
 
-export class PostgresqlService {
+export class PostgresqlProvider {
 
   public static local = 'localPostgresql';
 
@@ -10,9 +10,9 @@ export class PostgresqlService {
     return [
       {
         provide: this.local,
-        inject: [ConfigService],
+        inject: [ConfigProvider],
 
-        useFactory: async (configs: ConfigService) => {
+        useFactory: async (configs: ConfigProvider) => {
           const postgresql = new Sequelize(configs.info.database);
           postgresql.addModels([Order]);
           await postgresql.sync(); // It is not recommended to enable it in production

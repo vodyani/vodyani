@@ -6,7 +6,7 @@ import { headersConstant, ResponseBody } from '@common';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 
 import { getIp } from '../utils';
-import { SystemLogger } from '../logger';
+import { LoggerProvider } from '../logger';
 
 /**
  * Log the request details
@@ -15,7 +15,7 @@ import { SystemLogger } from '../logger';
  */
 @Injectable()
 export class LogInterceptor implements NestInterceptor {
-  constructor(private readonly logger: SystemLogger) {}
+  constructor(private readonly logger: LoggerProvider) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler): Observable<any> {
     const request: Request = ctx.switchToHttp().getRequest();

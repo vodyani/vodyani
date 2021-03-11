@@ -1,14 +1,14 @@
 import { Order } from '@entity';
 import { Sequelize } from 'sequelize-typescript';
 import { Inject, Injectable } from '@nestjs/common';
-import { PostgresqlService } from '@library/postgresql';
+import { PostgresqlProvider } from '@library/postgresql';
 
 import { CreateOrderDto, UpdateOrderDto } from './dto';
 
 @Injectable()
 export class OrderDao {
   constructor(
-    @Inject(PostgresqlService.local) private readonly postgresql: Sequelize,
+    @Inject(PostgresqlProvider.local) private readonly postgresql: Sequelize,
   ) {}
 
   async findOne(id: number) {

@@ -22,9 +22,7 @@
     "paths": {
       "@entity": ["src/entity"],
       "@common": ["src/common"],
-      "@library": ["src/library"],
       "@library/*": ["src/library/*"],
-      "@modules": ["src/modules"],
       "@modules/*": ["src/modules/*"],
     }
   }
