@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { RedisModule } from '@lib/redis';
-import { LoggerModule } from '@lib/logger';
-import { ConfigModule } from '@lib/configs';
-import { PostgresqlModule } from '@lib/postgresql';
+import { RedisModule } from '@library/redis';
+import { LoggerModule } from '@library/logger';
+import { ConfigModule } from '@library/configs';
+import { PostgresqlModule } from '@library/postgresql';
 
 import { OrderController } from './controller';
 import { OrderService } from './service';

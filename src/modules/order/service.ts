@@ -1,5 +1,5 @@
-import { RedisService } from '@lib/redis';
 import { SuperRedis } from '@sophons/redis';
+import { RedisService } from '@library/redis';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { OrderDao } from './dao';
@@ -9,7 +9,7 @@ import { FindOrderDto, CreateOrderDto, UpdateOrderDto } from './dto';
 export class OrderService {
   constructor(
     private readonly dao: OrderDao,
-    @Inject(RedisService.client) private readonly client: SuperRedis,
+    @Inject(RedisService.local) private readonly client: SuperRedis,
   ) {}
 
   async findOne(dto: FindOrderDto) {

@@ -1,7 +1,7 @@
 import { Order } from '@entity';
 import { Sequelize } from 'sequelize-typescript';
-import { PostgresqlService } from '@lib/postgresql';
 import { Inject, Injectable } from '@nestjs/common';
+import { PostgresqlService } from '@library/postgresql';
 
 import { CreateOrderDto, UpdateOrderDto } from './dto';
 

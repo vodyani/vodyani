@@ -5,7 +5,7 @@ import { resolve } from 'path';
 import { addAliases } from 'module-alias';
 
 addAliases({
-  '@lib': resolve(__dirname, './lib'),
+  '@library': resolve(__dirname, './library'),
   '@common': resolve(__dirname, './common'),
   '@entity': resolve(__dirname, './entity'),
   '@modules': resolve(__dirname, './modules'),

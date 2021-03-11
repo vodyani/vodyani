@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { RedisModule } from '@lib/redis';
-import { LoggerModule } from '@lib/logger';
-import { ConfigModule } from '@lib/configs';
-import { PostgresqlModule } from '@lib/postgresql';
-import { DtoPipe, ExceptionCatchFilter, FormatInterceptor, LogInterceptor } from '@lib/core';
+import { RedisModule } from '@library/redis';
+import { LoggerModule } from '@library/logger';
+import { ConfigModule } from '@library/configs';
+import { PostgresqlModule } from '@library/postgresql';
+import { DtoPipe, ExceptionCatchFilter, FormatInterceptor, LogInterceptor } from '@library/core';
 
 import { OrderModule } from './order';
 import { HealthModule } from './health';

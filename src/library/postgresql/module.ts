@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@lib/configs';
+import { ConfigModule } from '@library/configs';
 
 import { PostgresqlService } from './service';
 

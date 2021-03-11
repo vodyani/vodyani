@@ -1,16 +1,16 @@
 import { Order } from '@entity';
-import { ConfigService } from '@lib/configs';
+import { ConfigService } from '@library/configs';
 import { Sequelize } from 'sequelize-typescript';
 
 export class PostgresqlService {
 
-  public static local = 'local';
+  public static local = 'localPostgresql';
 
   public static getProviders() {
     return [
       {
-        inject: [ConfigService],
         provide: this.local,
+        inject: [ConfigService],
 
         useFactory: async (configs: ConfigService) => {
           const postgresql = new Sequelize(configs.info.database);

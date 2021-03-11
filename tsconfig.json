@@ -20,10 +20,10 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@lib": ["src/lib"],
-      "@lib/*": ["src/lib/*"],
       "@entity": ["src/entity"],
       "@common": ["src/common"],
+      "@library": ["src/library"],
+      "@library/*": ["src/library/*"],
       "@modules": ["src/modules"],
       "@modules/*": ["src/modules/*"],
     }
