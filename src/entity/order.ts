@@ -2,7 +2,7 @@ import { Column, DataType, Default, Table } from 'sequelize-typescript';
 
 import { BaseModel } from './base';
 
-@Table({ tableName: 'Order', timestamps: true, freezeTableName: true })
+@Table({ tableName: 'order', timestamps: true, freezeTableName: true })
 export class Order extends BaseModel<Order> {
 
   @Default('default')
