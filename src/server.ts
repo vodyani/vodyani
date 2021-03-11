@@ -27,7 +27,7 @@ export const createServer = async () => {
 
   await app.listen(configs.info.port);
 
-  logger.info(`🚀 SERVER START WITH PORT: ${configs.info.port} 🚀 `);
+  logger.info(`${configs.info.appName} START WITH PORT: ${configs.info.port} 🚀 `);
 };
 
 /**
