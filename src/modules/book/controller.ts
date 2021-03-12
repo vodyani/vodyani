@@ -1,6 +1,6 @@
 import { ApiTags } from '@nestjs/swagger';
 import { CurrentPage } from '@core/decorator';
-import { RequestPagination } from '@common/interface';
+import { Pagination } from '@common/interface';
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query } from '@nestjs/common';
 
 import { BookService } from './service';
@@ -36,7 +36,7 @@ export class BookController {
   @HttpCode(HttpStatus.OK)
   async findPagination(
     @Query() dto: FindBookPaginationDto,
-    @CurrentPage() pagination: RequestPagination,
+    @CurrentPage() pagination: Pagination,
   ) {
     const result = await this.service.findPagination(dto, pagination);
     return result;

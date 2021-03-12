@@ -1,8 +1,8 @@
+import { Pagination } from '@common/interface';
 import { Inject, Injectable } from '@nestjs/common';
 import { PostgresqlProvider, Sequelize, Op, Book, FindOptions, FindPaginationOptions, PaginationResult } from '@library/postgresql';
 
 import { FindBookDto, CreateBookDto, UpdateBookDto, FindBookPaginationDto } from './dto';
-import { RequestPagination } from '@common/interface';
 
 @Injectable()
 export class BookDao {
@@ -18,16 +18,25 @@ export class BookDao {
   }
 
   public async update(dto: UpdateBookDto) {
-    this.postgresql.transaction(async (transaction) => {
-      const entity = {};
-      const { id, title, auther, details } = dto;
+    const result = await new Promise((resolve, reject) => {
+      this.postgresql
+        .transaction(async (transaction) => {
+          const { id, title, auther, details } = dto;
 
-      if (title) entity['title'] = title;
-      if (auther) entity['auther'] = auther;
-      if (details) entity['details'] = details;
+          const entity = {};
+          if (title) entity['title'] = title;
+          if (auther) entity['auther'] = auther;
+          if (details) entity['details'] = details;
+          const result = await Book.update(entity, { where: { id }, transaction });
 
-      await Book.update(entity, { where: { id }, transaction });
+          if (result) resolve(result);
+        })
+        .catch((error) => {
+          if (error) reject(error);
+        });
     });
+
+    return result;
   }
 
   public async findOne(dto: FindBookDto) {
@@ -35,6 +44,7 @@ export class BookDao {
 
     if (dto) {
       const { id, title, auther } = dto;
+
       if (id) options.where['id'] = id;
       if (auther) options.where['auther'] = auther;
       if (title) options.where['title'] = { [Op.like]: `%${dto.title}%` };
@@ -44,8 +54,16 @@ export class BookDao {
     return result;
   }
 
-  public async findPagination(dto: FindBookPaginationDto, pagination: RequestPagination): Promise<PaginationResult<Book>> {
-    const options: FindPaginationOptions = { where: {}, pagination };
+  public async findPagination(
+    dto: FindBookPaginationDto,
+    pagination: Pagination,
+  )
+    :Promise<PaginationResult<Book>>
+  {
+    const options: FindPaginationOptions = {
+      where: {},
+      pagination,
+    };
 
     if (dto) {
       const { id, title, auther } = dto;
@@ -54,7 +72,7 @@ export class BookDao {
       if (auther) options.where['auther'] = auther;
     }
 
-    const result = await Book.findPagination(options);
+    const result = await Book.findPagination<Book>(options);
     return result;
   }
 }

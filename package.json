@@ -1,6 +1,6 @@
 {
 	"name": "nest-server",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"main": "dist/index.js",
 	"author": "chogath@163.com",
 	"license": "BSD-2-Clause",
@@ -27,7 +27,7 @@
 		"@nestjs/core": "^7.6.5",
 		"@nestjs/platform-express": "^7.6.5",
 		"@nestjs/swagger": "^4.7.2",
-		"@sophons/redis": "^1.0.6",
+		"@sophons/redis": "^1.1.7",
 		"@sophons/request": "^1.0.7",
 		"class-transformer": "^0.3.1",
 		"class-validator": "^0.12.2",

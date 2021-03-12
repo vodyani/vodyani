@@ -1,7 +1,11 @@
 import { Order } from './type';
 import { FindPaginationOptions, PaginationResult } from './interface';
 
-export async function findPagination(options: FindPaginationOptions): Promise<PaginationResult> {
+export async function findPagination<T = any>(
+  options: FindPaginationOptions,
+)
+  : Promise<PaginationResult<T>>
+{
   const { pagination } = options;
   const page = pagination && pagination.page ? Number(pagination.page) : 1;
   const order = pagination && pagination.order ? pagination.order : 'id DESC';
@@ -12,7 +16,6 @@ export async function findPagination(options: FindPaginationOptions): Promise<Pa
   options.order = ([order.split(' ')] as Order);
 
   const result = { rows: [], pagination: { page, pageSize, pageCount: 0, count: 0 }};
-
   const data = await this.findAndCountAll(options);
 
   if (data) {
@@ -20,6 +23,5 @@ export async function findPagination(options: FindPaginationOptions): Promise<Pa
     result.pagination.count = data.count;
     result.pagination.pageCount = Math.floor((data.count - 1) / pageSize) + 1;
   }
-
   return result;
 }

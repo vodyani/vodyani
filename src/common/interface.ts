@@ -7,7 +7,7 @@ export interface ResponseBody<T> {
   timestamp: number;
 }
 
-export interface RequestPagination {
+export interface Pagination {
   page: number;
   pageSize: number;
   order: string;
