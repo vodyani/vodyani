@@ -1,8 +1,8 @@
+import { addAliases } from 'module-alias';
+
 /**
  * The initializer module references the alias
  */
-import { addAliases } from 'module-alias';
-
 import { pathConstant } from './common';
 
 addAliases({
@@ -15,6 +15,6 @@ addAliases({
 /**
  * After initializer module references alias, Creating a Server Application
  */
-import { createServer } from './server';
+import { ServerManager } from './core';
 
-createServer();
+new ServerManager().create();
