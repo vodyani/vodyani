@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
-import { ArgumentMetadata, Injectable, PipeTransform, UnprocessableEntityException } from '@nestjs/common';
+import { ArgumentMetadata, Injectable, PipeTransform, HttpException } from '@nestjs/common';
 
 /**
  * A pipe used to validate DTO parameter properties
@@ -27,7 +27,7 @@ export class DtoPipe implements PipeTransform<any> {
     errors.forEach(error => {
       if (error.constraints) {
         const message = Object.values(error.constraints)[0];
-        throw new UnprocessableEntityException(message);
+        throw new HttpException(message, 400001);
       }
     });
   }

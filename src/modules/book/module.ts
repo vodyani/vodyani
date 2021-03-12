@@ -1,26 +1,24 @@
 import { Module } from '@nestjs/common';
 import { RedisModule } from '@library/redis';
-import { LoggerModule } from '@library/logger';
 import { ConfigModule } from '@library/configs';
 import { PostgresqlModule } from '@library/postgresql';
 
-import { OrderController } from './controller';
-import { OrderService } from './service';
-import { OrderDao } from './dao';
+import { BookController } from './controller';
+import { BookService } from './service';
+import { BookDao } from './dao';
 
 @Module({
   imports: [
     RedisModule,
     ConfigModule,
-    LoggerModule,
     PostgresqlModule,
   ],
   controllers: [
-    OrderController,
+    BookController,
   ],
   providers: [
-    OrderService,
-    OrderDao,
+    BookService,
+    BookDao,
   ],
 })
-export class OrderModule {}
+export class BookModule {}

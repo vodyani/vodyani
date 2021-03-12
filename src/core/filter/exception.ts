@@ -1,10 +1,10 @@
 import { v4 as uuid } from 'uuid';
-import { Request, Response } from 'express';
+import { IPUtil } from '@library/utils';
+import { REQ, RES } from '@common/type';
+import { LoggerProvider } from '@library/logger';
+import { HttpStatusConstant, ResponseBody } from '@common/interface';
+import { headersConstant, httpStatusConstant } from '@common/constant';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
-import { headersConstant, httpStatusConstant, HttpStatusConstant, ResponseBody } from '@common';
-
-import { getIp } from '../utils';
-import { LoggerProvider } from '../logger';
 
 /**
  * Catch exceptions during execution and log errors
@@ -19,8 +19,8 @@ export class ExceptionCatchFilter implements ExceptionFilter {
 
   public catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    const request: Request = ctx.getRequest();
-    const response: Response = ctx.getResponse();
+    const request: REQ = ctx.getRequest();
+    const response: RES = ctx.getResponse();
     const { originalUrl, body, query, method, headers } = request;
     const requestId = (request.headers[headersConstant.requestId] || uuid()) as string;
 
@@ -36,7 +36,7 @@ export class ExceptionCatchFilter implements ExceptionFilter {
     const message = exception.message || statusInfo[this.options.language];
 
     let responseMessage = `|ERROR| |${method}| ${originalUrl}`;
-    responseMessage += `, ip=${getIp(request)}`;
+    responseMessage += `, ip=${IPUtil.getIp(request)}`;
     responseMessage += `, requestId=${requestId}`;
     responseMessage += `, statusCode=${response.statusCode}`;
     responseMessage += `, headers=${JSON.stringify(headers)}`;

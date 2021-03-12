@@ -1,10 +1,10 @@
 {
 	"name": "nest-server",
-	"version": "1.0.1",
+	"version": "2.0.1",
 	"main": "dist/index.js",
 	"author": "chogath@163.com",
 	"license": "BSD-2-Clause",
-	"description": "> 🚀 probably the best scaffolding for nest.js server-side development",
+	"description": "👩‍🚀 User-centric services built using nest-server",
 	"homepage": "https://github.com/sophons-space/nest-server#readme",
 	"directories": {
 		"doc": "docs"
@@ -31,7 +31,9 @@
 		"@sophons/request": "^1.0.7",
 		"class-transformer": "^0.3.1",
 		"class-validator": "^0.12.2",
+		"crypto-js": "^4.0.0",
 		"helmet": "^4.2.0",
+		"jsonwebtoken": "^8.5.1",
 		"lodash": "^4.17.21",
 		"module-alias": "^2.2.2",
 		"moment": "^2.29.1",
@@ -45,6 +47,8 @@
 		"winston": "^3.3.3"
 	},
 	"devDependencies": {
+		"@types/crypto-js": "^4.0.1",
+		"@types/jsonwebtoken": "^8.5.0",
 		"@types/bluebird": "^3.5.33",
 		"@types/express": "^4.17.11",
 		"@types/ioredis": "^4.19.4",

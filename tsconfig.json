@@ -20,8 +20,8 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@entity": ["src/entity"],
-      "@common": ["src/common"],
+      "@core/*": ["src/core/*"],
+      "@common/*": ["src/common/*"],
       "@library/*": ["src/library/*"],
       "@modules/*": ["src/modules/*"],
     }

@@ -6,8 +6,8 @@ import { addAliases } from 'module-alias';
 import { pathConstant } from './common';
 
 addAliases({
+  '@core': pathConstant.core,
   '@common': pathConstant.common,
-  '@entity': pathConstant.entity,
   '@library': pathConstant.library,
   '@modules': pathConstant.modules,
 });

@@ -1,5 +1,7 @@
 import { Model, PrimaryKey, AutoIncrement, Column, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
+import { findPagination } from './method';
+
 export class BaseModel<T> extends Model<T> {
   @PrimaryKey
   @AutoIncrement
@@ -13,4 +15,8 @@ export class BaseModel<T> extends Model<T> {
   @UpdatedAt
   @Column
   updatedAt: Date;
+
+  // methods
+  // ------------------------------------------------
+  static findPagination = findPagination;
 }

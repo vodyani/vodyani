@@ -1,4 +1,4 @@
-import { Configs } from '@common';
+import { Configs } from './config.interface';
 
 export const defaults: Configs = {
   redis: {

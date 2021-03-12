@@ -1,9 +1,3 @@
-export interface RequestPagination {
-  page: number;
-  pageSize: number;
-  order: string;
-}
-
 export interface ResponseBody<T> {
   data: T;
   code: number;
@@ -11,6 +5,12 @@ export interface ResponseBody<T> {
   message: string;
   requestId: string;
   timestamp: number;
+}
+
+export interface RequestPagination {
+  page: number;
+  pageSize: number;
+  order: string;
 }
 
 export interface HttpStatusConstantInfo {

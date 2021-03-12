@@ -1,4 +1,4 @@
-import { pathConstant } from '@common';
+import { pathConstant } from '@common/constant';
 import { ConfigProvider } from '@library/configs';
 import { Injectable, LoggerService } from '@nestjs/common';
 import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';

@@ -1,3 +1,13 @@
+import { ENV } from '@common/type';
+
+export interface Configs {
+  env?: ENV;
+  appName?: string;
+  port?: string| number;
+  redis?: IoRedisOptions;
+  database?: SequlizeOptions;
+}
+
 export interface SequlizeOptions {
   username?: string;
   password?: string;

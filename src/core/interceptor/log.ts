@@ -1,12 +1,12 @@
 import { Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { map } from 'rxjs/operators';
-import { Request, Response } from 'express';
-import { headersConstant, ResponseBody } from '@common';
+import { IPUtil } from '@library/utils';
+import { REQ, RES } from '@common/type';
+import { ResponseBody } from '@common/interface';
+import { LoggerProvider } from '@library/logger';
+import { headersConstant } from '@common/constant';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
-
-import { getIp } from '../utils';
-import { LoggerProvider } from '../logger';
 
 /**
  * Log the request details
@@ -18,15 +18,15 @@ export class LogInterceptor implements NestInterceptor {
   constructor(private readonly logger: LoggerProvider) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler): Observable<any> {
-    const request: Request = ctx.switchToHttp().getRequest();
-    const response: Response = ctx.switchToHttp().getResponse();
+    const request: REQ = ctx.switchToHttp().getRequest();
+    const response: RES = ctx.switchToHttp().getResponse();
     const { originalUrl, body, query, method, headers } = request;
     headers[headersConstant.requestId] = headers[headersConstant.requestId] || uuid();
 
     let message = `|${method}| ${originalUrl}`;
     message += ` |${ctx.getClass().name}|`;
     message += ` |${ctx.getHandler().name}|`;
-    message += `, ip=${getIp(request)}`;
+    message += `, ip=${IPUtil.getIp(request)}`;
     message += `, requestId=${headers[headersConstant.requestId]}`;
 
     this.logger.info(message);

@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Request, Response } from 'express';
-import { ResponseBody, headersConstant, httpStatusConstant, HttpStatusConstant } from '@common';
+import { REQ, RES } from '@common/type';
+import { HttpStatusConstant, ResponseBody } from '@common/interface';
+import { httpStatusConstant, headersConstant } from '@common/constant';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 
 /**
@@ -15,8 +16,8 @@ export class FormatInterceptor implements NestInterceptor {
 
   public intercept(ctx: ExecutionContext, next: CallHandler): Observable<ResponseBody<any>> {
     return next.handle().pipe(map((details: any) => {
-      const request: Request = ctx.switchToHttp().getRequest();
-      const response: Response = ctx.switchToHttp().getResponse();
+      const request: REQ = ctx.switchToHttp().getRequest();
+      const response: RES = ctx.switchToHttp().getResponse();
       const requestId = (request.headers[headersConstant.requestId] as string);
       const contentType = request.headers['content-type'] || 'application/json; charset=utf-8';
 

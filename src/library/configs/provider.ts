@@ -1,8 +1,9 @@
+import { ENV } from '@common/type';
 import { defaultsDeep } from 'lodash';
 import { Injectable } from '@nestjs/common';
-import { ENV, envConstant, Configs } from '@common';
+import { envConstant } from '@common/constant';
 
-import { dev, test, pre, prod, defaults } from './shared';
+import { dev, test, pre, prod, defaults, Configs } from './shared';
 
 @Injectable()
 export class ConfigProvider {
