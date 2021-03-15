@@ -32,9 +32,9 @@ export class FormatInterceptor implements NestInterceptor {
 
         const data = details || null;
         const timestamp = Date.now();
-        const errorCode = status.errorCode || 0;
-        const code = status.code || response.statusCode;
+        const errorCode = status.errorCode || 200;
         const message = status[this.options.language] || '';
+        const code = status.code === 0 ? status.code : response.statusCode;
 
         return { requestId, code, errorCode, message, timestamp, data };
       }
