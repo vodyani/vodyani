@@ -67,7 +67,7 @@
 
 **Modules**
 
-> Server application specific business logic and routing processing
+> Specific routing and business logic in server-side applications
 
 - Health
   - Controller
