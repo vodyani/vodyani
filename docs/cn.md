@@ -1,4 +1,6 @@
-# Nest-Server
+# Nest-Server 中文文档
+
+> 👉  👀 [使用 Gitee 访问，效果更佳](https://gitee.com/ChoGathK/nest-server#document)
 
 ## 项目依赖
 
