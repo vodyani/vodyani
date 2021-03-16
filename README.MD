@@ -1,12 +1,57 @@
 # Nest-Server
 
-> 🚀  Possibly the best net.js server development template
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="http://kamilmysliwiec.com/public/nest-logo.png#1" alt="Nest Logo" /></a>
+</p>
+  
+ <p align="center">🚀 Possibly the best nest.js server development awesome template.
+</p>
+
+## Description
 
 ## Architecture diagram
 
 ![architecture diagram](docs/img/server.png)
 
-## Project directory
+**Common**
+
+> Store common information for the Server application
+
+- Type
+- constant
+- Interface
+
+**Core**
+
+> Manage capability deployment in the Server application
+
+- Server Manager
+- **IOC** Module
+- **AOP** Handler
+
+**Library**
+
+> Providers used to inject external dependencies
+
+- Configs
+- Logger
+- Postgresql
+- Redis
+- Utils
+
+**Modules**
+
+- Health
+  - Controller
+  - Module
+- **Book** (A simple Book example is provided to show the specific module implementation) 
+  - Dto
+  - Dao
+  - Service
+  - Controller
+  - Module
+
+### Directory comparison
 
 ```shell
 ├── src
@@ -44,6 +89,9 @@
 
 ## Q&A
 
-**How Debugging with VS Code breakpoints ?**
+### 1. How debugging with vscode breakpoints?
 
-see 👉  👀  [.vscode/launch.json](docs/vscode.md) 
+**see 👉  👀**  [.vscode/launch.json](docs/vscode.md) 
+
+## License
+[BSD 2-Clause](./LICENSE)
