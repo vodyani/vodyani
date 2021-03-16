@@ -116,11 +116,8 @@
 
 ## Q&A
 
-1. How debugging with vscode breakpoints?
-    **👉  👀**  [.vscode/launch.json](docs/vscode.md) 
-
-2. It is being collected, if you have good ideas, you are more than welcome to ask questions!
-    **👉  👀**[issues]([docs/vscode.md](https://github.com/sophons-space/nest-server/issues)) 
+1. How debugging with vscode breakpoints? **👉  👀**  [.vscode/launch.json](docs/vscode.md) 
+2. It is being collected, if you have good ideas, you are more than welcome to ask questions!**👉  ✏️**  [issues]([docs/vscode.md](https://github.com/sophons-space/nest-server/issues)) 
 
 ## License
 
