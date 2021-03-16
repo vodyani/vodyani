@@ -9,6 +9,31 @@
 
 ## Description
 
+[![](https://img.shields.io/badge/npm-typescript-9cf?style=flat-square)](https://www.npmjs.org/package/typescript)
+[![](https://img.shields.io/badge/npm-ts--node-9cf?style=flat-square)](https://www.npmjs.org/package/ts-node)
+[![](https://img.shields.io/badge/npm-module--alias-9cf?style=flat-square)](https://www.npmjs.org/package/module-alias)
+[![](https://img.shields.io/badge/npm-eslint-9cf?style=flat-square)](https://www.npmjs.org/package/eslint)
+[![](https://img.shields.io/badge/npm-@nestjs/core-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/core)
+[![](https://img.shields.io/badge/npm-@nestjs/common-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/common)
+[![](https://img.shields.io/badge/npm-@nestjs/swagger-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/swagger)
+[![](https://img.shields.io/badge/npm-@sophons/redis-success?style=flat-square)](https://www.npmjs.org/package/@sophons/redis)
+[![](https://img.shields.io/badge/npm-@sophons/request-success?style=flat-square)](https://www.npmjs.org/package/@sophons/request)
+[![](https://img.shields.io/badge/npm-swagger--ui--express-green?style=flat-square)](https://www.npmjs.org/package/swagger-ui-express)
+[![](https://img.shields.io/badge/npm-class--transformer-green?style=flat-square)](https://www.npmjs.org/package/class-transformer)
+[![](https://img.shields.io/badge/npm-class--validator-green?style=flat-square)](https://www.npmjs.org/package/class-validator)
+[![](https://img.shields.io/badge/npm-reflect--metadata-green?style=flat-square)](https://www.npmjs.org/package/reflect-metadata)
+[![](https://img.shields.io/badge/npm-rimraf-green?style=flat-square)](https://www.npmjs.org/package/rimraf)
+[![](https://img.shields.io/badge/npm-rxjs-green?style=flat-square)](https://www.npmjs.org/package/rxjs)
+[![](https://img.shields.io/badge/npm-sequelize--typescript-green?style=flat-square)](https://www.npmjs.org/package/sequelize-typescript)
+[![](https://img.shields.io/badge/npm-sequelize-green?style=flat-square)](https://www.npmjs.org/package/sequelize)
+[![](https://img.shields.io/badge/npm-crypto--js-green?style=flat-square)](https://www.npmjs.org/package/crypto-js)
+[![](https://img.shields.io/badge/npm-helmet-green?style=flat-square)](https://www.npmjs.org/package/helmet)
+[![](https://img.shields.io/badge/npm-jsonwebtoken-green?style=flat-square)](https://www.npmjs.org/package/jsonwebtoken)
+[![](https://img.shields.io/badge/npm-lodash-green?style=flat-square)](https://www.npmjs.org/package/lodash)
+[![](https://img.shields.io/badge/npm-moment-green?style=flat-square)](https://www.npmjs.org/package/moment)
+[![](https://img.shields.io/badge/npm-pg-green?style=flat-square)](https://www.npmjs.org/package/pg)
+[![](https://img.shields.io/badge/npm-winston-green?style=flat-square)](https://www.npmjs.org/package/winston)
+
 ## Architecture diagram
 
 ![architecture diagram](docs/img/server.png)
@@ -40,6 +65,8 @@
 - Utils
 
 **Modules**
+
+> Server application specific business logic and routing processing
 
 - Health
   - Controller
@@ -89,9 +116,12 @@
 
 ## Q&A
 
-### 1. How debugging with vscode breakpoints?
+1. How debugging with vscode breakpoints?
+    **👉  👀**  [.vscode/launch.json](docs/vscode.md) 
 
-**see 👉  👀**  [.vscode/launch.json](docs/vscode.md) 
+2. It is being collected, if you have good ideas, you are more than welcome to ask questions!
+    **👉  👀**[issues]([docs/vscode.md](https://github.com/sophons-space/nest-server/issues)) 
 
 ## License
+
 [BSD 2-Clause](./LICENSE)
