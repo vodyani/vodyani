@@ -2,12 +2,6 @@
 
 > building ... It is expected to be completed by the end of March 2021
 
-## Project depend on
-
-> For specific dependence, see package.json
-
-**Please do not submit package-lock.json to.gitignore! This affects the NPM version dependencies in the project, which can lead to uncontrollable problems**
-
 ## Project commands
 
 ``` shell

@@ -1,12 +1,6 @@
 # Nest-Server 中文文档
 
-> 👉  👀 [使用 Gitee 访问，效果更佳](https://gitee.com/ChoGathK/nest-server#document)
-
-## 项目依赖
-
-> 具体依赖见 package.json
-
-**请不要将 package-lock.json 提交到 .gitignore 中！这会影响项目中的 NPM 版本依赖，从而导致不可控的问题**
+> 👀 [建议使用 Gitee 访问，效果更佳哦](https://gitee.com/ChoGathK/nest-server#document)
 
 ## 常用命令
 
