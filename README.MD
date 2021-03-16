@@ -1,6 +1,6 @@
 # Nest-Server
 
-> 🚀 probably the best scaffolding for nest.js server-side development
+> 🚀  Possibly the best net.js server development template
 
 ## Architecture diagram
 
@@ -10,26 +10,26 @@
 
 ```shell
 ├── src
+│   ├── main.ts
 │   ├── common
-│   │   ├── constant.ts
 │   │   ├── index.ts
-│   │   ├── interface.ts
-│   │   └── type.ts
+│   │   ├── type.ts
+│   │   ├── constant.ts
+│   │   └── interface.ts
 │   ├── core
 │   │   ├── decorator
+│   │   ├── pipe
 │   │   ├── filter
-│   │   ├── index.ts
 │   │   ├── interceptor
-│   │   ├── manager.ts
+│   │   ├── index.ts
 │   │   ├── module.ts
-│   │   └── pipe
+│   │   └── manager.ts
 │   ├── library
+│   │   ├── postgresql
 │   │   ├── configs
 │   │   ├── logger
-│   │   ├── postgresql
 │   │   ├── redis
 │   │   └── utils
-│   ├── main.ts
 │   └── modules
 │       ├── book
 │       └── health
@@ -38,10 +38,12 @@
 └── tsconfig.json
 ```
 
-## Docs
+## Document
 
 [English Docs](docs/en.md) | [中文文档](docs/cn.md)
 
-## How Debugging with VS Code breakpoints
+## Q&A
 
-[setting: .vscode/launch.json](docs/vscode.md) 👀
+**How Debugging with VS Code breakpoints ?**
+
+see 👉  👀  [.vscode/launch.json](docs/vscode.md) 
