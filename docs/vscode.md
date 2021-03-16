@@ -11,7 +11,7 @@
       "type": "node",
       "request": "launch",
       "args": [
-        "${workspaceRoot}/src/main.ts" // 入口文件
+        "${workspaceRoot}/src/main.ts"
       ],
       "runtimeArgs": [
         "--nolazy",
