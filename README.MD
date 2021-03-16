@@ -4,7 +4,8 @@
   <a href="http://nestjs.com/" target="blank"><img src="http://kamilmysliwiec.com/public/nest-logo.png#1" alt="Nest Logo" /></a>
 </p>
   
- <p align="center">🚀 Possibly the best nest.js server development awesome template.
+<p align="center">
+  🚀 Possibly the best nest.js server development awesome template.
 </p>
 
 ## Description
@@ -116,9 +117,8 @@
 
 ## Q&A
 
-1. How debugging with vscode breakpoints? **👉  👀**  [.vscode/launch.json](docs/vscode.md) 
-
-1. It is being collected, if you have good ideas, you are more than welcome to ask questions! **👉  ✏️**[issues]([docs/vscode.md](https://github.com/sophons-space/nest-server/issues)) 
+1. How debugging with vscode breakpoints? **👉  👀** [.vscode/launch.json](docs/vscode.md) 
+2. It is being collected, if you have good ideas, you are more than welcome to ask questions! **👉  ✏️** [issues]([docs/vscode.md](https://github.com/sophons-space/nest-server/issues)) 
 
 ## License
 
