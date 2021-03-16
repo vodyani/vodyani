@@ -39,47 +39,7 @@
 
 ![architecture diagram](docs/img/server.png)
 
-**Common**
-
-> Store common information for the Server application
-
-- Type
-- constant
-- Interface
-
-**Core**
-
-> Manage capability deployment in the Server application
-
-- Server Manager
-- **IOC** Module
-- **AOP** Handler
-
-**Library**
-
-> Providers used to inject external dependencies
-
-- Configs
-- Logger
-- Postgresql
-- Redis
-- Utils
-
-**Modules**
-
-> Specific routing and business logic in server-side applications
-
-- Health
-  - Controller
-  - Module
-- **Book** (A simple Book example is provided to show the specific module implementation) 
-  - Dto
-  - Dao
-  - Service
-  - Controller
-  - Module
-
-### Directory comparison
+## Directory
 
 ```shell
 ├── src
@@ -117,8 +77,8 @@
 
 ## Q&A
 
-1. How debugging with vscode breakpoints? **👉  👀** [.vscode/launch.json](docs/vscode.md) 
-2. It is being collected, if you have good ideas, you are more than welcome to ask questions! **👉  ✏️** [issues](https://github.com/sophons-space/nest-server/issues)
+1. How to use vscode to debug breakpoints? **👉  👀** [.vscode/launch.json](docs/vscode.md) 
+2. If you have good ideas, you are more than welcome to ask questions! **👉  ✏️** [issues](https://github.com/sophons-space/nest-server/issues)
 
 ## License
 
