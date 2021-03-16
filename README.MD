@@ -5,7 +5,7 @@
 </p>
   
 <p align="center">
-  🚀 Possibly the best nest.js server development awesome template.
+  🚀 Possibly the best nest.js server development template.
 </p>
 
 ## Description
