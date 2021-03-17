@@ -34,7 +34,6 @@
 		"class-validator": "^0.12.2",
 		"crypto-js": "^4.0.0",
 		"helmet": "^4.2.0",
-		"jsonwebtoken": "^8.5.1",
 		"lodash": "^4.17.21",
 		"module-alias": "^2.2.2",
 		"moment": "^2.29.1",
@@ -49,7 +48,6 @@
 	},
 	"devDependencies": {
 		"@types/crypto-js": "^4.0.1",
-		"@types/jsonwebtoken": "^8.5.0",
 		"@types/bluebird": "^3.5.33",
 		"@types/express": "^4.17.11",
 		"@types/ioredis": "^4.19.4",

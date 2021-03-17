@@ -29,7 +29,6 @@
 [![](https://img.shields.io/badge/npm-sequelize-yellowgreen?style=flat-square)](https://www.npmjs.org/package/sequelize)
 [![](https://img.shields.io/badge/npm-crypto--js-green?style=flat-square)](https://www.npmjs.org/package/crypto-js)
 [![](https://img.shields.io/badge/npm-helmet-orange?style=flat-square)](https://www.npmjs.org/package/helmet)
-[![](https://img.shields.io/badge/npm-jsonwebtoken-green?style=flat-square)](https://www.npmjs.org/package/jsonwebtoken)
 [![](https://img.shields.io/badge/npm-lodash-orange?style=flat-square)](https://www.npmjs.org/package/lodash)
 [![](https://img.shields.io/badge/npm-moment-green?style=flat-square)](https://www.npmjs.org/package/moment)
 [![](https://img.shields.io/badge/npm-pg-yellowgreen?style=flat-square)](https://www.npmjs.org/package/pg)
