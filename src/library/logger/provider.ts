@@ -32,7 +32,7 @@ export class LoggerProvider implements LoggerService {
   /**
    * Formatted print output
    */
-  private readonly format = (info: Logform.TransformableInfo) => {
+  private format(info: Logform.TransformableInfo) {
     const pid = process.pid;
     const message = info.message;
     const timestamp = info.timestamp;
@@ -46,7 +46,7 @@ export class LoggerProvider implements LoggerService {
   /**
    * Get Winston configuration information
    */
-  private readonly getOptions = (): LoggerOptions => {
+  private getOptions(): LoggerOptions {
     const dirname = pathConstant.logs;
 
     return {
@@ -85,5 +85,5 @@ export class LoggerProvider implements LoggerService {
         }),
       ],
     };
-  };
+  }
 }
