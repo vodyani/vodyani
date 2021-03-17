@@ -18,7 +18,7 @@ npm install
 npm run build
 
 # local run (execute ts code)
-npm run dev：ts
+npm run dev:ts
 
 # Local run (compile first, then js code)
 npm run dev
@@ -48,11 +48,11 @@ npm run start
 
 ### Environment variables that can be specified externally in project
 
-- The default value is `NODE_ENV`dev`NODE_ENV``NODE_ENV` the current environment is not entered
+- `NODE_ENV` Service env, default value is: `dev`
 
-- service service port, the default value is :`3000
+- `NODE_PORT` Service port, the default value is: `3000`
 
-- service name is not entered, the default value is : `NODE_APP_NAME` Nest-Server`NODE_APP_NAME`
+- `NODE_APP_NAME` Service name, default value is: `Nest-Server`
 
 **Configs module**
 
@@ -77,7 +77,7 @@ npm run start
 > only real-time compilation in local environments is recommended
 
 ```shell
-# tsc &NODE_ENV=dev node dist/main.js
+# tsc & NODE_ENV=dev node dist/main.js
 npm run dev
 ```
 
@@ -115,13 +115,13 @@ npm run dev
 
 ```json
 ...
-``compilerOptions``：{
+"compilerOptions": {
   ...
- ``paths``：{
- @ core/*``：[`` src/core/*``],@
- @ common/*``：[`` src/common/*``],@
- @ library/*``：[`` src/library/*``],@
- @ modules/*``：[`` src/modules/*``],@
+  "paths":{
+    "@core/*": ["src/core/*"],
+    "@common/*": ["src/common/*"],
+    "@library/*": ["src/library/*"],
+    "@modules/*": ["src/modules/*"],
   }
 }
 ```
@@ -132,22 +132,22 @@ Citing `internal documents`, **forcing** to use **relative paths**, for example:
 
 ```ts
 // Introduction of book dao in book service
-import { BookDao }from'. dao';//
+import { BookDao } from './dao';
 ```
 
 Reference `other module `, **Forcing** to use **@ x** alias path, for example:
 
 ```ts
 // Introduction of redis in book service
-import { RedisProvider }from'@library/redis';
+import { RedisProvider } from '@library/redis';
 ```
 
 **project alias naming specification**
 
 - **force** to use lowercase initials and follow hump naming.
-  - Okay :`@ moduleName`
-  - Bad :`@ ModuleName`.
+  - Okay: `@moduleName`
+  - Bad: `@ModuleName`.
 
 - **force** to use the `@` identifier as the named prefix.
-  - Okay :`@ moduleName`
-  - Bad :`# moduleName`or `! moduleName`.
+  - Okay: `@moduleName`
+  - Bad: `#moduleName`or `!moduleName`.
