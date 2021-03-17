@@ -73,7 +73,8 @@
 
 ## Document
 
-[English Docs](docs/en.md) | [中文文档](docs/cn.md)
+- [English Docs](docs/en.md)
+- [中文文档](docs/cn.md)
 
 ## Q&A
 
@@ -82,4 +83,4 @@
 
 ## License
 
-[BSD 2-Clause](./LICENSE)
+- [BSD 2-Clause](./LICENSE)
