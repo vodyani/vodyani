@@ -8,7 +8,7 @@
   🚀 Possibly the best nest.js server development template.
 </p>
 
-## Description
+## Support
 
 [![](https://img.shields.io/badge/npm-typescript-9cf?style=flat-square)](https://www.npmjs.org/package/typescript)
 [![](https://img.shields.io/badge/npm-ts--node-9cf?style=flat-square)](https://www.npmjs.org/package/ts-node)
@@ -35,9 +35,9 @@
 [![](https://img.shields.io/badge/npm-pg-yellowgreen?style=flat-square)](https://www.npmjs.org/package/pg)
 [![](https://img.shields.io/badge/npm-winston-green?style=flat-square)](https://www.npmjs.org/package/winston)
 
-## Architecture diagram
+## Architecture
 
-![architecture diagram](docs/img/server.png)
+![Architecture](docs/img/server.png)
 
 ## Directory
 
