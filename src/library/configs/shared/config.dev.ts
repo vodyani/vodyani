@@ -1,6 +1,8 @@
 import { Configs } from './config.interface';
 
 export const dev: Configs = {
+  enableFileLoging: false,
+  enableConsoleLoging: true,
   database: {
     username: 'postgres',
     password: 'postgres',

@@ -9,10 +9,13 @@ import { Logform, Logger, createLogger, format, LoggerOptions, transports } from
 @Injectable()
 export class LoggerProvider implements LoggerService {
   /**
-   * winston logger
+   * Winston logger
    */
   private readonly instance: Logger;
 
+  /**
+   * Constructor
+   */
   public constructor(private readonly configs: ConfigProvider) {
     this.instance = createLogger(this.getOptions());
   }
@@ -44,7 +47,6 @@ export class LoggerProvider implements LoggerService {
    * Get Winston configuration information
    */
   private readonly getOptions = (): LoggerOptions => {
-    const silent = this.configs.info.env === 'dev'; // The local development environment disables write log
     const dirname = pathConstant.logs;
 
     return {
@@ -52,9 +54,9 @@ export class LoggerProvider implements LoggerService {
       exitOnError: false,
       handleExceptions: true,
       exceptionHandlers: new transports.File({ dirname, filename: 'stderr.log' }),
-
       transports: [
         new transports.Console({
+          silent: !this.configs.info.enableConsoleLoging,
           format: format.combine(
             format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
             format.printf(message => this.format(message)),
@@ -62,7 +64,7 @@ export class LoggerProvider implements LoggerService {
           ),
         }),
         new transports.File({
-          silent,
+          silent: !this.configs.info.enableFileLoging,
           dirname,
           level: 'info',
           filename: 'stdout.log',
@@ -72,7 +74,7 @@ export class LoggerProvider implements LoggerService {
           ),
         }),
         new transports.File({
-          silent,
+          silent: !this.configs.info.enableFileLoging,
           dirname,
           level: 'error',
           filename: 'stderr.log',

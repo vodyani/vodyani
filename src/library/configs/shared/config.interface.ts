@@ -4,6 +4,8 @@ export interface Configs {
   env?: ENV;
   appName?: string;
   port?: string| number;
+  enableFileLoging?: boolean;
+  enableConsoleLoging?: boolean;
   redis?: IoRedisOptions;
   database?: SequlizeOptions;
 }
