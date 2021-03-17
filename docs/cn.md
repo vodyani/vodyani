@@ -1,4 +1,4 @@
-# Nest-Server 中文文档
+# 文档
 
 >  🇨🇳 [国内用户建议使用 Gitee 访问，效果更佳哦](https://gitee.com/ChoGathK/nest-server#document)
 
