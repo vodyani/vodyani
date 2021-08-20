@@ -42,14 +42,9 @@
 ├── LICENSE
 ├── README.MD
 ├── logs
-│   ├── stderr.log
-│   └── stdout.log
 ├── package-lock.json
 ├── package.json
 ├── public
-│   ├── doc
-│   └── images
-│       └── icon.png
 ├── src
 │   ├── bin
 │   │   ├── app.ts
