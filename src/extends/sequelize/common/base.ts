@@ -50,7 +50,7 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
   @BeforeUpdate
   @BeforeUpsert
   @BeforeBulkUpdate
-  static baseUpdate<T extends Model>(entity: any) {
+  static baseUpdate(entity: any) {
     entity.updatedTime = new Date();
   }
 
