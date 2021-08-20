@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "NEST-SERVER",
+      "type": "node",
+      "request": "launch",
+      "env": {
+        "NODE_ENV": "dev",
+      },
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register"
+      ],
+      "protocol": "inspector",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "program": "${workspaceRoot}/src/bin/index.ts",
+    }
+  ]
+}

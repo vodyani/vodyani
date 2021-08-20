@@ -1,59 +1,53 @@
+/**
+ * @description: 公共常量值
+ * @type: common-constant
+ */
+
 import { resolve } from 'path';
 
-import { HttpStatusConstant } from './interface';
+import { HTTP_STATUS } from './enum';
 
-const srcPath = resolve(__dirname, '../');
-const rootPath = resolve(__dirname, '../../');
+const src = resolve(__dirname, '../');
+const root = resolve(__dirname, '../../');
 
-export const pathConstant = {
-  // root
-  // ----------------------------
-  root: rootPath,
-  temp: `${rootPath}/temp`,
-  logs: `${rootPath}/logs`,
-  // src
-  // ----------------------------
-  src: srcPath,
-  core: `${srcPath}/core`,
-  common: `${srcPath}/common`,
-  library: `${srcPath}/library`,
-  modules: `${srcPath}/modules`,
+/** 全局公用路径 */
+export const globalPath = {
+  /** src目录 */
+  src,
+  /** 根目录 */
+  root,
+  /** 临时目录 */
+  temp: `${root}/temp`,
+  /** 日志目录 */
+  logs: `${root}/logs`,
+  /** 公共约定/类型/常量目录 */
+  common: `${src}/common`,
+  /** 拓展模块目录 */
+  extends: `${src}/extends`,
+  /** 业务模块目录 */
+  modules: `${src}/modules`,
 };
 
-export const envConstant = {
-  env: 'NODE_ENV',
-  port: 'NODE_PORT',
-  appName: 'NODE_APP_NAME',
-};
+/**
+ * http 状态码
+ * @see: https://developer.mozilla.org/en-US/docs/Web/HTTP
+ */
+export const httpStatusMap = new Map([
+  /** http 基础状态码 */
+  [HTTP_STATUS.SUCCESS, { code: 0, statusCode: 200, message: '请求成功' }],
+  [HTTP_STATUS.CREATED, { code: 0, statusCode: 201, message: '操作成功' }],
+  [HTTP_STATUS.BAD_REQUEST, { code: 400, statusCode: 400, message: '请求有误' }],
+  [HTTP_STATUS.UNAUTHORIZED, { code: 401, statusCode: 401, message: '拒绝访问' }],
+  [HTTP_STATUS.FORBIDDEN, { code: 403, statusCode: 403, message: '无权限访问' }],
+  [HTTP_STATUS.NOT_FOUND, { code: 404, statusCode: 404, message: '未找到访问资源' }],
+  [HTTP_STATUS.TIMEOUT, { code: 408, statusCode: 408, message: '请求超时' }],
+  [HTTP_STATUS.PARAM_UNPROCESSABLE, { code: 422, statusCode: 422, message: '参数有误' }],
+  [HTTP_STATUS.SERVER_ERROR, { code: 500, statusCode: 500, message: '执行异常' }],
+  [HTTP_STATUS.NOT_IMPLEMENTED, { code: 501, statusCode: 501, message: '执行失败' }],
+  [HTTP_STATUS.BAD_GATEWAY, { code: 502, statusCode: 502, message: '网关访问异常' }],
+  [HTTP_STATUS.UNAVAILABLE, { code: 503, statusCode: 503, message: '服务升级中，暂不可用' }],
 
-export const secretConstant = {
-  jwt: 'NODE_USER_CENTER_JWT',
-  sha256: 'NODE_USER_CENTER_SHA256',
-};
-
-export const headersConstant = {
-  requestId: 'x-request-id',
-  requestToken: 'x-request-token',
-  requestUserId: 'x-request-user-id',
-};
-
-export const httpStatusConstant: HttpStatusConstant = {
-  language: 'en',
-  status: new Map([
-    // The http base status
-    // ----------------------------------------------------------------------------------------
-    [200, { code: 0, errorCode: 200, zh: '请求成功', en: 'Success' }],
-    [400, { code: 400, errorCode: 400, zh: '请求有误', en: 'BadRequest' }],
-    [401, { code: 401, errorCode: 401, zh: '拒绝访问', en: 'Forbidden' }],
-    [403, { code: 403, errorCode: 403, zh: '无权限访问', en: 'Unauthorized' }],
-    [404, { code: 404, errorCode: 404, zh: '未找到访问资源', en: 'NotFound' }],
-    [408, { code: 408, errorCode: 408, zh: '请求超时', en: 'Timeout' }],
-    [500, { code: 500, errorCode: 500, zh: '服务端异常', en: 'InternalServerError' }],
-    [501, { code: 501, errorCode: 501, zh: '服务端执行失败', en: 'NotImplemented' }],
-    [502, { code: 502, errorCode: 502, zh: '服务端网关访问异常', en: 'BadGateway' }],
-    [503, { code: 503, errorCode: 503, zh: '服务端更新中，暂不可用', en: 'Service Unavailable' }],
-    // The custom status
-    // ----------------------------------------------------------------------------------------
-    [400001, { code: 400, errorCode: 400001, zh: '参数有误', en: 'Parameter is wrong' }],
-  ]),
-};
+  /** 自定义状态码 */
+  /** 规则：{statusCode}0000{自增} */
+  [HTTP_STATUS.LOGIN_PARAM_UNPROCESSABLE, { code: 42200001, statusCode: 422, message: '登录参数不符合要求' }],
+]);

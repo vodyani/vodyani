@@ -1,43 +1,36 @@
 {
 	"name": "nest-server",
-	"version": "2.0.2",
+	"version": "2.1.1",
 	"main": "dist/index.js",
 	"author": "chogath@163.com",
 	"license": "BSD-2-Clause",
-	"description": "🚀 Possibly the best nest.js server development template.",
-	"homepage": "https://github.com/sophons-space/nest-server#readme",
-	"directories": {
-		"doc": "docs"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/sophons-space/nest-server.git"
-	},
-	"bugs": {
-		"url": "https://github.com/sophons-space/nest-server/issues"
-	},
+	"description": "🚀 可能是最好的 NestJS 服务端（Http）开发脚手架。",
 	"scripts": {
-		"build": "tsc",
 		"lint": "eslint ./src",
-		"start": "node dist/main.js",
-		"dev:ts": "ts-node src/main.ts",
-		"dev": "tsc && node dist/main.js"
+		"build": "rm -rf dist && tsc",
+		"dev:ts": "ts-node src/bin",
+		"dev": "tsc && node dist/bin",
+		"start": "NODE_ENV=dev node dist/bin",
+		"start:pre": "NODE_ENV=pre NODE_PORT=3010 node dist/bin",
+		"start:prod": "NODE_ENV=prod NODE_PORT=3100 node dist/bin",
+		"start:test": "ENABLE_SWAGGER=true NODE_PORT=3000 NODE_ENV=test node dist/bin"
 	},
 	"dependencies": {
 		"@nestjs/common": "^7.6.5",
 		"@nestjs/core": "^7.6.5",
+		"@nestjs/mapped-types": "^1.0.0",
 		"@nestjs/platform-express": "^7.6.5",
 		"@nestjs/swagger": "^4.7.2",
-		"@sophons/redis": "^1.1.7",
-		"@sophons/request": "^1.0.7",
+		"axios": "^0.21.1",
 		"class-transformer": "^0.3.1",
 		"class-validator": "^0.12.2",
 		"crypto-js": "^4.0.0",
+		"form-data": "^4.0.0",
 		"helmet": "^4.2.0",
 		"lodash": "^4.17.21",
 		"module-alias": "^2.2.2",
 		"moment": "^2.29.1",
-		"pg": "^8.5.0",
+		"mysql2": "^2.2.5",
 		"reflect-metadata": "^0.1.13",
 		"rimraf": "^3.0.2",
 		"rxjs": "^6.5.4",
@@ -47,13 +40,14 @@
 		"winston": "^3.3.3"
 	},
 	"devDependencies": {
-		"@types/crypto-js": "^4.0.1",
 		"@types/bluebird": "^3.5.33",
+		"@types/crypto-js": "^4.0.1",
 		"@types/express": "^4.17.11",
-		"@types/ioredis": "^4.19.4",
 		"@types/lodash": "^4.14.168",
 		"@types/module-alias": "^2.0.0",
+		"@types/multer": "^1.4.5",
 		"@types/node": "^14.14.33",
+		"@types/sequelize": "^4.28.9",
 		"@types/uuid": "^8.3.0",
 		"@types/validator": "^13.1.0",
 		"@typescript-eslint/eslint-plugin": "3.9.1",

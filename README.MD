@@ -1,11 +1,11 @@
 # Nest-Server
 
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="http://kamilmysliwiec.com/public/nest-logo.png#1" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="public/images/icon.png" alt="Nest Logo" /></a>
 </p>
   
 <p align="center">
-  🚀 Possibly the best nest.js server development template.
+  🚀 可能是最好的 NestJS 服务端（Http）开发脚手架。
 </p>
 
 ## Description
@@ -15,8 +15,6 @@
 [![](https://img.shields.io/badge/npm-@nestjs/core-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/core)
 [![](https://img.shields.io/badge/npm-@nestjs/common-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/common)
 [![](https://img.shields.io/badge/npm-@nestjs/swagger-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/swagger)
-[![](https://img.shields.io/badge/npm-@sophons/redis-success?style=flat-square)](https://www.npmjs.org/package/@sophons/redis)
-[![](https://img.shields.io/badge/npm-@sophons/request-success?style=flat-square)](https://www.npmjs.org/package/@sophons/request)
 [![](https://img.shields.io/badge/npm-swagger--ui--express-green?style=flat-square)](https://www.npmjs.org/package/swagger-ui-express)
 [![](https://img.shields.io/badge/npm-class--transformer-yellowgreen?style=flat-square)](https://www.npmjs.org/package/class-transformer)
 [![](https://img.shields.io/badge/npm-eslint-blueviolet?style=flat-square)](https://www.npmjs.org/package/eslint)
@@ -31,55 +29,58 @@
 [![](https://img.shields.io/badge/npm-helmet-orange?style=flat-square)](https://www.npmjs.org/package/helmet)
 [![](https://img.shields.io/badge/npm-lodash-orange?style=flat-square)](https://www.npmjs.org/package/lodash)
 [![](https://img.shields.io/badge/npm-moment-green?style=flat-square)](https://www.npmjs.org/package/moment)
-[![](https://img.shields.io/badge/npm-pg-yellowgreen?style=flat-square)](https://www.npmjs.org/package/pg)
 [![](https://img.shields.io/badge/npm-winston-green?style=flat-square)](https://www.npmjs.org/package/winston)
 
 ## Architecture
 
-![Architecture](docs/img/server.png)
+![Architecture](public/images/server.png)
 
 ## Directory
 
-```shell
+```
+.
+├── LICENSE
+├── README.MD
+├── logs
+│   ├── stderr.log
+│   └── stdout.log
+├── package-lock.json
+├── package.json
+├── public
+│   ├── doc
+│   └── images
+│       └── icon.png
 ├── src
-│   ├── main.ts
+│   ├── bin
+│   │   ├── app.ts
+│   │   └── index.ts
 │   ├── common
-│   │   ├── index.ts
-│   │   ├── type.ts
 │   │   ├── constant.ts
-│   │   └── interface.ts
-│   ├── core
-│   │   ├── decorator
-│   │   ├── pipe
-│   │   ├── filter
-│   │   ├── interceptor
+│   │   ├── enum.ts
 │   │   ├── index.ts
-│   │   ├── module.ts
-│   │   └── manager.ts
-│   ├── library
-│   │   ├── postgresql
-│   │   ├── configs
+│   │   ├── interface.ts
+│   │   └── type.ts
+│   ├── extends
+│   │   ├── config
+│   │   ├── http-client
 │   │   ├── logger
-│   │   ├── redis
+│   │   ├── sequelize
+│   │   ├── swagger
 │   │   └── utils
 │   └── modules
 │       ├── book
-│       └── health
-├── package-lock.json
-├── package.json
+│       └── core
 └── tsconfig.json
 ```
 
-## Document
+## Vscode PlugIn
 
-- [English Docs](docs/en.md)
-- [中文文档](docs/cn.md)
+- [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools)  🦁  帮助 nest-server 开发者在 vscode 中快速创建模板/目录/文件
 
 ## Q&A
 
-1. How to use vscode to debug breakpoints? **👉  👀** [.vscode/launch.json](docs/vscode.md) 
-2. If you have good ideas, you are more than welcome to ask questions! **👉  ✏️** [issues](https://github.com/sophons-space/nest-server/issues)
+- 如果您有好的想法，欢迎您提出宝贵意见! **👉  ✏️** [issues](https://github.com/sophons-space/nest-server/issues)
 
 ## License
 
-- [BSD 2-Clause](./LICENSE)
+- [MIT](./LICENSE)

@@ -1,11 +1,11 @@
 {
   "include": [
-    "src"
+    "./src"
   ],
   "exclude": [
     "**/*.spec.ts",
     "**/*.spec.js",
-    "node_modules"
+    "./node_modules",
   ],
   "compilerOptions": {
     "experimentalDecorators": true,
@@ -17,13 +17,12 @@
     "module": "CommonJS",
     "target": "ESNext",
     "lib": ["ESNext"],
-    "outDir": "dist",
-    "baseUrl": ".",
+    "outDir": "./dist",
+    "baseUrl": "./",
     "paths": {
-      "@core/*": ["src/core/*"],
-      "@common/*": ["src/common/*"],
-      "@library/*": ["src/library/*"],
-      "@modules/*": ["src/modules/*"],
+      "@/common": ["./src/common"],
+      "@/extends/*": ["./src/extends/*"],
+      "@/modules/*": ["./src/modules/*"],
     }
   }
 }
