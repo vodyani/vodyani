@@ -17,7 +17,7 @@ class SequelizeEntity {
   /** 匹配 Entity 文件路径 */
   static pathMath() {
     const path = resolve(__dirname, '../shared');
-    const list = readdirSync(path).filter(e => e !== 'index.ts');
+    const list = readdirSync(path).filter(e => !e.includes('index.'));
     return (list || []).map(e => `${path}/${e}`);
   }
 }
