@@ -12,23 +12,18 @@ import { IRequestOption, IRequestFormOption } from '../common';
 
 @Injectable()
 export class HttpClientProvider {
-  private agent: Http.Agent;
-
-  constructor() {
-    this.agent = new Http.Agent({ keepAlive: true });
-  }
-
-  public getAgent() {
-    return this.agent;
-  }
-
   /** 将 query 对象进行序列化 */
-  public transformQuery(url: string, query: Record<string, any>) {
+  private transformQuery(url: string, query: Record<string, any>) {
     if (!query) return url;
 
     const baseUrl = url && !url.includes('?') ? `${url}?` : `${url}&`;
 
     return `${baseUrl}${stringify(query)}`;
+  }
+
+  /** 获取请求代理 */
+  public getAgent(opts?: Http.AgentOptions) {
+    return new Http.Agent(opts);
   }
 
   /** 发起请求 */
@@ -43,8 +38,8 @@ export class HttpClientProvider {
     return response;
   }
 
-  /** 发起 POST FORM DATA 请求 */
-  public async formRequest <T = any>(option: IRequestFormOption) {
+  /** 发起表单请求 */
+  public async formData <T = any>(option: IRequestFormOption) {
     if (!option || !option.url || !option.data) return null;
 
     const form = new Form();
@@ -63,7 +58,7 @@ export class HttpClientProvider {
   }
 
   /** 发起请求, 将返回数据转换为 buffer */
-  public async bufferRequest(url: string, config?: AxiosRequestConfig) {
+  public async buffer(url: string, config?: AxiosRequestConfig) {
     if (!url) return null;
 
     const response: AxiosResponse<Buffer> = await axios({
@@ -76,7 +71,7 @@ export class HttpClientProvider {
   }
 
   /** 发起请求, 将返回数据转换为可读写 stream */
-  public async streamRequest(url: string, config?: AxiosRequestConfig) {
+  public async stream(url: string, config?: AxiosRequestConfig) {
     if (!url) return null;
     const response: AxiosResponse<Stream> = await axios({
       ...config,
@@ -88,7 +83,7 @@ export class HttpClientProvider {
   }
 
   /** 发起下载请求，并存储到指定的绝对路径 */
-  public async downloadRequest(
+  public async download(
     url: string,
     path: string,
     isStream = false,
@@ -98,7 +93,7 @@ export class HttpClientProvider {
 
     /** 流式传输 */
     if (isStream) {
-      const stream = await this.streamRequest(url, config);
+      const stream = await this.stream(url, config);
 
       await new Promise((resolve, reject) => {
         const writeStream = stream.pipe(fs.createWriteStream(path));
@@ -109,7 +104,7 @@ export class HttpClientProvider {
 
     /** buffer 写入 */
     else {
-      const buffer = await this.bufferRequest(url, config);
+      const buffer = await this.buffer(url, config);
       fs.writeFileSync(path, buffer, 'binary');
     }
 
