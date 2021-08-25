@@ -15,25 +15,15 @@
 [![](https://img.shields.io/badge/npm-@nestjs/core-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/core)
 [![](https://img.shields.io/badge/npm-@nestjs/common-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/common)
 [![](https://img.shields.io/badge/npm-@nestjs/swagger-blue?style=flat-square)](https://www.npmjs.org/package/@nestjs/swagger)
-[![](https://img.shields.io/badge/npm-swagger--ui--express-green?style=flat-square)](https://www.npmjs.org/package/swagger-ui-express)
-[![](https://img.shields.io/badge/npm-class--transformer-yellowgreen?style=flat-square)](https://www.npmjs.org/package/class-transformer)
-[![](https://img.shields.io/badge/npm-eslint-blueviolet?style=flat-square)](https://www.npmjs.org/package/eslint)
-[![](https://img.shields.io/badge/npm-class--validator-green?style=flat-square)](https://www.npmjs.org/package/class-validator)
+[![](https://img.shields.io/badge/npm-class--transformer-orange?style=flat-square)](https://www.npmjs.org/package/class-transformer)
+[![](https://img.shields.io/badge/npm-class--validator-orange?style=flat-square)](https://www.npmjs.org/package/class-validator)
 [![](https://img.shields.io/badge/npm-reflect--metadata-orange?style=flat-square)](https://www.npmjs.org/package/reflect-metadata)
-[![](https://img.shields.io/badge/npm-module--alias-ff69b4?style=flat-square)](https://www.npmjs.org/package/module-alias)
-[![](https://img.shields.io/badge/npm-rimraf-yellowgreen?style=flat-square)](https://www.npmjs.org/package/rimraf)
 [![](https://img.shields.io/badge/npm-rxjs-orange?style=flat-square)](https://www.npmjs.org/package/rxjs)
 [![](https://img.shields.io/badge/npm-sequelize--typescript-green?style=flat-square)](https://www.npmjs.org/package/sequelize-typescript)
-[![](https://img.shields.io/badge/npm-sequelize-yellowgreen?style=flat-square)](https://www.npmjs.org/package/sequelize)
-[![](https://img.shields.io/badge/npm-crypto--js-green?style=flat-square)](https://www.npmjs.org/package/crypto-js)
-[![](https://img.shields.io/badge/npm-helmet-orange?style=flat-square)](https://www.npmjs.org/package/helmet)
-[![](https://img.shields.io/badge/npm-lodash-orange?style=flat-square)](https://www.npmjs.org/package/lodash)
-[![](https://img.shields.io/badge/npm-moment-green?style=flat-square)](https://www.npmjs.org/package/moment)
+[![](https://img.shields.io/badge/npm-lodash-green?style=flat-square)](https://www.npmjs.org/package/lodash)
 [![](https://img.shields.io/badge/npm-winston-green?style=flat-square)](https://www.npmjs.org/package/winston)
-
-## Architecture
-
-![Architecture](public/images/server.png)
+[![](https://img.shields.io/badge/npm-eslint-ff69b4?style=flat-square)](https://www.npmjs.org/package/eslint)
+[![](https://img.shields.io/badge/npm-module--alias-ff69b4?style=flat-square)](https://www.npmjs.org/package/module-alias)
 
 ## Directory
 
@@ -41,6 +31,7 @@
 .
 ├── LICENSE
 ├── README.MD
+├── tsconfig.json
 ├── package-lock.json
 ├── package.json
 ├── public
@@ -49,7 +40,6 @@
 │   ├── common
 │   │   ├── constant.ts
 │   │   ├── enum.ts
-│   │   ├── index.ts
 │   │   ├── interface.ts
 │   │   └── type.ts
 │   ├── core
@@ -57,7 +47,6 @@
 │   │   ├── module.ts
 │   │   ├── decorator
 │   │   ├── filter
-│   │   ├── index.ts
 │   │   ├── intercetor
 │   │   └── pipe
 │   ├── extends
@@ -68,16 +57,19 @@
 │   │   ├── swagger
 │   │   └── utils
 │   ├── modules
-│   |   ├── book
-│   |   └── default
+│   │   ├── book
+│   │   └── default
 │   └── main.ts
-
-└── tsconfig.json
 ```
 
-## Vscode PlugIn
+## Architecture
 
-- [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools)  🦁  帮助 nest-server 开发者在 vscode 中快速创建模板/目录/文件
+![Architecture](public/images/server.png)
+
+## Plug-In
+
+- vscode
+  - [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools)  🦁  帮助 nest-server 开发者在 vscode 中快速创建模板/目录/文件
 
 ## Q&A
 
