@@ -1,8 +1,3 @@
-/**
- * @description: 公共类型
- * @type: common-type
- */
-
 export type HashType = 'MD5' | 'SHA1' | 'SHA256' | 'SHA512';
 
 export type AESModeType = 'CBC' | 'CFB' | 'CTR' | 'CTRGladman' | 'OFB' | 'ECB';

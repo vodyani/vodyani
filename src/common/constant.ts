@@ -1,8 +1,3 @@
-/**
- * @description: 公共常量值
- * @type: common-constant
- */
-
 import { resolve } from 'path';
 
 import { HTTP_STATUS } from './enum';

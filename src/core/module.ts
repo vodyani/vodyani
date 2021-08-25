@@ -4,13 +4,13 @@ import { BookModule } from '@/modules/book';
 import { ConfigModule } from '@/extends/config';
 import { LoggerModule } from '@/extends/logger';
 import { SwaggerModule } from '@/extends/swagger';
+import { DefaultModule } from '@/modules/default';
 import { SequelizeModule } from '@/extends/sequelize';
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { DTOPipe } from './pipe';
 import { ExceptionFilter } from './filter';
-import { DefaultController } from './controller';
 import { LogInterceptor, ParamFormatInterceptor } from './intercetor';
 
 @Module({
@@ -21,6 +21,7 @@ import { LogInterceptor, ParamFormatInterceptor } from './intercetor';
     SequelizeModule,
     SwaggerModule,
     BookModule,
+    DefaultModule,
   ],
   /** 声明 AOP 执行器流程 */
   providers: [
@@ -28,9 +29,6 @@ import { LogInterceptor, ParamFormatInterceptor } from './intercetor';
     { provide: APP_PIPE, useClass: DTOPipe },
     { provide: APP_INTERCEPTOR, useClass: LogInterceptor },
     { provide: APP_INTERCEPTOR, useClass: ParamFormatInterceptor },
-  ],
-  controllers: [
-    DefaultController,
   ],
 })
 export class CoreModule implements NestModule {

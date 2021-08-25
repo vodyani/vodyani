@@ -22,9 +22,9 @@ export class LogInterceptor implements NestInterceptor {
 
     /** 定义日志内容 */
     const content = JSON.stringify({
-      type: 'REQUEST_ID',
+      type: 'INIT',
       class: ctx.getClass().name,
-      handle: ctx.getHandler().name,
+      handler: ctx.getHandler().name,
       request: { originalUrl, method, headers, query, body },
     });
 
@@ -34,7 +34,7 @@ export class LogInterceptor implements NestInterceptor {
     /** 绑定执行过程 */
     return next.handle().pipe(
       map((response: IHttpResponseBody<Record<string, any>>) => {
-        const content = JSON.stringify({ type: 'REQUEST_SUCCESS', response });
+        const content = JSON.stringify({ type: 'SUCCESS', response });
         this.logger.info(content);
         return response;
       }),

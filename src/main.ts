@@ -1,7 +1,7 @@
 import { addAliases } from 'module-alias';
 
-/** 初始化引用别名 */
-import { globalPath } from '../common/constant';
+/** 别名初始化 */
+import { globalPath } from './common';
 
 addAliases({
   '@/common': globalPath.common,
@@ -9,7 +9,7 @@ addAliases({
   '@/modules': globalPath.modules,
 });
 
-/** 完成引用别名初始化后再继续创建服务 */
-import { bootstrap } from './app';
+/** 别名初始化后再继续创建服务 */
+import { bootstrap } from './core';
 
 bootstrap();

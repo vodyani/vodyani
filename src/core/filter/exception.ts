@@ -36,7 +36,7 @@ export class ExceptionFilter implements Filter {
     /** 打印异常日志 */
     this.logger.error(
       JSON.stringify({
-        type: 'REQUEST_ERROR',
+        type: 'ERROR',
         request: { originalUrl, method, headers, query, body },
         response,
         exception,

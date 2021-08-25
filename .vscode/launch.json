@@ -16,7 +16,7 @@
       "protocol": "inspector",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "program": "${workspaceRoot}/src/bin/index.ts",
+      "program": "${workspaceRoot}/src/main.ts",
     }
   ]
 }

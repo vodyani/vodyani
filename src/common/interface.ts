@@ -1,8 +1,3 @@
-/**
- * @description: 公共接口
- * @type: common-interface
- */
-
 /** http response body */
 export interface IHttpResponseBody<T = any> {
   /** 具体数据 */

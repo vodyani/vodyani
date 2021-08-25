@@ -1,113 +1,114 @@
-import * as fs from 'fs';
-import * as Http from 'http';
 import * as Form from 'form-data';
+import * as Agent from 'agentkeepalive';
 
 import { Stream } from 'stream';
+import { AgentOptions } from 'http';
 import { defaultsDeep } from 'lodash';
-import { stringify } from 'querystring';
 import { Injectable } from '@nestjs/common';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import { IRequestOption, IRequestFormOption } from '../common';
+import { writeFileSync, existsSync } from 'fs';
+import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 
 @Injectable()
 export class HttpClientProvider {
-  /** 将 query 对象进行序列化 */
-  private transformQuery(url: string, query: Record<string, any>) {
-    if (!query) return url;
+  /** axios 客户端实例 */
+  private readonly client: AxiosInstance;
 
-    const baseUrl = url && !url.includes('?') ? `${url}?` : `${url}&`;
-
-    return `${baseUrl}${stringify(query)}`;
+  constructor(config: AxiosRequestConfig, agentOption?: AgentOptions) {
+    config.timeout = config.timeout ? config.timeout : 15000;
+    if (agentOption) config.httpAgent = new Agent(agentOption);
+    this.client = axios.create(config);
   }
 
-  /** 获取请求代理 */
-  public getAgent(opts?: Http.AgentOptions) {
-    return new Http.Agent(opts);
+  /** Method GET */
+  public get(url: string, config?: AxiosRequestConfig) {
+    return this.client.get(url, config);
   }
 
-  /** 发起请求 */
-  public async request <T = any>(option: IRequestOption) {
-    if (!option || !option.url) return null;
-
-    const response: AxiosResponse<T> = await axios({
-      ...option,
-      url: this.transformQuery(option.url, option.query),
-    });
-
-    return response;
+  /** Method POST */
+  public post(url: string, config?: AxiosRequestConfig) {
+    return this.client.post(url, config);
   }
 
-  /** 发起表单请求 */
-  public async formData <T = any>(option: IRequestFormOption) {
-    if (!option || !option.url || !option.data) return null;
+  /** Method PUT */
+  public put(url: string, config?: AxiosRequestConfig) {
+    return this.client.put(url, config);
+  }
 
+  /** Method Delete */
+  public delete(url: string, config?: AxiosRequestConfig) {
+    return this.client.delete(url, config);
+  }
+
+  /** Method Options */
+  public options(url: string, config?: AxiosRequestConfig) {
+    return this.client.options(url, config);
+  }
+
+  /** (GET) 发起请求，并获取 response body 中的指定参数，默认是 `data` */
+  public async getData(url: string, config?: AxiosRequestConfig, key = 'data') {
+    const response = await this.get(url, config);
+    return response.data && response.data[key] ? response.data[key] : null;
+  }
+
+  /** (POST) 发起请求，并获取 response body 中的指定参数，默认是 `data` */
+  public async postData(url: string, config?: AxiosRequestConfig, key = 'data') {
+    const response = await this.post(url, config);
+    return response.data && response.data[key] ? response.data[key] : null;
+  }
+
+  /** (PUT) 发起请求，并获取 response body 中的指定参数，默认是 `data` */
+  public async putData(url: string, config?: AxiosRequestConfig, key = 'data') {
+    const response = await this.put(url, config);
+    return response.data && response.data[key] ? response.data[key] : null;
+  }
+
+  /** (POST) 发起表单请求 */
+  public async formData(url: string, data: Record<string, any>, config: AxiosRequestConfig) {
     const form = new Form();
 
-    const { url, query, data, config } = option;
+    const configs = defaultsDeep({ headers: form.getHeaders() }, config);
 
     Object.keys(data).forEach((key) => form.append(key, data[key]));
 
-    const response: AxiosResponse<T> = await axios.post(
-      this.transformQuery(url, query),
-      form,
-      defaultsDeep({ headers: form.getHeaders() }, config)
-    );
+    const response = await this.client.post(url, form, configs);
 
     return response;
   }
 
-  /** 发起请求, 将返回数据转换为 buffer */
+  /** (GET) 发起请求, 将返回数据转换为 buffer */
   public async buffer(url: string, config?: AxiosRequestConfig) {
-    if (!url) return null;
-
-    const response: AxiosResponse<Buffer> = await axios({
-      ...config,
-      responseType: 'arraybuffer',
+    const response = await this.get(
       url,
-    });
+      defaultsDeep({ responseType: 'arraybuffer' }, config)
+    );
 
-    return response.data;
+    return response.data as Buffer;
   }
 
-  /** 发起请求, 将返回数据转换为可读写 stream */
+  /** (GET) 发起请求, 将返回数据转换为 stream */
   public async stream(url: string, config?: AxiosRequestConfig) {
-    if (!url) return null;
-    const response: AxiosResponse<Stream> = await axios({
-      ...config,
-      responseType: 'stream',
+    const response = await this.get(
       url,
-    });
+      defaultsDeep({ responseType: 'stream' }, config)
+    );
 
-    return response.data;
+    return response.data as Stream;
   }
 
-  /** 发起下载请求，并存储到指定的绝对路径 */
-  public async download(
-    url: string,
-    path: string,
-    isStream = false,
-    config?: AxiosRequestConfig,
-  ) {
-    if (!url || !path) return null;
+  /** (GET) 发起请求, 将返回数据转换为 base64 格式的字符串 */
+  public async base64(url: string, config?: AxiosRequestConfig) {
+    const data = await this.buffer(url, config);
+    return data.toString('base64');
+  }
 
-    /** 流式传输 */
-    if (isStream) {
-      const stream = await this.stream(url, config);
-
-      await new Promise((resolve, reject) => {
-        const writeStream = stream.pipe(fs.createWriteStream(path));
-        writeStream.on('error', (error) => reject(error));
-        writeStream.on('finish', () => resolve(null));
-      });
+  /** (GET) 发起请求，下载文件并存储到指定的路径下 */
+  public async download(url: string, path: string, config?: AxiosRequestConfig) {
+    if (!existsSync(path)) {
+      throw new Error(`${path} 该路径不存在`);
     }
 
-    /** buffer 写入 */
-    else {
-      const buffer = await this.buffer(url, config);
-      fs.writeFileSync(path, buffer, 'binary');
-    }
-
+    const buffer = await this.buffer(url, config);
+    writeFileSync(path, buffer, 'binary');
     return path;
   }
 }

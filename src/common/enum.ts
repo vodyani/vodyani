@@ -1,8 +1,3 @@
-/**
- * @description: 公共枚举值
- * @type: common-enum
- */
-
 /** 字符串布尔值 */
 export enum STRBOOL {
   TRUE = 'true',
