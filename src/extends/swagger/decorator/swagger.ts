@@ -1,7 +1,7 @@
 import { Type, applyDecorators } from '@nestjs/common';
 import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
-import { HttpResponseBodyBO, HttpResponsePageBO } from './common';
+import { HttpResponseBodyBO, HttpResponsePageBO } from '../common';
 
 /** 返回单条 BO/业务数据对象 */
 export const ApiResponseBO = <T extends Type<any>>(BO?: T) => {
