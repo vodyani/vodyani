@@ -41,20 +41,25 @@
 .
 ├── LICENSE
 ├── README.MD
-├── logs
 ├── package-lock.json
 ├── package.json
 ├── public
+├── logs
 ├── src
-│   ├── bin
-│   │   ├── app.ts
-│   │   └── index.ts
 │   ├── common
 │   │   ├── constant.ts
 │   │   ├── enum.ts
 │   │   ├── index.ts
 │   │   ├── interface.ts
 │   │   └── type.ts
+│   ├── core
+│   │   ├── app.ts
+│   │   ├── module.ts
+│   │   ├── decorator
+│   │   ├── filter
+│   │   ├── index.ts
+│   │   ├── intercetor
+│   │   └── pipe
 │   ├── extends
 │   │   ├── config
 │   │   ├── http-client
@@ -62,9 +67,11 @@
 │   │   ├── sequelize
 │   │   ├── swagger
 │   │   └── utils
-│   └── modules
-│       ├── book
-│       └── core
+│   ├── modules
+│   |   ├── book
+│   |   └── default
+│   └── main.ts
+
 └── tsconfig.json
 ```
 
