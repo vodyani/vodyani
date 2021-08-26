@@ -41,8 +41,10 @@ Nest-Server 是基于 Nest.js 的功能封装，对后端开发中常用的层�
 
 - [📚 快速入门](public/doc/quick-start.md)
 - [📚 架构与名词解释](public/doc/architecture.md) `👷 (完善中 ...)`
+- [⛰ 如何修改核心模块](public/doc/how-to-use-core.md) `👷 (完善中 ...)`
 - [🏭 如何开发业务模块](public/doc/how-to-use-modules.md) `👷 (完善中 ...)`
 - [🔩 如何开发拓展模块](public/doc/how-to-use-extends.md) `👷 (完善中 ...)`
+- [👪 如何正确使用 Common](public/doc/how-to-use-common.md) `👷 (完善中 ...)`
 
 ## 工具与插件
 
