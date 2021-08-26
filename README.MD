@@ -33,32 +33,27 @@ Nest-Server 是基于 Nest.js 的功能封装，对后端开发中常用的层�
 
 使用 Nest-Server 搭建项目，开发者可以体验到清晰的模块组织方式，隔离模块的冗余调用；在各种模块内都涉及不一样的设计模式。
 
-## 项目架构
-
-![Architecture](public/images/server.png)
-
 ## 文档
 
 - [📚 快速入门](public/doc/quick-start.md)
-- [📚 架构与名词解释](public/doc/architecture.md) `👷 (完善中 ...)`
-- [⛰ 如何修改核心模块](public/doc/how-to-use-core.md) `👷 (完善中 ...)`
+- [📜 架构与名词解释](public/doc/architecture.md)
+- [🔱 如何修改核心模块](public/doc/how-to-use-core.md) `👷 (完善中 ...)`
 - [🏭 如何开发业务模块](public/doc/how-to-use-modules.md) `👷 (完善中 ...)`
 - [🔩 如何开发拓展模块](public/doc/how-to-use-extends.md) `👷 (完善中 ...)`
-- [👪 如何正确使用 Common](public/doc/how-to-use-common.md) `👷 (完善中 ...)`
-
-## 工具与插件
-
-- [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools)  
-  - > `🦁  帮助 nest-server 开发者在 vscode 中快速创建模板/目录/文件。`
-  - > 使用方法请对照 👉 [📚 架构与名词解释](public/doc/architecture.md) `👷 (完善中 ...)`
+- [👪 如何正确使用公共约定目录](public/doc/how-to-use-common.md) `👷 (完善中 ...)`
 
 ## Todo
 
-- request-id 传递方案
-- redis extends
-- kafka extends
-- grpc extends
-- apm extends
+- RPC 间传递 Request-Id
+- Extends·redis
+- Extends·kafka
+- Extends·grpc
+- Extends·apm
+
+## 工具与插件
+
+- Vscode 插件
+  - [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools) 🦁  帮助 nest-server 开发者在 vscode 中快速创建模板/目录/文件。
 
 ## Q&A
 
