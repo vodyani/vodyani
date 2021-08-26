@@ -1,3 +1,6 @@
+# 📚 架构与名词解释
+
+## 名词结束
 - 🦁 NestJS Server Module
   - [* Module 模块定义](https://docs.nestjs.cn/7/modules)
   - NestJS Server AOP
@@ -7,3 +10,7 @@
     - [* Intercetor 拦截器](https://docs.nestjs.cn/7/interceptors)
     - [* Pipe 管道](https://docs.nestjs.cn/7/pipes)
     - [* Guard 守卫](https://docs.nestjs.cn/7/guards)
+
+## 项目架构图解释
+
+![Architecture](public/images/server.png)
