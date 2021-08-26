@@ -11,6 +11,8 @@ import {
   BeforeBulkCreate,
   BeforeBulkUpdate,
 } from 'sequelize-typescript';
+import { resolve } from 'path';
+import { readdirSync } from 'fs';
 import { isNil, intersection } from 'lodash';
 import { IHttpResponsePage, IHttpResponsePaginated } from '@/common';
 
@@ -127,5 +129,24 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
       .forEach(key => { entity[key] = dto[key] });
 
     return { entity };
+  }
+}
+
+export class BaseEntityUtils {
+  /** 匹配 Entity 命名 */
+  public static match(filename: string, member: string) {
+    const realName = filename
+      .split('-')
+      .join('')
+      .toLocaleLowerCase();
+
+    return realName === member.toLocaleLowerCase();
+  }
+
+  /** 匹配 Entity 文件路径 */
+  static pathMath() {
+    const path = resolve(__dirname, '../shared');
+    const list = readdirSync(path).filter(e => !e.includes('index.'));
+    return (list || []).map(e => `${path}/${e}`);
   }
 }

@@ -4,7 +4,6 @@ import { AESModeType, AESPadType, EncodeType } from '@/common';
 
 @Injectable()
 export class CryptoProvider {
-
   /** 对字符串进行 md5 转换 */
   public md5(str: string): string {
     if (!str) return '';

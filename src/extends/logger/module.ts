@@ -4,14 +4,8 @@ import { ConfigModule } from '@/extends/config';
 import { WinstonLoggerProvider } from './provider';
 
 @Module({
-  imports: [
-    ConfigModule,
-  ],
-  exports: [
-    WinstonLoggerProvider,
-  ],
-  providers: [
-    WinstonLoggerProvider,
-  ],
+  imports: [ConfigModule],
+  exports: [WinstonLoggerProvider],
+  providers: [WinstonLoggerProvider],
 })
 export class LoggerModule {}

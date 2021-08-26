@@ -11,4 +11,7 @@ export interface IConfig {
   enableSwagger?: boolean;
   enableSequelizeSync?: boolean;
   sequlize?: SequelizeOptions;
+  server?: {
+    local: string;
+  }
 }

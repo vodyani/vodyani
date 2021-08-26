@@ -1,5 +1,5 @@
 import { globalPath } from '@/common';
-import { Config, ConfigFactoryProvider } from '@/extends/config';
+import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';
 
@@ -9,7 +9,7 @@ export class WinstonLoggerProvider implements LoggerService {
 
   constructor(
     @Inject(ConfigFactoryProvider.provide)
-    private readonly config: Config,
+    private readonly config: BaseConfig,
   ) {
     this.instance = createLogger(this.getOptions());
   }

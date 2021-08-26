@@ -20,6 +20,9 @@ export const configMap: Map<string, IConfig> = new Map([
         pool: { max: 5 },
         timezone: '+08:00',
       },
+      server: {
+        local: 'http://localhost:8080',
+      },
     },
   ],
   [

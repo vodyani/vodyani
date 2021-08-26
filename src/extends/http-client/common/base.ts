@@ -4,16 +4,15 @@ import * as Agent from 'agentkeepalive';
 import { Stream } from 'stream';
 import { AgentOptions } from 'http';
 import { defaultsDeep } from 'lodash';
-import { Injectable } from '@nestjs/common';
 import { writeFileSync, existsSync } from 'fs';
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 
-@Injectable()
-export class HttpClientProvider {
+export class BaseHttpClient {
   /** axios 客户端实例 */
-  private readonly client: AxiosInstance;
+  private client: AxiosInstance;
 
-  constructor(config: AxiosRequestConfig, agentOption?: AgentOptions) {
+  /** Init AxiosInstance */
+  public init(config: AxiosRequestConfig, agentOption?: AgentOptions) {
     config.timeout = config.timeout ? config.timeout : 15000;
     if (agentOption) config.httpAgent = new Agent(agentOption);
     this.client = axios.create(config);

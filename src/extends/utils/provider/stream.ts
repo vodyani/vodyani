@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class StreamProvider {
-
   /** stream 转 buffer */
   public async streamToBuffer(stream: Stream): Promise<Buffer> {
     return new Promise((resolve, reject) => {

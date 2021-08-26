@@ -1,14 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerProvider } from '@/extends/swagger';
 import { WinstonLoggerProvider } from '@/extends/logger';
-import { Config, ConfigFactoryProvider } from '@/extends/config';
+import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
 
 import { CoreModule } from './module';
 
 export const bootstrap = async () => {
   const app = await NestFactory.create(CoreModule, { cors: true });
 
-  const config: Config = app.get(ConfigFactoryProvider.provide);
+  const config: BaseConfig = app.get(ConfigFactoryProvider.provide);
 
   const logger = app.get(WinstonLoggerProvider);
 
