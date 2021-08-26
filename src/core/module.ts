@@ -1,11 +1,9 @@
 import * as Helmet from 'helmet';
 
-import { BookModule } from '@/modules/book';
 import { ConfigModule } from '@/extends/config';
 import { LoggerModule } from '@/extends/logger';
 import { SwaggerModule } from '@/extends/swagger';
 import { DefaultModule } from '@/modules/default';
-import { SequelizeModule } from '@/extends/sequelize';
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
@@ -18,9 +16,7 @@ import { LogInterceptor, ParamFormatInterceptor } from './intercetor';
   imports: [
     ConfigModule,
     LoggerModule,
-    SequelizeModule,
     SwaggerModule,
-    BookModule,
     DefaultModule,
   ],
   /** 声明 AOP 执行器流程 */
