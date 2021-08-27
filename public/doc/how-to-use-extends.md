@@ -1,11 +1,7 @@
-# 🔩 如何开发拓展模块
+# 📚 拓展模块使用指南
 
-## 如何开发一个新的拓展模块
-
-## 如何使用项目自带的拓展模块
-
-### ⚙ 如何使用 config 模块
-### 📮 如何使用 http-client 模块
-### 📝 如何使用 logger 模块
-### ⛰ 如何使用 sequelize 模块
-### 🔧 如何使用 utils 模块
+## config
+## http-client
+## logger
+## sequelize
+## utils
