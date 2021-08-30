@@ -1,5 +1,20 @@
 # 📚 拓展模块使用指南
 
+> 完成模块定义后，不要忘记将模块注册到 Core-Module 中
+
+```ts
+// src/core/module.ts
+@Module({
+  /** 声明服务模块 */
+  imports: [
+    ConfigModule,
+    LoggerModule,
+    SwaggerModule,
+    DefaultModule,
+    // YOUR MODULE 
+    ...
+```
+
 ## Config 模块
 
 > 服务通常在不同的环境中运行，根据环境的不同，应该使用不同的配置设置。
