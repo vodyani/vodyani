@@ -31,6 +31,8 @@
 
 ## 文档
 
+> 请将使用 Nest-Server 创建的项目，放置于独立的 vscode 工作区，确保您有最好的开发体验 ☺️
+
 - [📚 安装指南](public/doc/quick-start.md)
 - [📚 整体介绍](public/doc/architecture.md)
 - [📚 业务模块使用指南](public/doc/how-to-use-modules.md)
@@ -43,11 +45,10 @@
 
 ## TODO
 
-- RPC 间传递 Request-Id
-- Extends·redis
-- Extends·kafka
-- Extends·grpc
-- Extends·apm
+- RPC Request-Id 方案
+- Extends·redis-client
+- Extends·kafka-client
+- Extends·grpc-client
 
 ## Q&A
 

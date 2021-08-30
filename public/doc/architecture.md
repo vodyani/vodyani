@@ -31,17 +31,55 @@
 
 ## 架构图
 
+> 从功能上来看，`Nest-Server` 的整体能力可以划分为四层：
+
+- Common 全局公用约定目录
+- Core-Module 核心 IOC 容器 & 启动程序
+- Extends 拓展模块
+- Modules 业务模块
+
 ![Architecture](../images/server.png)
+
+## 设计思想
+
+> 提升代码质量，降低开发者认知复杂度
+
+- 模块化/标准化
+  - 可插拔
+  - 可通用
+  - 依赖注入/控制反转
+  - 规范开发流程
+  - 规范目录
+  - 标准初始化/创建流程
+- 丰富的拓展/工具
+  - 基础组件：
+    - config
+    - swagger
+    - logger
+    - utils
+  - 拓展组件：
+    - sequelize
+    - http-client
+    - grpc-client（待开发）
+    - redis-client（待开发）
+    - kafka-client（待开发）
+  - 工具
+    - Vscode
+      - Nest-Server-Tools
+    - Cli
+      - Nest-Server-Cli（待开发）
 
 ## 基本概念
 
-### 模块
+### 模块 (Module)
 
 > NestJs 中的模块 [Module](https://docs.nestjs.cn/7/modules)
 
-除了 `Core-Module` 外，每个模块都提供对外分享的能力；一旦创建就能被任意模块复用/引用。模块是单例，因此开发者可以轻松地在多个模块之间共享同一个提供者实例。
+模块是单例，每个模块都提供对外分享的能力；一旦创建就能被任意模块复用/引用，因此开发者可以轻松地在多个模块之间共享同一个提供者实例。
 
-其中，module.ts 中的模块注册表是具有 `@Module()` 装饰器的类。Nest-Server 将用它来组织逻辑结构以及管理依赖关系。`@Module()` 接受一个描述模块属性的对象，包含以下属性:
+模块内的 `module.ts` 是模块注册表，它是具有 `@Module()` 装饰器的类，`Nest-Server` 将用它来组织逻辑结构以及管理依赖关系。
+
+`@Module()` 接受模块注册信息，包含以下属性:
 
 - exports	对外导出的`提供者`列表
 - imports	外部导入的`模块`列表
@@ -50,7 +88,9 @@
 
 ### 约定目录（Common）
 
-> 每个模块中都可以有自己直属的 common 层，用于存放私有定义，`src` 下的 `common` 用于存放全局通用的定义信息，但是他们都包含:
+> 每个模块中都可以有自己直属的约定目录，用于存放私有定义
+
+`src` 下的 `common` 用于存放全局通用的定义信息，但是他们都可以包含:
 
 ```
 * base      —— 定义基类（base class）
@@ -77,7 +117,7 @@
 > NestJs 中的提供者 [Controller](https://docs.nestjs.cn/7/providers)
 
 Provider 只是一个用 `@Injectable()` 装饰器注释的类。
-Provider 是 Nest-Server 中的基础，根据使用策略/架构分层，可以被分类为:
+Provider 是 `Nest-Server` 中的基础，根据使用策略/架构分层，可以被分类为:
 
 - Service 业务层
 - Provider 基础业务/功能提供者
