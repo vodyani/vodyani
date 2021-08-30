@@ -25,11 +25,10 @@
 
 ## 介绍
 
-`Nest-Server` 是一款基于 Nest.js 开发，⾯向业务的 Web 服务端框架。
 
-`Nest-Server` 提供了诸多开箱即⽤的模块/功能，这些模块通过 [Nest-Server 配套工具](#工具与插件) 即可便捷地创建，以便开发者快速开发 Web 服务。
+`Nest-Server` 是基于 [Typescript](https://www.typescriptlang.org/) 与 [Nest.js](https://github.com/nestjs/nest) 的 Node.js 服务端开发框架。
 
-同时，依托 [Typescript](https://www.typescriptlang.org/) 与 [Nest.js](https://github.com/nestjs/nest)，并结合业界优秀的开发实践，未来 `Nest-Server` 将为开发者提供⼀个符合业务应⽤场景的 Node.js 服务端⽣态体系。
+`Nest-Server` 是⼀款⾯向业务的 Web 开发框架，提供了诸多开箱即⽤的模块/功能，可以⽤来快速开发 Web 服务，开发者通过 [Nest-Server 配套工具](#工具与插件) 即可便捷地创建。
 
 ## 文档
 
