@@ -1,9 +1,5 @@
 # 📚 整体介绍
 
-## 架构图
-
-![Architecture](../images/server.png)
-
 ## 目录
 
 ```
@@ -32,6 +28,10 @@
 │   │   └── default
 │   └── main.ts
 ```
+
+## 架构图
+
+![Architecture](../images/server.png)
 
 ## 基本概念
 
