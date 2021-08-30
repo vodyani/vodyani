@@ -39,7 +39,7 @@
 ## 工具
 
 - Visual Studio Code
-  - [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools) 🦁  帮助 nest-server 开发者在 vscode 中快速创建模板/目录/文件。
+  - [Nest-Server-Tools](https://github.com/sophons-space/nest-server-tools) 🦁  帮助 `Nest-Server` 开发者在 `vscode` 中快速创建模板/目录/文件。
 
 ## TODO
 
