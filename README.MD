@@ -5,7 +5,7 @@
 </p>
   
 <p align="center">
-  🚀 可能是最好的 NestJS 服务端 Web 开发框架。
+  🚀 可能是最好的 NestJS 服务端开发框架。
 </p>
 
 [![](https://img.shields.io/badge/npm-typescript-9cf?style=flat-square)](https://www.npmjs.org/package/typescript)
@@ -28,7 +28,7 @@
 
 `Nest-Server` 是基于 [Typescript](https://www.typescriptlang.org/) 与 [Nest.js](https://github.com/nestjs/nest) 的 Node.js 服务端开发框架。
 
-`Nest-Server` 是⼀款⾯向业务的 Web 开发框架，提供了诸多开箱即⽤的模块/功能，可以⽤来快速开发 Web 服务，开发者通过 [Nest-Server 配套工具](#工具与插件) 即可便捷地创建。
+`Nest-Server` 是⼀款⾯向业务的 Web 开发框架，提供了诸多开箱即⽤的模块/功能，可以⽤来快速开发 Web 服务，开发者通过 [Nest-Server 配套工具](#工具) 即可便捷地创建。
 
 ## 文档
 
