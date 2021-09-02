@@ -23,6 +23,8 @@ export const configMap: Map<string, IConfig> = new Map([
       server: {
         local: 'http://localhost:8080',
       },
+      redis: {},
+      redisCluster: {},
     },
   ],
   [

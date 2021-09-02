@@ -1,5 +1,21 @@
-/** http response body */
-export interface IHttpResponseBody<T = any> {
+/**
+ * ==========================================
+ * HTTP SERVER
+ * ==========================================
+ */
+
+export interface IRequestPage {
+  /** 页数 */
+  index?: string | number;
+  /** 页码 */
+  size?: string | number;
+  /** 排序字段，默认是 id */
+  orderBy?: string;
+  /** 排序规则 desc=降序排序 asc=升序排序  */
+  orderRule?: string;
+}
+
+export interface IResponseBody<T = any> {
   /** 具体数据 */
   data?: T;
   /** 服务端状态码 */
@@ -14,8 +30,7 @@ export interface IHttpResponseBody<T = any> {
   responseTime?: number;
 }
 
-/** 页码信息 */
-export interface IHttpResponsePage {
+export interface IResponsePage {
   /** 页数 */
   index?: number;
   /** 页码 */
@@ -26,20 +41,9 @@ export interface IHttpResponsePage {
   pageCount?: number;
 }
 
-/** http response data 中的分页信息 */
-export interface IHttpResponsePaginated<T = any> {
+export interface IResponsePaginated<T = any> {
+  /** 分页数组 */
   rows?: T[];
-  page?: IHttpResponsePage;
-}
-
-/** http request 分页请求参数 */
-export interface IHttpRequestPage {
-  /** 页数 */
-  index?: string | number;
-  /** 页码 */
-  size?: string | number;
-  /** 排序字段，默认是 id */
-  orderBy?: string;
-  /** 排序规则 desc=降序排序 asc=升序排序  */
-  orderRule?: string;
+  /** 分页信息 */
+  page?: IResponsePage;
 }

@@ -1,6 +1,7 @@
 import * as CryptoJS from 'crypto-js';
 import { Injectable } from '@nestjs/common';
-import { AESModeType, AESPadType, EncodeType } from '@/common';
+
+import { AESModeType, AESPadType, EncodeType } from '../common';
 
 @Injectable()
 export class CryptoProvider {

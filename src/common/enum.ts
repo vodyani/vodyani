@@ -1,7 +1,41 @@
+/**
+ * ==========================================
+ * GLOBAL
+ * ==========================================
+ */
+
 /** 字符串布尔值 */
 export enum STRBOOL {
   TRUE = 'true',
   FALSE = 'false',
+}
+
+/** 环境变量 */
+export enum ENV {
+  /** 默认 */
+  DEFAULT = 'default',
+  /** 开发 */
+  DEV = 'dev',
+  /** 测试 */
+  TEST = 'test',
+  /** 预发布 */
+  PRE = 'pre',
+  /** 正式环境 */
+  PROD = 'prod',
+}
+
+/** 外部输入的环境变量 */
+export enum ENV_PARAM {
+  /** 环境变量 */
+  ENV = 'NODE_ENV',
+  /** 端口 */
+  PORT = 'NODE_PORT',
+  /** 应用名 */
+  NAME = 'NODE_APP_NAME',
+  /** 是否启用 swagger，默认是 'true' */
+  ENABLE_SWAGGER = 'NODE_ENABLE_SWAGGER',
+  /** 是否启用 sequelize 数据同步，默认是 'false' */
+  ENABLE_SEQUELIZE_SYNC = 'NODE_ENABLE_SEQUELIZE_SYNC',
 }
 
 /** 状态 */
@@ -20,35 +54,13 @@ export enum STATUS {
   DELETE = 'DELETE',
 }
 
-/** 环境变量 */
-export enum ENV {
-  /** 默认 */
-  DEFAULT = 'default',
-  /** 开发 */
-  DEV = 'dev',
-  /** 测试 */
-  TEST = 'test',
-  /** 预发布 */
-  PRE = 'pre',
-  /** 正式环境 */
-  PROD = 'prod',
-}
+/**
+ * ==========================================
+ * HTTP SERVER
+ * ==========================================
+ */
 
-/** node.js 外部输入的环境变量 */
-export enum ENV_PARAM {
-  /** 环境变量 */
-  ENV = 'NODE_ENV',
-  /** 端口 */
-  PORT = 'NODE_PORT',
-  /** 应用名 */
-  NAME = 'NODE_APP_NAME',
-  /** 是否启用 swagger，默认是 'true' */
-  ENABLE_SWAGGER = 'NODE_ENABLE_SWAGGER',
-  /** 是否启用 sequelize 实体同步，默认是 'false' */
-  ENABLE_SEQUELIZE_SYNC = 'NODE_ENABLE_SEQUELIZE_SYNC',
-}
-
-/** http 服务常用请求头 */
+/** 常用请求头 */
 export enum HTTP_HEADER {
   /** 客户端 ip */
   IP = 'x-request-ip',
@@ -71,7 +83,7 @@ export enum HTTP_HEADER {
   API_VERSION = 'x-request-api-version',
 }
 
-/** http 状态码映射 */
+/** 状态码映射 */
 export enum HTTP_STATUS {
   SUCCESS = 200,
   CREATED = 201,
@@ -80,10 +92,10 @@ export enum HTTP_STATUS {
   FORBIDDEN = 403,
   NOT_FOUND = 404,
   TIMEOUT = 408,
-  PARAM_UNPROCESSABLE = 422,
-  SERVER_ERROR = 500,
+  UNPROCESSABLE = 422,
+  BAD_SERVER = 500,
   NOT_IMPLEMENTED = 501,
   BAD_GATEWAY = 502,
   UNAVAILABLE = 503,
-  LOGIN_PARAM_UNPROCESSABLE = 42200001,
+  LOGIN_UNPROCESSABLE = 42200001,
 }

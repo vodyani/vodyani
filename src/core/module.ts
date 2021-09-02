@@ -7,7 +7,7 @@ import { DefaultModule } from '@/modules/default';
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
-import { DTOPipe } from './pipe';
+import { DTOVerifyPipe } from './pipe';
 import { ExceptionFilter } from './filter';
 import { LogInterceptor, ParamFormatInterceptor } from './intercetor';
 
@@ -22,7 +22,7 @@ import { LogInterceptor, ParamFormatInterceptor } from './intercetor';
   /** 声明 AOP 执行器流程 */
   providers: [
     { provide: APP_FILTER, useClass: ExceptionFilter },
-    { provide: APP_PIPE, useClass: DTOPipe },
+    { provide: APP_PIPE, useClass: DTOVerifyPipe },
     { provide: APP_INTERCEPTOR, useClass: LogInterceptor },
     { provide: APP_INTERCEPTOR, useClass: ParamFormatInterceptor },
   ],

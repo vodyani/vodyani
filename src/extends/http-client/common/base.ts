@@ -8,7 +8,6 @@ import { writeFileSync, existsSync } from 'fs';
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 
 export class BaseHttpClient {
-  /** axios 客户端实例 */
   private client: AxiosInstance;
 
   /** Init AxiosInstance */

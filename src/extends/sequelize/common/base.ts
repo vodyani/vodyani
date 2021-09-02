@@ -14,15 +14,9 @@ import {
 import { resolve } from 'path';
 import { readdirSync } from 'fs';
 import { isNil, intersection } from 'lodash';
-import { IHttpResponsePage, IHttpResponsePaginated } from '@/common';
+import { IResponsePage, IResponsePaginated } from '@/common';
 
-import { IHttpResponsePaginatedOption } from './interface';
-
-export interface IBaseEntity {
-  id?: number | string;
-  createdTime?: Date;
-  updatedTime?: Date;
-}
+import { IBaseEntity, IResponsePaginatedOption } from './interface';
 
 @Table({ freezeTableName: true, timestamps: false })
 export class BaseEntity<T> extends Model<T> implements IBaseEntity {
@@ -60,9 +54,9 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
   /** 分页查询 */
   public static async paginated<T extends Model>(
     this: { new (): T } & typeof Model,
-    options: IHttpResponsePaginatedOption,
+    options: IResponsePaginatedOption,
   )
-  : Promise<IHttpResponsePaginated<T>>
+  : Promise<IResponsePaginated<T>>
   {
     const { orderBy, orderRule } = options.page;
     const index = Number(options.page.index) || 1;
@@ -87,7 +81,7 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
    * @param dto Record<string, any> DTO 数据传输对象
    */
   public static getConditionByDTO(dto: Record<string, any>) {
-    const page: IHttpResponsePage = {};
+    const page: IResponsePage = {};
     const condition: Record<string, any> = {};
 
     if (isNil(dto)) return;

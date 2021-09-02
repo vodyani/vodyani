@@ -1,12 +1,12 @@
 import { addAliases } from 'module-alias';
 
 /** 别名初始化 */
-import { globalPath } from './common';
+import { path } from './common';
 
 addAliases({
-  '@/common': globalPath.common,
-  '@/extends': globalPath.extends,
-  '@/modules': globalPath.modules,
+  '@/common': path.common,
+  '@/extends': path.extends,
+  '@/modules': path.modules,
 });
 
 /** 别名初始化后再继续创建服务 */

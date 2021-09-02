@@ -1,7 +1,12 @@
-import { IHttpRequestPage } from '@/common';
+import { IRequestPage } from '@/common';
 import { FindAndCountOptions } from 'sequelize';
 
-/** 分页查询条件 */
-export interface IHttpResponsePaginatedOption extends FindAndCountOptions {
-  page: IHttpRequestPage;
+export interface IBaseEntity {
+  id?: number | string;
+  createdTime?: Date;
+  updatedTime?: Date;
+}
+
+export interface IResponsePaginatedOption extends FindAndCountOptions {
+  page: IRequestPage;
 }

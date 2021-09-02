@@ -3,10 +3,8 @@ import { plainToClass } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
 import { ArgumentMetadata, Injectable, PipeTransform, HttpException } from '@nestjs/common';
 
-/** 管道 —— 用于验证 request dto 参数 */
 @Injectable()
-export class DTOPipe implements PipeTransform<any> {
-  /** 覆盖 PipeTransform transform */
+export class DTOVerifyPipe implements PipeTransform<any> {
   public async transform(value: Record<string, any>, { metatype }: ArgumentMetadata) {
     if (!metatype) return value;
 
@@ -20,11 +18,10 @@ export class DTOPipe implements PipeTransform<any> {
 
     if (!errors || !errors.length) return value;
 
-    // throw message
     for (const error of errors) {
       if (error.constraints) {
         const message = Object.values(error.constraints)[0];
-        throw new HttpException(message, HTTP_STATUS.PARAM_UNPROCESSABLE);
+        throw new HttpException(message, HTTP_STATUS.UNPROCESSABLE);
       }
     }
   }

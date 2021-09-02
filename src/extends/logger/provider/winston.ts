@@ -1,4 +1,4 @@
-import { globalPath } from '@/common';
+import { path } from '@/common';
 import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';
@@ -26,7 +26,7 @@ export class WinstonLoggerProvider implements LoggerService {
   }
 
   private getOptions(): LoggerOptions {
-    const dirname = globalPath.logs;
+    const dirname = path.logs;
 
     return {
       exitOnError: false,
@@ -62,9 +62,9 @@ export class WinstonLoggerProvider implements LoggerService {
     };
   }
 
-  public log = (message: string) => this.instance.info(message);
-  public info = (message: string) => this.instance.info(message);
-  public warn = (message: string) => this.instance.warn(message);
-  public debug = (message: string) => this.instance.debug(message);
-  public error = (message: string) => this.instance.error(message);
+  public log = (message: string, ...meta: any[]) => this.instance.info(message, ...meta);
+  public info = (message: string, ...meta: any[]) => this.instance.info(message, ...meta);
+  public warn = (message: string, ...meta: any[]) => this.instance.warn(message, ...meta);
+  public debug = (message: string, ...meta: any[]) => this.instance.debug(message, ...meta);
+  public error = (message: string, ...meta: any[]) => this.instance.error(message, ...meta);
 }

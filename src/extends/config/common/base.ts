@@ -8,14 +8,13 @@ import { configMap } from './constant';
 export class BaseConfig {
   private readonly info: IConfig;
 
-  /** 实例化 */
-  constructor(param: any) {
-    /** 基础环境变量 */
+  constructor(param: Record<string, any>) {
+    /** 收集外部输入的环境变量 */
     const settings = {
       pid: process.pid,
       env: process.env[ENV_PARAM.ENV] || ENV.DEV,
+      name: process.env[ENV_PARAM.NAME] || 'Nest-Server',
       port: Number(process.env[ENV_PARAM.PORT] || '3000'),
-      name: process.env[ENV_PARAM.NAME] || 'NEST_HTTP_SERVER',
       enableSwagger: process.env[ENV_PARAM.ENABLE_SWAGGER] === STRBOOL.TRUE,
       enableSequelizeSync: process.env[ENV_PARAM.ENABLE_SEQUELIZE_SYNC] === STRBOOL.TRUE,
     };
@@ -43,7 +42,7 @@ export class BaseConfig {
   }
 
   /** 按指定的键返回 */
-  public get<K extends keyof IConfig>(key: K): IConfig[K] {
+  public get<Key extends keyof IConfig>(key: Key): IConfig[Key] {
     return this.info[key];
   }
 }

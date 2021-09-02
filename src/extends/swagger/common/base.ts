@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IHttpRequestPage, IHttpResponseBody, IHttpResponsePage } from '@/common';
+import { IRequestPage, IResponseBody, IResponsePage } from '@/common';
 
 /** http 通用返回参数 */
-export class HttpResponseBodyBO<T> implements IHttpResponseBody {
+export class HttpResponseBodyBO<T> implements IResponseBody {
   data: T;
 
   @ApiProperty({ name: 'code', type: Number, required: true, description: '状态码' })
@@ -22,7 +22,7 @@ export class HttpResponseBodyBO<T> implements IHttpResponseBody {
 }
 
 /** http 页码信息的返回参数 */
-export class HttpResponsePageBO implements IHttpResponsePage {
+export class HttpResponsePageBO implements IResponsePage {
   @ApiProperty({ name: 'index', type: Number, required: true, example: 1, description: '页数' })
   index: number;
 
@@ -37,7 +37,7 @@ export class HttpResponsePageBO implements IHttpResponsePage {
 }
 
 /** http 分页信息的请求参数 */
-export class HttpRequestPageDTO implements IHttpRequestPage {
+export class HttpRequestPageDTO implements IRequestPage {
   @ApiProperty({ name: 'id', type: String, required: false, example: '1', description: '主键ID' })
   id?: string;
 
