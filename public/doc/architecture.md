@@ -1,34 +1,5 @@
 # 📚 整体介绍
 
-## 目录
-
-```
-.
-├── src
-│   ├── common
-│   │   ├── constant.ts
-│   │   ├── enum.ts
-│   │   ├── interface.ts
-│   │   └── type.ts
-│   ├── core
-│   │   ├── app.ts
-│   │   ├── module.ts
-│   │   ├── decorator
-│   │   ├── filter
-│   │   ├── intercetor
-│   │   └── pipe
-│   ├── extends
-│   │   ├── config
-│   │   ├── http-client
-│   │   ├── logger
-│   │   ├── sequelize
-│   │   ├── swagger
-│   │   └── utils
-│   ├── modules
-│   │   └── default
-│   └── main.ts
-```
-
 ## 架构图
 
 > 从功能上来看，`Nest-Server` 的整体能力可以划分为四层：
@@ -60,14 +31,12 @@
   - 拓展组件：
     - sequelize
     - http-client
+    - redis-client
     - grpc-client（待开发）
-    - redis-client（待开发）
     - kafka-client（待开发）
   - 工具
     - Vscode
       - Nest-Server-Tools
-    - Cli
-      - Nest-Server-Cli（待开发）
 
 ## 基本概念
 
