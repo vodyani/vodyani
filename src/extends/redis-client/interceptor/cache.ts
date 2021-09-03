@@ -7,7 +7,7 @@ import { WinstonLoggerProvider } from '@/extends/logger';
 import { Inject, Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException } from '@nestjs/common';
 
 import { Redis, ICacheOptions } from '../common';
-import { ClusterClientFactoryProvider, RedisClientFactoryProvider } from '../provider';
+import { ClusterClientFactoryProvider, RedisClientFactoryProvider, RedisUtilsProvider } from '../provider';
 
 /** redis 单例客户端 缓存拦截器 */
 @Injectable()
@@ -16,34 +16,37 @@ export class CacheInterceptor implements NestInterceptor {
     @Inject(RedisClientFactoryProvider.provide)
     private readonly redis: Redis.Redis,
     private readonly reflector: Reflector,
+    private readonly utils: RedisUtilsProvider,
     private readonly logger: WinstonLoggerProvider,
   ) {}
 
   async intercept(ctx: ExecutionContext, next: CallHandler): Promise<Observable<Record<string, any>>> {
     const request = ctx.switchToHttp().getRequest<Request>();
-
+    const params = { ...request.headers, ...request.params, ...request.query, ...request.body };
     const options = this.reflector.get<ICacheOptions>('CACHE_OPTIONS', ctx.getHandler());
 
-    if (options.fileds && options.fileds.length) {
-      options.fileds.forEach(item => {
-        if (request.headers[item]) options.key += `:${request.headers[item]}`;
-        if (request.params[item]) options.key += `:${request.params[item]}`;
-        if (request.query[item]) options.key += `:${request.query[item]}`;
-        if (request.body[item]) options.key += `:${request.body[item]}`;
-      });
-    }
+    let key = options.key;
+    key = this.utils.matchKey(key, params);
 
-    try {
-      const record = await this.redis.get(options.key);
-      this.logger.info('MutexInterceptor', options);
-      if (record) return of(JSON.parse(record));
-    } catch (error) {
-      this.logger.error('CacheInterceptor', error);
-      throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+    if (key) {
+      try {
+        const record = await this.redis.get(key);
+        this.logger.info('CacheInterceptor', { options, params });
+        if (record) return of(JSON.parse(record));
+      } catch (error) {
+        this.logger.error(error, 'CacheInterceptor', params);
+        throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+      }
+    } else {
+      // 未能按规则完整匹配 Redis-Key
+      this.logger.warn('CacheInterceptor.matchKey', { options, params });
     }
 
     return next.handle().pipe(map((body: Record<string, any>) => {
-      this.redis.set(options.key, JSON.stringify(body), 'EX', options.ttl);
+      if (key) {
+        this.redis.set(key, JSON.stringify(body), 'EX', options.ttl);
+      }
+
       return body;
     }));
   }
@@ -56,34 +59,37 @@ export class ClusterCacheInterceptor implements NestInterceptor {
     @Inject(ClusterClientFactoryProvider.provide)
     private readonly cluster: Redis.Cluster,
     private readonly reflector: Reflector,
+    private readonly utils: RedisUtilsProvider,
     private readonly logger: WinstonLoggerProvider,
   ) {}
 
   async intercept(ctx: ExecutionContext, next: CallHandler): Promise<Observable<Record<string, any>>> {
     const request = ctx.switchToHttp().getRequest<Request>();
-
+    const params = { ...request.headers, ...request.params, ...request.query, ...request.body };
     const options = this.reflector.get<ICacheOptions>('CACHE_OPTIONS', ctx.getHandler());
 
-    if (options.fileds && options.fileds.length) {
-      options.fileds.forEach(item => {
-        if (request.headers[item]) options.key += `:${request.headers[item]}`;
-        if (request.params[item]) options.key += `:${request.params[item]}`;
-        if (request.query[item]) options.key += `:${request.query[item]}`;
-        if (request.body[item]) options.key += `:${request.body[item]}`;
-      });
-    }
+    let key = options.key;
+    key = this.utils.matchKey(key, params);
 
-    try {
-      const record = await this.cluster.get(options.key);
-      this.logger.info('MutexInterceptor', options);
-      if (record) return of(JSON.parse(record));
-    } catch (error) {
-      this.logger.error('ClusterCacheInterceptor', error);
-      throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+    if (key) {
+      try {
+        const record = await this.cluster.get(key);
+        this.logger.info('ClusterCacheInterceptor', options);
+        if (record) return of(JSON.parse(record));
+      } catch (error) {
+        this.logger.error(error, 'ClusterCacheInterceptor', params);
+        throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+      }
+    } else {
+      // 未能按规则完整匹配 Redis-Key
+      this.logger.warn('ClusterCacheInterceptor.matchKey', { options, params });
     }
 
     return next.handle().pipe(map((body: Record<string, any>) => {
-      this.cluster.set(options.key, JSON.stringify(body), 'EX', options.ttl);
+      if (key) {
+        this.cluster.set(key, JSON.stringify(body), 'EX', options.ttl);
+      }
+
       return body;
     }));
   }

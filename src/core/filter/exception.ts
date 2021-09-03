@@ -21,27 +21,28 @@ export class ExceptionFilter implements Filter {
       exception instanceof HttpException ? exception.getStatus() : 500,
     );
 
+    const requestBody = {
+      data: {},
+      code: httpStatus.code,
+      requestTime: Date.now(),
+      responseTime: Date.now(),
+      message: exception.message || httpStatus.message,
+      requestId: headers[HTTP_HEADER.REQUEST_ID] as string || uuid(),
+    };
+
     /** 打印异常日志 */
     this.logger.error(
+      exception,
       'ExceptionFilter',
       {
-        type: 'ERROR',
-        exception,
         request: { originalUrl, method, headers, query, body },
-        response: {
-          data: {},
-          code: httpStatus.code,
-          requestTime: Date.now(),
-          responseTime: Date.now(),
-          message: exception.message || httpStatus.message,
-          requestId: headers[HTTP_HEADER.REQUEST_ID] as string || uuid(),
-        },
+        response: requestBody,
       },
     );
 
     /** 抛出异常 */
-    response.status(httpStatus.statusCode);
     response.header('Content-Type', 'application/json; charset=utf-8');
-    response.send(response);
+    response.status(httpStatus.statusCode);
+    response.send(requestBody);
   }
 }

@@ -13,19 +13,18 @@ export class LogInterceptor implements NestInterceptor {
   ) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler): Observable<any> {
-    const req: Request = ctx.switchToHttp().getRequest();
-    const { originalUrl, body, query, method, headers } = req;
-    headers[HTTP_HEADER.REQUEST_ID] = headers[HTTP_HEADER.REQUEST_ID] || uuid();
+    const request: Request = ctx.switchToHttp().getRequest();
+    const { originalUrl, body, query, method, headers } = request;
+    request.headers[HTTP_HEADER.REQUEST_ID] = request.headers[HTTP_HEADER.REQUEST_ID] || uuid();
 
     return next.handle().pipe(
       map((responseBody: IResponseBody<Record<string, any>>) => {
         this.logger.info(
           'LogInterceptor',
           {
-            type: 'SUCCESS',
+            request: { originalUrl, method, headers, query, body },
             class: ctx.getClass().name,
             handler: ctx.getHandler().name,
-            request: { originalUrl, method, headers, query, body },
           },
         );
 

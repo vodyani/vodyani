@@ -6,8 +6,13 @@ import { CacheInterceptor, ClusterCacheInterceptor } from '../interceptor';
 export function Cache(options: ICacheOptions) {
   return applyDecorators(
     SetMetadata('CACHE_OPTIONS', options),
-    options.type === 'client'
-      ? UseInterceptors(CacheInterceptor)
-      : UseInterceptors(ClusterCacheInterceptor),
+    UseInterceptors(CacheInterceptor)
+  );
+}
+
+export function ClusterCache(options: ICacheOptions) {
+  return applyDecorators(
+    SetMetadata('CACHE_OPTIONS', options),
+    UseInterceptors(ClusterCacheInterceptor),
   );
 }

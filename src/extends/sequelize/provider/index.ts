@@ -1,1 +1,2 @@
-export * from './sequlize';
+export * from './sequelize';
+export * from './sequelize-utils';

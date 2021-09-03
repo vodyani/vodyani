@@ -1,6 +1,11 @@
 import { Module } from '@nestjs/common';
 
 import {
+  RedisUtilsProvider,
+  RedisClientFactoryProvider,
+  ClusterClientFactoryProvider,
+} from './provider';
+import {
   CacheInterceptor,
   MutexInterceptor,
   HashCacheInterceptor,
@@ -9,7 +14,6 @@ import {
 } from './interceptor';
 import { ConfigModule } from '../config';
 import { LoggerModule } from '../logger';
-import { ClusterClientFactoryProvider, RedisClientFactoryProvider } from './provider';
 
 @Module({
   imports: [
@@ -19,6 +23,7 @@ import { ClusterClientFactoryProvider, RedisClientFactoryProvider } from './prov
   exports: [
     CacheInterceptor,
     MutexInterceptor,
+    RedisUtilsProvider,
     HashCacheInterceptor,
     ClusterCacheInterceptor,
     HashClusterCacheInterceptor,
@@ -28,6 +33,7 @@ import { ClusterClientFactoryProvider, RedisClientFactoryProvider } from './prov
   providers: [
     CacheInterceptor,
     MutexInterceptor,
+    RedisUtilsProvider,
     HashCacheInterceptor,
     ClusterCacheInterceptor,
     HashClusterCacheInterceptor,

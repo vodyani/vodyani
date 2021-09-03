@@ -6,8 +6,13 @@ import { HashCacheInterceptor, HashClusterCacheInterceptor } from '../intercepto
 export function HashCache(options: IHashCacheOptions) {
   return applyDecorators(
     SetMetadata('HASH_CACHE_OPTIONS', options),
-    options.type === 'client'
-      ? UseInterceptors(HashCacheInterceptor)
-      : UseInterceptors(HashClusterCacheInterceptor),
+    UseInterceptors(HashCacheInterceptor)
+  );
+}
+
+export function HashClusterCache(options: IHashCacheOptions) {
+  return applyDecorators(
+    SetMetadata('HASH_CACHE_OPTIONS', options),
+    UseInterceptors(HashClusterCacheInterceptor),
   );
 }

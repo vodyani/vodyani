@@ -11,8 +11,6 @@ import {
   BeforeBulkCreate,
   BeforeBulkUpdate,
 } from 'sequelize-typescript';
-import { resolve } from 'path';
-import { readdirSync } from 'fs';
 import { isNil, intersection } from 'lodash';
 import { IResponsePage, IResponsePaginated } from '@/common';
 
@@ -77,12 +75,12 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
   }
 
   /**
-   * 从 DTO 中获取数据库查询条件
-   * @param dto Record<string, any> DTO 数据传输对象
+   * 从 DTO 中获取实体查询条件
+   * @param dto Record<keyof T, any> DTO 数据传输对象
    */
-  public static getConditionByDTO(dto: Record<string, any>) {
-    const page: IResponsePage = {};
-    const condition: Record<string, any> = {};
+  public static getConditionByDTO<T extends Model>(dto: Record<keyof T, any>) {
+    const page = {} as IResponsePage;
+    const condition = {} as Record<keyof T, any>;
 
     if (isNil(dto)) return;
 
@@ -107,10 +105,10 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
 
   /**
    * 从 DTO 中获取实体操作参数与查询条件
-   * @param dto Record<string, any> DTO 数据传输对象
+   * @param dto Record<keyof T, any> DTO 数据传输对象
    */
-  public static getEntityByDTO(dto: Record<string, any>) {
-    const entity: Record<string, any> = {};
+  public static getEntityByDTO<T extends Model>(dto: Record<keyof T, any>) {
+    const entity = {} as Record<keyof T, any>;
 
     if (isNil(dto)) return;
 
@@ -123,24 +121,5 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
       .forEach(key => { entity[key] = dto[key] });
 
     return { entity };
-  }
-}
-
-export class BaseEntityUtils {
-  /** 匹配 Entity 命名 */
-  public static match(filename: string, member: string) {
-    const realName = filename
-      .split('-')
-      .join('')
-      .toLocaleLowerCase();
-
-    return realName === member.toLocaleLowerCase();
-  }
-
-  /** 匹配 Entity 文件路径 */
-  static pathMath() {
-    const path = resolve(__dirname, '../shared');
-    const list = readdirSync(path).filter(e => !e.includes('index.'));
-    return (list || []).map(e => `${path}/${e}`);
   }
 }

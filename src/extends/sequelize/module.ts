@@ -1,11 +1,17 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@/extends/config';
 
-import { SequelizeFactoryProvider } from './provider';
+import { SequelizeFactoryProvider, SequelizeUtilsProvider } from './provider';
 
 @Module({
   imports: [ConfigModule],
-  exports: [SequelizeFactoryProvider.getProvider()],
-  providers: [SequelizeFactoryProvider.getProvider()],
+  exports: [
+    SequelizeUtilsProvider,
+    SequelizeFactoryProvider.getProvider(),
+  ],
+  providers: [
+    SequelizeUtilsProvider,
+    SequelizeFactoryProvider.getProvider(),
+  ],
 })
 export class SequelizeModule {}

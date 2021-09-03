@@ -7,7 +7,7 @@ import { WinstonLoggerProvider } from '@/extends/logger';
 import { Inject, Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException } from '@nestjs/common';
 
 import { Redis, IHashCacheOptions } from '../common';
-import { ClusterClientFactoryProvider, RedisClientFactoryProvider } from '../provider';
+import { ClusterClientFactoryProvider, RedisClientFactoryProvider, RedisUtilsProvider } from '../provider';
 
 /** redis 单例客户端 Hash 缓存拦截器 */
 @Injectable()
@@ -16,43 +16,39 @@ export class HashCacheInterceptor implements NestInterceptor {
     @Inject(RedisClientFactoryProvider.provide)
     private readonly redis: Redis.Redis,
     private readonly reflector: Reflector,
+    private readonly utils: RedisUtilsProvider,
     private readonly logger: WinstonLoggerProvider,
   ) {}
 
   async intercept(ctx: ExecutionContext, next: CallHandler): Promise<Observable<Record<string, any>>> {
     const request = ctx.switchToHttp().getRequest<Request>();
-
+    const params = { ...request.headers, ...request.params, ...request.query, ...request.body };
     const options = this.reflector.get<IHashCacheOptions>('HASH_CACHE_OPTIONS', ctx.getHandler());
 
-    if (options.fileds && options.fileds.length) {
-      options.fileds.forEach(item => {
-        if (request.headers[item]) options.key += `:${request.headers[item]}`;
-        if (request.params[item]) options.key += `:${request.params[item]}`;
-        if (request.query[item]) options.key += `:${request.query[item]}`;
-        if (request.body[item]) options.key += `:${request.body[item]}`;
-      });
-    }
+    let key = options.key;
+    let hkey = options.hkey;
+    key = this.utils.matchKey(key, params);
+    hkey = this.utils.matchKey(hkey, params);
 
-    if (options.hashFileds && options.hashFileds.length) {
-      options.hashFileds.forEach(item => {
-        if (request.headers[item]) options.hashKey += `:${request.headers[item]}`;
-        if (request.params[item]) options.hashKey += `:${request.params[item]}`;
-        if (request.query[item]) options.hashKey += `:${request.query[item]}`;
-        if (request.body[item]) options.hashKey += `:${request.body[item]}`;
-      });
-    }
-
-    try {
-      const record = await this.redis.hget(options.hashKey, options.key);
-      this.logger.info('MutexInterceptor', options);
-      if (record) return of(JSON.parse(record));
-    } catch (error) {
-      this.logger.error('HashCacheInterceptor', error);
-      throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+    if (hkey && key) {
+      try {
+        const record = await this.redis.hget(hkey, key);
+        this.logger.info('HashCacheInterceptor', { options, params });
+        if (record) return of(JSON.parse(record));
+      } catch (error) {
+        this.logger.error(error, 'HashCacheInterceptor', params);
+        throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+      }
+    } else {
+      // 未能按规则完整匹配 Redis-Key
+      this.logger.warn('HashCacheInterceptor.matchKey', { options, params });
     }
 
     return next.handle().pipe(map((body: Record<string, any>) => {
-      this.redis.hset(options.hashKey, options.key, JSON.stringify(body));
+      if (hkey && key) {
+        this.redis.hset(hkey, key, JSON.stringify(body));
+      }
+
       return body;
     }));
   }
@@ -65,43 +61,39 @@ export class HashClusterCacheInterceptor implements NestInterceptor {
     @Inject(ClusterClientFactoryProvider.provide)
     private readonly cluster: Redis.Cluster,
     private readonly reflector: Reflector,
+    private readonly utils: RedisUtilsProvider,
     private readonly logger: WinstonLoggerProvider,
   ) {}
 
   async intercept(ctx: ExecutionContext, next: CallHandler): Promise<Observable<Record<string, any>>> {
     const request = ctx.switchToHttp().getRequest<Request>();
-
+    const params = { ...request.headers, ...request.params, ...request.query, ...request.body };
     const options = this.reflector.get<IHashCacheOptions>('HASH_CACHE_OPTIONS', ctx.getHandler());
 
-    if (options.fileds && options.fileds.length) {
-      options.fileds.forEach(item => {
-        if (request.headers[item]) options.key += `:${request.headers[item]}`;
-        if (request.params[item]) options.key += `:${request.params[item]}`;
-        if (request.query[item]) options.key += `:${request.query[item]}`;
-        if (request.body[item]) options.key += `:${request.body[item]}`;
-      });
-    }
+    let key = options.key;
+    let hkey = options.hkey;
+    key = this.utils.matchKey(key, params);
+    hkey = this.utils.matchKey(hkey, params);
 
-    if (options.hashFileds && options.hashFileds.length) {
-      options.hashFileds.forEach(item => {
-        if (request.headers[item]) options.hashKey += `:${request.headers[item]}`;
-        if (request.params[item]) options.hashKey += `:${request.params[item]}`;
-        if (request.query[item]) options.hashKey += `:${request.query[item]}`;
-        if (request.body[item]) options.hashKey += `:${request.body[item]}`;
-      });
-    }
-
-    try {
-      const record = await this.cluster.hget(options.hashKey, options.key);
-      this.logger.info('MutexInterceptor', options);
-      if (record) return of(JSON.parse(record));
-    } catch (error) {
-      this.logger.error('HashClusterCacheInterceptor', error);
-      throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+    if (hkey && key) {
+      try {
+        const record = await this.cluster.hget(hkey, key);
+        this.logger.info('HashClusterCacheInterceptor', { options, params });
+        if (record) return of(JSON.parse(record));
+      } catch (error) {
+        this.logger.error(error, 'HashClusterCacheInterceptor', params);
+        throw new HttpException('操作失败，请稍后重试', HTTP_STATUS.BAD_REQUEST);
+      }
+    } else {
+      // 未能按规则完整匹配 Redis-Key
+      this.logger.warn('HashClusterCacheInterceptor.matchKey', { options, params });
     }
 
     return next.handle().pipe(map((body: Record<string, any>) => {
-      this.cluster.hset(options.hashKey, options.key, JSON.stringify(body));
+      if (hkey && key) {
+        this.cluster.hset(hkey, key, JSON.stringify(body));
+      }
+
       return body;
     }));
   }
