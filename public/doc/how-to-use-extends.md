@@ -1,6 +1,6 @@
 # 📚 拓展模块使用指南
 
-> 完成模块定义后，不要忘记将模块注册到 Core-Module 中
+> 完成模块注册表（module.ts）的定义后，不要忘记将模块引入到 IOC 容器（CoreModule）中。
 
 ```ts
 // src/core/module.ts
@@ -11,7 +11,7 @@
     LoggerModule,
     SwaggerModule,
     DefaultModule,
-    // YOUR MODULE 
+    // YOUR MODULE
     ...
 ```
 
