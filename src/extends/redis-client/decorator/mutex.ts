@@ -1,11 +1,11 @@
 import { applyDecorators, SetMetadata, UseInterceptors } from '@nestjs/common';
 
-import { IMutexOptions } from '../common';
 import { MutexInterceptor } from '../interceptor';
+import { IMutexOptions, RedisDecoratorOptionType } from '../common';
 
 export function Mutex(options: IMutexOptions) {
   return applyDecorators(
-    SetMetadata('MUTEX_OPTIONS', options),
+    SetMetadata(RedisDecoratorOptionType.MUTEX, options),
     UseInterceptors(MutexInterceptor),
   );
 }

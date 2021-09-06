@@ -37,18 +37,18 @@ npm run dev
 
 > 运行成功后，您将会看到控制台输出：
 
-```JavaScript
-[NestFactory] Starting Nest application...
-[InstanceLoader] ConfigModule dependencies initialized +30ms
-[InstanceLoader] SwaggerModule dependencies initialized +0ms
-[InstanceLoader] DefaultModule dependencies initialized +16ms
-[InstanceLoader] LoggerModule dependencies initialized +1ms
-[InstanceLoader] CoreModule dependencies initialized +0ms
-[dev] INFO: DefaultController {}:
-[dev] INFO: Mapped {, GET} route
-[dev] INFO: Nest application successfully started
-[dev] INFO: SERVER START: http://localhost:3000
-[dev] INFO: ENAVLE SWAGGER: http://localhost:3000/doc
-```
-
 通过访问 `/doc` 路径，您将看到项目对应的 swagger 文档
+
+```JavaScript
+[Nest] [NestFactory] Starting Nest application...
+[Nest] [InstanceLoader] ConfigModule dependencies initialized +34ms
+[Nest] [InstanceLoader] SwaggerModule dependencies initialized +4ms
+[Nest] [InstanceLoader] DefaultModule dependencies initialized +37ms
+[Nest] [InstanceLoader] LoggerModule dependencies initialized +2ms
+[Nest] [InstanceLoader] CoreModule dependencies initialized +1ms
+[Nest-Server] [dev] INFO: {"trace":"DefaultController {}:","meta":"RoutesResolver","type":"LOG"}
+[Nest-Server] [dev] INFO: {"trace":"Mapped {, GET} route","meta":"RouterExplorer","type":"LOG"}
+[Nest-Server] [dev] INFO: {"trace":"Nest application successfully started","meta":"NestApplication","type":"LOG"}
+[Nest-Server] [dev] INFO: "SERVER START: http://localhost:3000"
+[Nest-Server] [dev] INFO: "ENAVLE SWAGGER: http://localhost:3000/doc"
+```

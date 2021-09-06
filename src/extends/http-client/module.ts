@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 
 import { ConfigModule } from '../config';
-import { LocalClientProvider } from './provider';
+import { HttpClientProvider } from './provider';
 
 @Module({
   imports: [ConfigModule],
-  exports: [LocalClientProvider],
-  providers: [LocalClientProvider],
+  exports: [HttpClientProvider],
+  providers: [HttpClientProvider],
 })
 export class HttpClientModule {}

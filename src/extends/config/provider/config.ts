@@ -8,7 +8,7 @@ export class ConfigFactoryProvider {
     return {
       provide: this.provide,
       useFactory: async () => {
-        /** 可以在异步实现方法中，获取外部输入的变量 */
+        /** 可以在这里，增加其他获取配置的逻辑，如配置中心 */
         const config = new BaseConfig({});
         return config;
       },
