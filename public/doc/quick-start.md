@@ -12,7 +12,7 @@
 > github:
 
 ```
-git clone https://gitee.com/ChoGathK/nest-server
+git clone https://github.com/ChoGathK/nest-server.git
 ```
 
 > gitee（推荐 🇨🇳 国内用户使用）:

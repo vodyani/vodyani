@@ -15,6 +15,14 @@
 		"start:prod": "NODE_ENV=prod NODE_PORT=3100 node dist/main",
 		"start:test": "ENABLE_SWAGGER=true NODE_PORT=3000 NODE_ENV=test node dist/main"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ChoGathK/nest-server"
+	},
+	"bugs": {
+		"url": "https://github.com/ChoGathK/nest-server/issues",
+		"email": "chogath@163.com"
+	},
 	"dependencies": {
 		"@nestjs/common": "^7.6.5",
 		"@nestjs/core": "^7.6.5",

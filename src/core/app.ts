@@ -12,7 +12,7 @@ export const bootstrap = async () => {
 
   const logger = app.get(WinstonLoggerProvider);
 
-  if (config.get('enableSwagger')) app.get(SwaggerProvider).build(app);
+  if (config.get('enableSwagger')) app.get(SwaggerProvider).init(app);
 
   app.useLogger(logger);
 

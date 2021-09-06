@@ -21,7 +21,7 @@ export class WinstonLoggerProvider implements LoggerService {
   }
 
   // 构建基本配置
-  private buildOptions(): LoggerOptions {
+  private initOptions(): LoggerOptions {
     const dirname = path.logs;
 
     const consoleLogger = new transports.Console({
@@ -68,7 +68,7 @@ export class WinstonLoggerProvider implements LoggerService {
     @Inject(ConfigFactoryProvider.provide)
     private readonly config: BaseConfig,
   ) {
-    const options = this.buildOptions();
+    const options = this.initOptions();
     this.instance = createLogger(options);
   }
 

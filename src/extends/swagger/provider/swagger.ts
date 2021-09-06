@@ -5,8 +5,7 @@ import { HttpResponseBodyBO, HttpResponsePageBO } from '../common';
 
 @Injectable()
 export class SwaggerProvider {
-  /** 构建 swagger */
-  public build(app: INestApplication) {
+  public init(app: INestApplication) {
     const doc = SwaggerModule.createDocument(
       app,
       /** 为 nest.js app 绑定 swagger */
