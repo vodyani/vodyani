@@ -79,7 +79,7 @@ export class WinstonLoggerProvider implements LoggerService {
    */
   public log(trace: string, meta?: any) {
     const data = meta ? { trace, meta, type: 'LOG' } : trace;
-    this.instance.info(data);
+    this.instance.info(JSON.stringify(data));
   }
 
   /**
@@ -89,7 +89,7 @@ export class WinstonLoggerProvider implements LoggerService {
    */
   public info(trace: string, meta?: any) {
     const data = meta ? { trace, meta, type: 'INFO' } : trace;
-    this.instance.info(data);
+    this.instance.info(JSON.stringify(data));
   }
 
   /**
@@ -99,7 +99,7 @@ export class WinstonLoggerProvider implements LoggerService {
    */
   public warn(trace: string, meta?: any) {
     const data = meta ? { trace, meta, type: 'WARN' } : trace;
-    this.instance.warn(data);
+    this.instance.warn(JSON.stringify(data));
   }
 
   /**
@@ -118,6 +118,6 @@ export class WinstonLoggerProvider implements LoggerService {
     };
 
     const data = meta ? { meta, ...exception } : exception;
-    this.instance.error(data);
+    this.instance.error(JSON.stringify(data));
   }
 }
