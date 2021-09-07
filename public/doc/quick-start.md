@@ -2,8 +2,8 @@
 
 ## 依赖
 
-- 请确保您的操作系统上安装了 [git](https://git-scm.com/)**（>= 2.24.3）**
-- 请确保您的操作系统上安装了 [node.js](http://nodejs.cn/download/)**（>= 10.13.0）**
+- 请确保您的操作系统上安装了 [git](https://git-scm.com/)**（>= 2.24.3 ) **
+- 请确保您的操作系统上安装了 [node.js](http://nodejs.cn/download/)**（>= 10.13.0 ) **
 
 ## 安装
 
@@ -15,7 +15,7 @@
 git clone https://github.com/ChoGathK/nest-server.git
 ```
 
-> gitee（推荐 🇨🇳 国内用户使用）:
+> gitee（推荐 🇨🇳 国内用户使用 ) :
 
 ```
 git clone https://gitee.com/ChoGathK/nest-server

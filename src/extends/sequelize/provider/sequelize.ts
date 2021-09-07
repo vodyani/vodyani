@@ -3,7 +3,7 @@ import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
 
 import { SequelizeUtilsProvider } from './sequelize-utils';
 
-/** 工厂提供者（支持异步加载） */
+/** 工厂提供者 (支持异步加载) */
 export class SequelizeFactoryProvider {
   public static provide = 'SequelizeFactoryProvider'
 

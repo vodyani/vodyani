@@ -1,6 +1,6 @@
 # 📚 拓展模块使用指南
 
-> 完成模块注册表（module.ts）的定义后，不要忘记将模块引入到 IOC 容器（CoreModule）中。
+> 完成模块注册表（module.ts ) 的定义后，不要忘记将模块引入到 IOC 容器（CoreModule ) 中。
 
 ```ts
 // src/core/module.ts
@@ -26,7 +26,7 @@
   - constant 本地配置常量
   - interface 配置信息接口
 - provider 配置提供者
-  - config 异步提供者（工厂模式）
+  - config 异步提供者（工厂模式 ) 
 
 > 如何修改配置信息？
 
@@ -42,7 +42,7 @@
 - common Http 客户端约定
   - base Http 客户端基类
 - provider Http 客户端提供者
-  - local 提供者（请求本地8080端口）
+  - local 提供者（请求本地8080端口 ) 
 
 ## Logger 模块
 
@@ -62,7 +62,7 @@
 - decorator Sequelize 装饰器
   - sequelize 装饰器方法
 - provider Sequelize 提供者
-  - sequelize 异步提供者（工厂模式），在这里定义需要加载的数据库
+  - sequelize 异步提供者（工厂模式 ) ，在这里定义需要加载的数据库
 
 ## OPENAPI (Swagger) 模块
 

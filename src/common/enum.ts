@@ -66,7 +66,7 @@ export enum HTTP_HEADER {
   IP = 'x-request-ip',
   /**
    * 客户端 JWT 鉴权解析出内容中的 用户 ID
-   * 网关鉴权后会新增 UID 到 request header 中（前提是 JWT 内容中有 uid）
+   * 网关鉴权后会新增 UID 到 request header 中 (前提是 JWT 内容中有 uid)
    */
   UID = 'x-request-uid',
   /** 客户端 JWT 鉴权凭证 */

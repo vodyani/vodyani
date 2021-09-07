@@ -21,11 +21,11 @@ export class BaseConfig {
 
     /** 聚合配置信息 */
     this.info =
-      /** 合并项目内配置和异步输入配置 （以异步输入的参数为基准） */
+      /** 合并项目内配置和异步输入配置  (以异步输入的参数为基准) */
       defaultsDeep(
-        /** 合并默认配置和外部输入配置 （以基础环境变量为基准） */
+        /** 合并默认配置和外部输入配置  (以基础环境变量为基准) */
         defaultsDeep(
-          /** 合并默认配置和当前环境配置（以默认配置为基准） */
+          /** 合并默认配置和当前环境配置 (以默认配置为基准) */
           defaultsDeep(
             configMap.get(settings.env),
             configMap.get(ENV.DEFAULT),

@@ -4,7 +4,7 @@
 	"main": "dist/index.js",
 	"author": "chogath@163.com",
 	"license": "BSD-2-Clause",
-	"description": "🚀 可能是最好的 NestJS 服务端（Http）开发脚手架。",
+	"description": "🚀 可能是最好的 NestJS 服务端 (Http)开发脚手架。",
 	"scripts": {
 		"lint": "eslint ./src",
 		"build": "rm -rf dist && tsc",

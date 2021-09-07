@@ -1,6 +1,6 @@
 import { BaseConfig } from '../common';
 
-/** 工厂提供者（支持异步加载） */
+/** 工厂提供者 (支持异步加载) */
 export class ConfigFactoryProvider {
   public static provide = 'ConfigFactoryProvider'
 

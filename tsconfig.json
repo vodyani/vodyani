@@ -21,6 +21,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
+      "@/core": ["./src/core"],
       "@/common": ["./src/common"],
       "@/extends/*": ["./src/extends/*"],
       "@/modules/*": ["./src/modules/*"],

@@ -21,6 +21,8 @@ export const path = {
   temp: `${root}/temp`,
   /** 日志目录 */
   logs: `${root}/logs`,
+  /** 核心容器层 */
+  core: `${src}/core`,
   /** 公共约定/类型/常量目录 */
   common: `${src}/common`,
   /** 拓展模块目录 */
@@ -38,7 +40,7 @@ export const path = {
 /** http 状态码 */
 export const httpStatusMap = new Map([
   /** http 基础状态码 */
-  [HTTP_STATUS.SUCCESS, { code: 0, statusCode: 200, message: '请求成功' }],
+  [HTTP_STATUS.SUCCESS, { code: 200, statusCode: 200, message: '请求成功' }],
   [HTTP_STATUS.BAD_REQUEST, { code: 400, statusCode: 400, message: '请求有误' }],
   [HTTP_STATUS.UNAUTHORIZED, { code: 401, statusCode: 401, message: '拒绝访问' }],
   [HTTP_STATUS.FORBIDDEN, { code: 403, statusCode: 403, message: '无权限访问' }],

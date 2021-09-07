@@ -4,6 +4,7 @@ import { addAliases } from 'module-alias';
 import { path } from './common';
 
 addAliases({
+  '@/core': path.core,
   '@/common': path.common,
   '@/extends': path.extends,
   '@/modules': path.modules,
