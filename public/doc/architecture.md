@@ -72,21 +72,147 @@ AOP 技术利用一种称为“横切”的技术，剖解开封装对象的内�
 
 ## 工程结构
 
-### 结构图
+### 模块职责结构介绍
 
 ![Architecture](../images/server.png)
 
-> Nest-Server 工程根据职责分为五部分，分别是：
+> Nest-Server 工程根据职责分为四部分，分别是：
 
-#### `Core` 核心容器层介绍
-#### `Common` 公共约定层介绍
-#### `Extends` 拓展模块层介绍
-#### `Modules` 业务模块层介绍
+#### Core 核心容器层
 
-> Nest-Server 的启动文件为 src/main.ts
+- `NestApplication` 将根据 `Module` 核心容器模块内注册的内容，进行依赖管理，并且生成对应的 `Context` 应用上下文。
 
-#### 启动文件介绍
+- `Module` 核心容器模块用于全局 `AOP` 执行器、`Extends` 拓展模块、 `Modules` 业务模块的注册声明。
 
-### 依赖关系图
+- `NestApplication` 生成后，我们可以通过 `get` 方法，获取 `Context` 应用上下文中任何注册过的 `AOP` 执行器/`Provider` 提供者。
 
-### 请求与返回流程图
+#### Common 公共约定层
+
+- `constant` 用于存放常量
+- `enum` 用于存放枚举值
+- `interface` 用于存放接口定义
+
+#### Extends 拓展模块层
+
+> 将外部依赖进行分类，封装成独立的拓展模块
+
+拓展模块对内内聚了 `工具/方法/实例` 的实现方法，对外提供了 Provider 供其他模块/`Context`调用
+
+> 目前 `Nest-Server` 内必须注册的拓展有：
+
+- config 配置模块
+- swagger 接口文档模块（open api）
+- logger 日志模块
+
+> 可选的拓展有：
+
+- utils
+- sequelize
+- http-client
+- redis-client
+- **[待开发的可选拓展](../../README.MD##TODO)**
+
+#### Modules 业务模块层
+
+> 将业务需求进行分类，封装成独立的业务模块
+
+`Nest-Server` 将业务中场景的处理场景进行分层，分别是：
+
+* DTO (Data Transger Object - 数据传输对象)
+  * 负责定义外部输入的数据参数定义/类型/校验规则
+* Controller (业务逻辑控制层)
+  * 定义 Router Path
+  * 指定 DTO (输入)
+  * 指定 Logic Flow，将业务处理转发到 Service 层，并获取 BO (输出)
+* Service (业务逻辑处理层)
+  * 对 Mananger 层的调用
+  * 对 DAO 层的调用 (简单的 CURD 场景)
+  * 当设计复杂业务场景时，应该考虑将 Service 部分处理逻辑下沉为 Manager
+* Mananger (业务逻辑组合层)
+  * 对 Service 层通用能力的下沉，如调用组合、缓存、事务处理
+  * 对 Provider 层的调用，组合返回数据及转化异常信息
+  * 与 DAO 层交互，以及对多个 DAO 的组合复用
+* DAO (Data Access Object - 数据访问层)
+  * 封装 SQL/数据库交互命令 并获取返回值
+  * 封装 Extends 模块内 Entity 层的调用 (包含但不限于 sequelize/mongoose)
+* Provider (调用提供层)
+  * 作为 Client 端对其他 Server 进行 RPC 调用
+  * 作为 Client 端对中间件应用进行请求/调用（包括不限于 redis/mq/es）
+* BO (Business Object - 业务对象)
+  * 负责定义 Service 层对外输出的数据
+
+### 模块通用结构介绍
+
+> 模块化开发，给功能内聚和实现内部特性提供了更多的可能性
+
+#### Common 与 Shared
+
+> 除了全局的公共约定层，每个独立的模块内，都可以拥有自己私有的 `Common` 与 `Shared`
+
+**Common 内部公共约定**
+
+- `base` 用于存放基础类定义
+- `constant` 用于存放常量
+- `enum` 用于存放枚举值
+- `interface` 用于存放接口定义
+- `type` 用于存放类型定义
+
+**Shared 内部公共资源**
+
+- 一般用于存放 Entity 定义
+
+#### AOP 执行器
+
+利用 AOP 可以对模块内的各个层级进行隔离，从而使得层级之间的耦合度降低。
+
+##### [* Middleware 中间件](https://docs.nestjs.cn/7/middlewares)
+
+`Nest-Server` 中间件等价于 Express 中间件。下面是 Express 官方文档中所述的中间件功能：
+
+- 在上下文过程中，执行代码。
+- 对请求和响应对象进行更改。
+- 调用堆栈中的下一个中间件函数。
+- 如果当前的中间件函数没有结束请求-响应周期，它必须调用 next() 将控制传递给下一个中间件函数。否则, 请求将被挂起。
+
+##### [* Decorator 装饰器](https://docs.nestjs.cn/7/customdecorators)
+
+Nest.js 是基于装饰器这种语言特性而创建的。它是许多常用编程语言中众所周知的概念，但在 JavaScript 世界中，这个概念仍然相对较新。所以为了更好地理解装饰器是如何工作的，你应该看看[这篇文章 📚](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841)。下面给出一个简单的定义：
+
+`ES2016` 的装饰器是一个可以将目标对象，名称和属性描述符作为参数的返回函数的表达式。你可以通过装饰器前缀 `@` 来使用它，并将其放置在您想要装饰的最顶端。装饰器可以被定义为一个类或是属性。
+
+##### [* Filter 异常过滤器](https://docs.nestjs.cn/7/exceptionfilters)
+
+内置的异常层负责处理整个应用程序中的所有抛出的异常。当捕获到未处理的异常时，最终用户将收到友好的响应。
+
+##### [* Intercetor 拦截器](https://docs.nestjs.cn/7/interceptors)
+
+拦截器应该实现 `NestInterceptor` 接口。
+
+- 在函数执行之前/之后绑定额外的逻辑
+- 转换从函数返回的结果
+- 转换从函数抛出的异常
+- 扩展基本函数行为
+- 根据所选条件完全重写函数 (例如, 缓存目的)
+
+##### [* Pipe 管道](https://docs.nestjs.cn/7/pipes)
+
+管道应实现 `PipeTransform` 接口。
+
+管道有两个类型:
+
+- 转换：管道将输入数据转换为所需的数据输出
+- 验证：对输入数据进行验证，如果验证成功继续传递; 验证失败则抛出异常;
+
+在这两种情况下, 管道 参数(arguments) 会由 控制器(controllers)的路由处理程序进行处理。
+
+Nest.js 会在调用这个方法之前插入一个管道，管道会先拦截方法的调用参数，进行转换或是验证处理，然后用转换好或是验证好的参数调用原方法。
+
+##### [* Guard 守卫](https://docs.nestjs.cn/7/guards)
+
+守卫应该实现 `CanActivate` 接口。
+
+守卫有一个单独的责任。它们根据运行时出现的某些条件（例如权限，角色，访问控制列表等）来确定给定的请求是否由路由处理程序处理。 这通常称为授权。在传统的 Express 应用程序中，通常由中间件处理授权。中间件是身份验证的良好选择。到目前为止，访问限制逻辑大多在中间件内。这样很好，因为诸如 token 验证或将 request 对象附加属性与特定路由没有强关联。
+
+### 依赖关系介绍
+
+### 请求与返回流程介绍

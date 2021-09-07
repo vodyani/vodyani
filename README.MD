@@ -45,8 +45,14 @@
 
 ## TODO
 
+### 待开发拓展：
+
 - Extends·grpc-client
 - Extends·kafka-client
+- Extends·es-client (elasticsearch)
+
+### 测试功能：
+
 - 单元测试与单元测试工具
 
 ## Q&A

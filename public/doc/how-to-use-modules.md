@@ -15,8 +15,8 @@
     ...
 ```
 
-1. ✍️ 优先确定输入和输出（DTO & BO ) 
-2. 🤔 思考当前模块的依赖关系与资源调用（Extends/Modules/Provider/Common/Shared ) 
-3. 🤔 设计业务实现（Service/Provider/AOP... ) 
-4. 🤔 设计控制层实现（Controller/AOP... ) 
-5. ✍️ 完成模块注册表的定义（module.ts ) 
+1. ✍️ 优先确定输入和输出（DTO & BO) 
+2. 🤔 思考当前模块的依赖关系与资源调用（Extends/Modules/Provider/Common/Shared) 
+3. 🤔 设计业务实现（Service/Provider/AOP...) 
+4. 🤔 设计控制层实现（Controller/AOP...) 
+5. ✍️ 完成模块注册表的定义（module.ts) 
