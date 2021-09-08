@@ -1,5 +1,10 @@
 # 📚 业务模块使用指南
 
+> 如何快速创建 module ？
+
+1. 安装 vscode 插件 [Nest-Server-Tools](https://github.com/ChoGathK/nest-server-tools)
+2. 在 modules 目录点击右键唤出菜单，点击 `🏗 Nest: New Module` 创建即可
+
 > 完成模块注册表（module.ts ) 的定义后，不要忘记将模块引入到 IOC 容器（CoreModule ) 中。
 
 ```ts
