@@ -1,4 +1,3 @@
-import { Sequelize } from 'sequelize-typescript';
 import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
 
 import { SequelizeUtilsProvider } from './sequelize-utils';
@@ -18,16 +17,11 @@ export class SequelizeFactoryProvider {
         utils: SequelizeUtilsProvider,
         config: BaseConfig
       ) => {
-        /** 初始化链接 */
-        const db = new Sequelize({
-          ...config.get('sequlize'),
-          modelMatch: utils.match,
-          models: utils.pathMath(),
-        });
-
-        /** 根据配置决定是否开启表结构同步 */
-        if (config.get('enableSequelizeSync')) await db.sync();
-
+        const db = await utils.init(
+          config.get('sequlize'),
+          '',
+          config.get('enableSequelizeSync'),
+        );
         return db;
       },
     };

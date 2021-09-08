@@ -13,7 +13,7 @@
 		"start": "NODE_ENV=dev node dist/main",
 		"start:pre": "NODE_ENV=pre NODE_PORT=3010 node dist/main",
 		"start:prod": "NODE_ENV=prod NODE_PORT=3100 node dist/main",
-		"start:test": "ENABLE_SWAGGER=true NODE_PORT=3000 NODE_ENV=test node dist/main"
+		"start:test": "NODE_PORT=3000 NODE_ENV=test node dist/main"
 	},
 	"repository": {
 		"type": "git",

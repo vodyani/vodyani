@@ -32,10 +32,6 @@ export enum ENV_PARAM {
   PORT = 'NODE_PORT',
   /** 应用名 */
   NAME = 'NODE_APP_NAME',
-  /** 是否启用 swagger，默认是 'true' */
-  ENABLE_SWAGGER = 'NODE_ENABLE_SWAGGER',
-  /** 是否启用 sequelize 数据同步，默认是 'false' */
-  ENABLE_SEQUELIZE_SYNC = 'NODE_ENABLE_SEQUELIZE_SYNC',
 }
 
 /** 状态 */

@@ -8,8 +8,8 @@ export class ConfigFactoryProvider {
     return {
       provide: this.provide,
       useFactory: async () => {
-        /** 可以在这里，增加其他获取配置的逻辑，如配置中心 */
-        const config = new BaseConfig({});
+        /** 可以在这里增加或者替换 `获取配置` 的逻辑，如查询配置中心 */
+        const config = new BaseConfig();
         return config;
       },
     };

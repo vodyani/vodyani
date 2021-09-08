@@ -11,9 +11,12 @@ export class BaseHttpClient {
   private client: AxiosInstance;
 
   /** Init AxiosInstance */
-  public init(config: AxiosRequestConfig, agentOption?: AgentOptions) {
-    config.timeout = config.timeout ? config.timeout : 15000;
-    if (agentOption) config.httpAgent = new Agent(agentOption);
+  public init(config?: AxiosRequestConfig, agentOption?: AgentOptions) {
+    if (config) {
+      config.timeout = config.timeout ? config.timeout : 15000;
+      if (agentOption) config.httpAgent = new Agent(agentOption);
+    }
+
     this.client = axios.create(config);
   }
 

@@ -9,6 +9,13 @@ import { Logform, Logger, createLogger, format, LoggerOptions, transports } from
 export class WinstonLoggerProvider implements LoggerService {
   private readonly instance: Logger;
 
+  constructor(
+    @Inject(ConfigFactoryProvider.provide)
+    private readonly config: BaseConfig,
+  ) {
+    this.instance = createLogger(this.initOptions());
+  }
+
   // 格式化输出样式
   private format(info: Logform.TransformableInfo): string {
     const pid = this.config.get('pid');
@@ -62,14 +69,6 @@ export class WinstonLoggerProvider implements LoggerService {
       exceptionHandlers: stderrLogger,
       transports: [consoleLogger, stdoutLogger, stderrLogger],
     };
-  }
-
-  constructor(
-    @Inject(ConfigFactoryProvider.provide)
-    private readonly config: BaseConfig,
-  ) {
-    const options = this.initOptions();
-    this.instance = createLogger(options);
   }
 
   /**
