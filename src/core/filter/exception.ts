@@ -1,13 +1,13 @@
 import { v4 as uuid } from 'uuid';
 import { Request, Response } from 'express';
+import { WinstonProvider } from '@/extends/logger';
 import { httpStatusMap, HTTP_HEADER } from '@/common';
-import { WinstonLoggerProvider } from '@/extends/logger';
 import { ArgumentsHost, Catch, ExceptionFilter as Filter, HttpException } from '@nestjs/common';
 
 @Catch()
 export class ExceptionFilter implements Filter {
   constructor(
-    private readonly logger: WinstonLoggerProvider
+    private readonly logger: WinstonProvider
   ) {}
 
   public catch(exception: HttpException, host: ArgumentsHost) {

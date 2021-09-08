@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
+import { WinstonProvider } from '@/extends/logger';
 import { SwaggerProvider } from '@/extends/swagger';
-import { WinstonLoggerProvider } from '@/extends/logger';
 import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
 
 import { CoreModule } from './module';
@@ -10,7 +10,7 @@ export const bootstrap = async () => {
 
   const config: BaseConfig = app.get(ConfigFactoryProvider.provide);
 
-  const logger = app.get(WinstonLoggerProvider);
+  const logger = app.get(WinstonProvider);
 
   if (config.get('enableSwagger')) app.get(SwaggerProvider).init(app);
 

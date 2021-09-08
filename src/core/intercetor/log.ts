@@ -2,14 +2,14 @@ import { Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { Request } from 'express';
 import { map } from 'rxjs/operators';
+import { WinstonProvider } from '@/extends/logger';
 import { HTTP_HEADER, IResponseBody } from '@/common';
-import { WinstonLoggerProvider } from '@/extends/logger';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 
 @Injectable()
 export class LogInterceptor implements NestInterceptor {
   constructor(
-    private readonly logger: WinstonLoggerProvider
+    private readonly logger: WinstonProvider
   ) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler): Observable<any> {

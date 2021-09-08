@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HTTP_STATUS } from '@/common';
 import { Reflector } from '@nestjs/core';
-import { WinstonLoggerProvider } from '@/extends/logger';
+import { WinstonProvider } from '@/extends/logger';
 import { Inject, Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException } from '@nestjs/common';
 
 import { Redis, IMutexOptions } from '../common';
@@ -17,7 +17,7 @@ export class MutexInterceptor implements NestInterceptor {
     private readonly redis: Redis.Redis,
     private readonly reflector: Reflector,
     private readonly utils: RedisUtilsProvider,
-    private readonly logger: WinstonLoggerProvider,
+    private readonly logger: WinstonProvider,
   ) {}
 
   async intercept(ctx: ExecutionContext, next: CallHandler): Promise<Observable<Record<string, any>>> {

@@ -6,7 +6,7 @@ import { HttpException, Inject, Injectable, LoggerService } from '@nestjs/common
 import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';
 
 @Injectable()
-export class WinstonLoggerProvider implements LoggerService {
+export class WinstonProvider implements LoggerService {
   private readonly instance: Logger;
 
   constructor(

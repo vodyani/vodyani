@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@/extends/config';
 
-import { WinstonLoggerProvider } from './provider';
+import { WinstonProvider } from './provider';
 
 @Module({
   imports: [ConfigModule],
-  exports: [WinstonLoggerProvider],
-  providers: [WinstonLoggerProvider],
+  exports: [WinstonProvider],
+  providers: [WinstonProvider],
 })
 export class LoggerModule {}
