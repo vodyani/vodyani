@@ -12,7 +12,9 @@ export const bootstrap = async () => {
 
   const logger = app.get(WinstonProvider);
 
-  if (config.get('enableSwagger')) app.get(SwaggerProvider).init(app);
+  if (config.get('enableSwagger')) {
+    app.get(SwaggerProvider).init(app);
+  }
 
   app.useLogger(logger);
 
@@ -20,4 +22,8 @@ export const bootstrap = async () => {
 
   logger.info(`SERVER START: http://localhost:${config.get('port')}`);
   logger.info(`ENAVLE SWAGGER: http://localhost:${config.get('port')}/doc`);
+
+  /** 未处理的异常 */
+  process.on('uncaughtException', (err: Error) => { logger.error(err, 'bootstrap') });
+  process.on('unhandledRejection', (err: Error) => { logger.error(err, 'bootstrap') });
 };
