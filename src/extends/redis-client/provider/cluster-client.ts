@@ -4,7 +4,7 @@ import { Redis } from '../common';
 
 /** 工厂提供者 (支持异步加载) */
 export class ClusterClientFactoryProvider {
-  public static provide = 'RedisClusterClient'
+  public static readonly provide = 'RedisClusterClient'
 
   public static getProvider() {
     return {

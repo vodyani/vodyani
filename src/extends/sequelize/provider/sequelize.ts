@@ -4,7 +4,7 @@ import { SequelizeUtilsProvider } from './sequelize-utils';
 
 /** 工厂提供者 (支持异步加载) */
 export class SequelizeFactoryProvider {
-  public static provide = 'SequelizeFactoryProvider'
+  public static readonly provide = 'SequelizeFactoryProvider'
 
   public static getProvider() {
     return {
