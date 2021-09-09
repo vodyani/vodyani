@@ -5,62 +5,111 @@ import { Stream } from 'stream';
 import { AgentOptions } from 'http';
 import { defaultsDeep } from 'lodash';
 import { writeFileSync, existsSync } from 'fs';
-import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 
-export class BaseHttpClient {
+export abstract class BaseHttpClient {
   private client: AxiosInstance;
 
-  /** Init AxiosInstance */
-  public init(config?: AxiosRequestConfig, agentOption?: AgentOptions) {
-    if (config) {
-      config.timeout = config.timeout ? config.timeout : 15000;
-      if (agentOption) config.httpAgent = new Agent(agentOption);
-    }
+  /** 动态地根据配置信息拼接 URL */
+  protected abstract getURL(url: string): string
 
-    this.client = axios.create(config);
+  /** Init AxiosInstance */
+  public constructor(config?: AxiosRequestConfig, agentOption?: AgentOptions) {
+    const setting: AxiosRequestConfig = {
+      timeout: config && config.timeout ? config.timeout : 15000,
+    };
+
+    if (agentOption) config.httpAgent = new Agent(agentOption);
+
+    this.client = axios.create(setting);
   }
 
   /** Method GET */
-  public get(url: string, config?: AxiosRequestConfig) {
-    return this.client.get(url, config);
+  public async get(url: string, config?: AxiosRequestConfig) {
+    try {
+      const result = await this.client.get(this.getURL(url), config);
+      return result;
+    } catch (error) {
+      if (error.isAxiosError) {
+        return error.response as AxiosResponse<any>;
+      } else {
+        return null;
+      }
+    }
   }
 
   /** Method POST */
-  public post(url: string, config?: AxiosRequestConfig) {
-    return this.client.post(url, config);
+  public async post(url: string, config?: AxiosRequestConfig) {
+    try {
+      const result = await this.client.post(this.getURL(url), config);
+      return result;
+    } catch (error) {
+      if (error.isAxiosError) {
+        return error.response as AxiosResponse<any>;
+      } else {
+        return null;
+      }
+    }
   }
 
   /** Method PUT */
-  public put(url: string, config?: AxiosRequestConfig) {
-    return this.client.put(url, config);
+  public async put(url: string, config?: AxiosRequestConfig) {
+    try {
+      const result = await this.client.put(this.getURL(url), config);
+      return result;
+    } catch (error) {
+      if (error.isAxiosError) {
+        return error.response as AxiosResponse<any>;
+      } else {
+        return null;
+      }
+    }
   }
 
   /** Method Delete */
-  public delete(url: string, config?: AxiosRequestConfig) {
-    return this.client.delete(url, config);
+  public async delete(url: string, config?: AxiosRequestConfig) {
+    try {
+      const result = await this.client.delete(this.getURL(url), config);
+      return result;
+    } catch (error) {
+      if (error.isAxiosError) {
+        return error.response as AxiosResponse<any>;
+      } else {
+        return null;
+      }
+    }
   }
 
   /** Method Options */
-  public options(url: string, config?: AxiosRequestConfig) {
-    return this.client.options(url, config);
+  public async options(url: string, config?: AxiosRequestConfig) {
+    try {
+      const result = await this.client.options(this.getURL(url), config);
+      return result;
+    } catch (error) {
+      if (error.isAxiosError) {
+        return error.response as AxiosResponse<any>;
+      } else {
+        return null;
+      }
+    }
   }
 
   /** (GET) 发起请求，并获取 response body 中的指定参数，默认是 `data` */
   public async getData(url: string, config?: AxiosRequestConfig, key = 'data') {
-    const response = await this.get(url, config);
-    return response.data && response.data[key] ? response.data[key] : null;
+    const response = await this.get(this.getURL(url), config);
+    return response && response.data && response.data[key] ? response.data[key] : null;
   }
 
   /** (POST) 发起请求，并获取 response body 中的指定参数，默认是 `data` */
   public async postData(url: string, config?: AxiosRequestConfig, key = 'data') {
-    const response = await this.post(url, config);
-    return response.data && response.data[key] ? response.data[key] : null;
+    const response = await this.post(this.getURL(url), config);
+    return response && response.data && response.data[key] ? response.data[key] : null;
   }
 
   /** (PUT) 发起请求，并获取 response body 中的指定参数，默认是 `data` */
   public async putData(url: string, config?: AxiosRequestConfig, key = 'data') {
-    const response = await this.put(url, config);
-    return response.data && response.data[key] ? response.data[key] : null;
+    const response = await this.put(this.getURL(url), config);
+    return response && response.data && response.data[key] ? response.data[key] : null;
   }
 
   /** (POST) 发起表单请求 */
@@ -68,11 +117,9 @@ export class BaseHttpClient {
     const form = new Form();
 
     const configs = defaultsDeep({ headers: form.getHeaders() }, config);
-
     Object.keys(data).forEach((key) => form.append(key, data[key]));
 
-    const response = await this.client.post(url, form, configs);
-
+    const response = await this.client.post(this.getURL(url), form, configs);
     return response;
   }
 
@@ -83,6 +130,7 @@ export class BaseHttpClient {
       defaultsDeep({ responseType: 'arraybuffer' }, config)
     );
 
+    if (!response) return null;
     return response.data as Buffer;
   }
 
@@ -93,12 +141,15 @@ export class BaseHttpClient {
       defaultsDeep({ responseType: 'stream' }, config)
     );
 
+    if (!response) return null;
     return response.data as Stream;
   }
 
   /** (GET) 发起请求, 将返回数据转换为 base64 格式的字符串 */
   public async base64(url: string, config?: AxiosRequestConfig) {
-    const data = await this.buffer(url, config);
+    const data = await this.buffer(this.getURL(url), config);
+
+    if (!data) return null;
     return data.toString('base64');
   }
 
@@ -108,7 +159,10 @@ export class BaseHttpClient {
       throw new Error(`${path} 该路径不存在`);
     }
 
-    const buffer = await this.buffer(url, config);
+    const buffer = await this.buffer(this.getURL(url), config);
+
+    if (!buffer) return null;
+
     writeFileSync(path, buffer, 'binary');
     return path;
   }
