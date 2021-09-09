@@ -1,8 +1,8 @@
 import { path } from '@/common';
 import 'winston-daily-rotate-file';
 import { DailyRotateFile } from 'winston/lib/winston/transports';
+import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { BaseConfig, ConfigFactoryProvider } from '@/extends/config';
-import { HttpException, Inject, Injectable, LoggerService } from '@nestjs/common';
 import { Logform, Logger, createLogger, format, LoggerOptions, transports } from 'winston';
 
 @Injectable()
@@ -107,7 +107,7 @@ export class WinstonProvider implements LoggerService {
    * @param trace string 日志标记，用于快速检索内容
    * @param meta any 日志数据源 (允许为空)
    */
-  public error(error: HttpException, trace: string, meta?: any) {
+  public error(error: Error, trace: string, meta?: any) {
     const exception = {
       error: error.message,
       stack: error.stack,
