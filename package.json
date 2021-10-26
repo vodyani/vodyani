@@ -29,7 +29,7 @@
 		"@nestjs/mapped-types": "^1.0.0",
 		"@nestjs/platform-express": "^7.6.5",
 		"@nestjs/swagger": "^4.7.2",
-		"@types/ioredis": "^4.27.1",
+		"@types/ioredis": "^4.27.6",
 		"agentkeepalive": "^4.1.4",
 		"axios": "^0.21.1",
 		"class-transformer": "^0.3.1",
