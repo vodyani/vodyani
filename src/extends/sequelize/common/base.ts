@@ -18,7 +18,6 @@ import { IBaseEntity, IResponsePaginatedOption } from './interface';
 
 @Table({ freezeTableName: true, timestamps: false })
 export class BaseEntity<T> extends Model<T> implements IBaseEntity {
-  /** base fields */
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -30,7 +29,6 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
   @Column({ field: 'updated_time' })
   public updatedTime: Date;
 
-  /** base hooks */
   /** 创建数据前，维护创建时间和更新时间 */
   @BeforeSave
   @BeforeCreate
@@ -48,7 +46,6 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
     entity.updatedTime = new Date();
   }
 
-  /** base methods */
   /** 分页查询 */
   public static async paginated<T extends Model>(
     this: { new (): T } & typeof Model,
@@ -64,7 +61,7 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
     options.offset = (index - 1) * size;
     options.order = [[orderBy, orderRule]];
 
-    const result = { rows: [], page: { index, size, pageCount: 0, count: 0 }};
+    const result = { rows: [], page: { index, size, count: 0, pageCount: 0 }};
     const data = await this.findAndCountAll(options);
 
     result.rows = data.rows;
@@ -76,13 +73,14 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
 
   /**
    * 从 DTO 中获取实体查询条件
-   * @param dto Record<keyof T, any> DTO 数据传输对象
+   *
+   * @param dto Partial<Record<keyof T, any>> DTO 数据传输对象
    */
-  public static getConditionByDTO<T extends Model>(dto: Record<keyof T, any>) {
+  public static getConditionByDTO<T>(dto: Partial<Record<keyof T, any>>) {
     const page = {} as IResponsePage;
-    const condition = {} as Record<keyof T, any>;
+    const condition = {} as Partial<Record<keyof T, any>>;
 
-    if (isNil(dto)) return;
+    if (isNil(dto)) return { page, condition };
 
     /** 计算交集，确保查询的是表内字段 */
     const raws = intersection(Object.keys(this.rawAttributes), Object.keys(dto));
@@ -97,20 +95,18 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
       .filter(key => ['page', 'size', 'orderBy', 'orderRule'].includes(key))
       .forEach(key => { page[key] = dto[key] });
 
-    return {
-      page,
-      condition,
-    };
+    return { page, condition };
   }
 
   /**
    * 从 DTO 中获取实体操作参数与查询条件
-   * @param dto Record<keyof T, any> DTO 数据传输对象
+   *
+   * @param dto Partial<Record<keyof T, any>> DTO 数据传输对象
    */
-  public static getEntityByDTO<T extends Model>(dto: Record<keyof T, any>) {
-    const entity = {} as Record<keyof T, any>;
+  public static getEntityByDTO<T>(dto: Partial<Record<keyof T, any>>) {
+    const entity = {} as Partial<Record<keyof T, any>>;
 
-    if (isNil(dto)) return;
+    if (isNil(dto)) return { entity };
 
     /** 计算交集，确保查询的是表内字段 */
     const raws = intersection(Object.keys(this.rawAttributes), Object.keys(dto));
