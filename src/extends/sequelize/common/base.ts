@@ -76,7 +76,10 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
    *
    * @param dto Partial<Record<keyof T, any>> DTO 数据传输对象
    */
-  public static getConditionByDTO<T>(dto: Partial<Record<keyof T, any>>) {
+  public static getConditionByDTO<T extends Model>(
+    this: { new (): T } & typeof Model,
+    dto: Partial<Record<keyof T, any>>,
+  ) {
     const page = {} as IResponsePage;
     const condition = {} as Partial<Record<keyof T, any>>;
 
@@ -103,7 +106,10 @@ export class BaseEntity<T> extends Model<T> implements IBaseEntity {
    *
    * @param dto Partial<Record<keyof T, any>> DTO 数据传输对象
    */
-  public static getEntityByDTO<T>(dto: Partial<Record<keyof T, any>>) {
+  public static getEntityByDTO<T extends Model>(
+    this: { new (): T } & typeof Model,
+    dto: Partial<Record<keyof T, any>>,
+  ) {
     const entity = {} as Partial<Record<keyof T, any>>;
 
     if (isNil(dto)) return { entity };
