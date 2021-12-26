@@ -37,7 +37,7 @@
 		"crypto-js": "^4.0.0",
 		"form-data": "^4.0.0",
 		"helmet": "^4.2.0",
-		"ioredis": "^4.27.9",
+		"ioredis": "^4.28.2",
 		"lodash": "^4.17.21",
 		"module-alias": "^2.2.2",
 		"moment": "^2.29.1",
