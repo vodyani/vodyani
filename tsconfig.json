@@ -1,0 +1,31 @@
+{
+  "include": [
+    "src",
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ESNext"],
+    "target": "ES6",
+    "outDir": "dist",
+    "module": "CommonJS",
+    "sourceMap": false,
+    "declaration": true,
+    "incremental": false,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "removeComments": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@/api/*": ["./src/api/*"],
+      "@/core/*": ["./src/core/*"],
+      "@/domain/*": ["./src/domain/*"],
+      "@/infrastructure/*": ["./src/infrastructure/*"]
+    }
+  }
+}
