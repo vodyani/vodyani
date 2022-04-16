@@ -18,7 +18,7 @@
     "url": "https://github.com/vodyani/vodyani/issues"
   },
   "scripts": {
-    "install:all": "npm i && npm i @vodyani/eslint-config -D && npx husky install",
+    "install:all": "npm i && npx husky install",
     "dev": "ts-node src/main",
     "start": "npm run build && node dist/main",
     "build": "rm -rf dist && tsc",
@@ -65,6 +65,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@vodyani/eslint-config": "^1.0.9",
+    "@nestjs/testing": "8.4.1",
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@types/express": "4.17.13",
@@ -72,15 +74,13 @@
     "@types/module-alias": "2.0.1",
     "@types/node": "16.11.26",
     "@types/uuid": "8.3.4",
-    "@vodyani/eslint-config": "^1.0.9",
-    "husky": "7.0.4",
-    "ts-node": "10.7.0",
-    "typescript": "4.6.2",
-    "@nestjs/testing": "8.4.1",
     "@types/jest": "27.4.1",
     "@types/supertest": "2.0.11",
-    "jest": "27.5.1",
     "supertest": "6.2.2",
-    "ts-jest": "27.1.3"
+    "husky": "7.0.4",
+    "jest": "27.5.1",
+    "ts-jest": "27.1.3",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.3"
   }
 }
