@@ -1,7 +1,7 @@
 {
   "name": "@vodyani/vodyani",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "8.0.0",
   "author": "ChoGathK",
   "description": "vodyani server",
   "homepage": "https://github.com/vodyani/vodyani#readme",
@@ -19,9 +19,11 @@
   },
   "scripts": {
     "install:all": "npm i && npm i @vodyani/eslint-config -D && npx husky install",
-    "build": "rm -rf dist && tsc",
     "dev": "ts-node src/main",
     "start": "npm run build && node dist/main",
+    "build": "rm -rf dist && tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "lint": "eslint ./src && tsc",
     "lint:fix": "eslint --fix --ext .ts src/ test/",
     "lint:html-report": "eslint ./src -f html -o eslint-report.html",
@@ -34,6 +36,20 @@
   },
   "eslintConfig": {
     "extends": "@vodyani"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/test/.spec.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.ts$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "./node_modules/(?!(lodash-es|other-es-lib))"
+    ]
   },
   "dependencies": {
     "@nestjs/common": "^8.4.4",
@@ -59,6 +75,12 @@
     "@vodyani/eslint-config": "^1.0.9",
     "husky": "7.0.4",
     "ts-node": "10.7.0",
-    "typescript": "4.6.2"
+    "typescript": "4.6.2",
+    "@nestjs/testing": "8.4.1",
+    "@types/jest": "27.4.1",
+    "@types/supertest": "2.0.11",
+    "jest": "27.5.1",
+    "supertest": "6.2.2",
+    "ts-jest": "27.1.3"
   }
 }

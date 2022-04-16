@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PaginationQueryOptions } from '@vodyani/core';
 
-export class PaginationQueryOptionsDto implements PaginationQueryOptions {
+export class PaginationQueryDto implements PaginationQueryOptions {
   @ApiProperty({ name: 'index', example: '1', type: String, description: 'index' })
   public index?: string;
 
