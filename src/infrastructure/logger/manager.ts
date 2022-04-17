@@ -1,27 +1,20 @@
-import { FixedContext } from '@vodyani/core';
 import { BaseLogger } from '@vodyani/winston';
-import { FactoryProvider } from '@nestjs/common';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
+import { FixedContext, ProviderFactory } from '@vodyani/core';
 
 import { logsPath } from '@/core/common';
 import { Configuration } from '@/infrastructure/config/common';
 
-export class LoggerManager {
+export class LoggerManager implements ProviderFactory {
   public static token = Symbol('LoggerManager');
 
-  private provider: FactoryProvider;
-
-  constructor() {
-    this.provider = {
+  @FixedContext
+  public create() {
+    return {
       inject: [ArkManager.token],
       useFactory: this.useFactory,
       provide: LoggerManager.token,
     };
-  }
-
-  @FixedContext
-  public getFactoryProvider() {
-    return this.provider;
   }
 
   @FixedContext
