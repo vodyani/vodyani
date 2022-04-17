@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "8.0.0",
   "author": "ChoGathK",
-  "description": "vodyani server",
+  "description": "🚀 A fantastic solution for nodejs server-side apps.",
   "homepage": "https://github.com/vodyani/vodyani#readme",
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
     "url": "https://github.com/vodyani/vodyani/issues"
   },
   "scripts": {
-    "install:all": "npm i && npx husky install",
+    "install:all": "npm i && npm run install:husky",
+    "install:husky": "npx husky install",
     "dev": "ts-node src/main",
     "start": "npm run build && node dist/main",
     "build": "rm -rf dist && tsc",
