@@ -57,7 +57,7 @@
     "@nestjs/core": "^8.4.4",
     "@nestjs/platform-express": "^8.4.4",
     "@vodyani/ark": "^0.1.19",
-    "@vodyani/core": "^0.3.4",
+    "@vodyani/core": "^0.3.5",
     "@vodyani/swagger": "^0.0.5",
     "@vodyani/winston": "^0.1.7",
     "dayjs": "^1.11.0",
