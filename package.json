@@ -59,7 +59,7 @@
     "@vodyani/ark": "^0.1.19",
     "@vodyani/core": "^0.3.4",
     "@vodyani/swagger": "^0.0.5",
-    "@vodyani/winston": "^0.1.6",
+    "@vodyani/winston": "^0.1.7",
     "dayjs": "^1.11.0",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
