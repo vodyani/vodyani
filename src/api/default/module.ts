@@ -1,10 +1,10 @@
-import { ApiRegister } from '@vodyani/core';
+import { ApiModule } from '@vodyani/core';
 
 import { DefaultController } from './controller';
 
 import { DefaultDomain } from '@/domain/default/module';
 
-@ApiRegister({
+@ApiModule({
   imports: [
     DefaultDomain,
   ],

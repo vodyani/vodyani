@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { isBuffer, isArrayBuffer } from 'lodash';
+import { isValidStream } from '@vodyani/validator';
+import { getDefault, getDefaultString } from '@vodyani/transformer';
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { isValidStream, getDefault, getDefaultString, resultIntercept } from '@vodyani/core';
 
-import { HTTP_HEADER, httpStatus } from '@/core/common';
+import { resultIntercept } from '../method';
+import { HTTP_HEADER, httpStatus } from '../common';
 
 @Injectable()
 export class ResultFormatInterceptor implements NestInterceptor {

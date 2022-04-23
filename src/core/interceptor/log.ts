@@ -1,8 +1,9 @@
 import { Request } from 'express';
 import { BaseLogger } from '@vodyani/winston';
-import { getDefault, resultIntercept } from '@vodyani/core';
+import { getDefault } from '@vodyani/transformer';
 import { Injectable, NestInterceptor, Inject, ExecutionContext, CallHandler } from '@nestjs/common';
 
+import { resultIntercept } from '../method';
 import { HTTP_HEADER, ResponseBody, uuid } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';

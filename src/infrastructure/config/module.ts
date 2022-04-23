@@ -1,10 +1,10 @@
 import { ArkModule } from '@vodyani/ark';
 import { DynamicModule } from '@nestjs/common';
-import { getDefaultNumber } from '@vodyani/core';
+import { getDefaultNumber } from '@vodyani/transformer';
 
 import { ENV, PROCESS_ENV } from './common';
 
-import { configPath } from '@/core/common';
+import { configPath as path } from '@/core/common';
 
 export class ConfigModule {
   static forRoot(): DynamicModule {
@@ -13,19 +13,17 @@ export class ConfigModule {
       current: (process.env[PROCESS_ENV.ENV] || ENV.LOCAL) as ENV,
     };
 
+    const params = {
+      name: process.env[PROCESS_ENV.NAME] || 'SERVER',
+      port: getDefaultNumber(process.env[PROCESS_ENV.PORT], 3000),
+    };
+
     return {
       global: true,
       module: ConfigModule,
       imports: [
         ArkModule.forRoot({
-          local: {
-            env,
-            path: configPath,
-            params: {
-              name: process.env[PROCESS_ENV.NAME] || 'SERVER',
-              port: getDefaultNumber(process.env[PROCESS_ENV.PORT], 3000),
-            },
-          },
+          local: { env, path, params },
         }),
       ],
     };

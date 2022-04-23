@@ -25,7 +25,8 @@ export class Launcher {
 
     await this.app.listen(port);
 
-    logger.info(`SERVER START: http://localhost:${port}`);
+    logger.info(`LISTEN: http://localhost:${port}`);
+    logger.info(`SWAGGER: http://localhost:${port}/doc`);
   }
 
   private deployCatcher() {
@@ -55,9 +56,6 @@ export class Launcher {
     const { enable } = config.discovery('swagger');
 
     if (enable) {
-      const logger = this.app.get<BaseLogger>(LoggerManager.token);
-      const port = config.discovery('port');
-
       new BaseSwagger().deploy(
         this.app,
         {
@@ -65,8 +63,6 @@ export class Launcher {
           extraModels: [PaginationResultVo, ResponseBodyVo],
         },
       );
-
-      logger.info(`SWAGGER WITH: http://localhost:${port}/doc`);
     }
   }
 }
