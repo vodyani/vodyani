@@ -1,8 +1,8 @@
-import { DomainRegister } from '@vodyani/core';
+import { DomainModule } from '@vodyani/core';
 
 import { DefaultService } from './service';
 
-@DomainRegister({
+@DomainModule({
   exports: [DefaultService],
   service: [DefaultService],
 })

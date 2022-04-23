@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { BaseLogger } from '@vodyani/winston';
-import { getDefault, toDeepSnakeCase } from '@vodyani/core';
+import { getDefault, toDeepSnakeCase } from '@vodyani/transformer';
 import { Catch, Inject, HttpException, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
 
 import { httpStatus, HTTP_HEADER, uuid } from '../common';

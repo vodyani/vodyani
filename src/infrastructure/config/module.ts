@@ -1,6 +1,6 @@
 import { ArkModule } from '@vodyani/ark';
 import { DynamicModule } from '@nestjs/common';
-import { getDefaultNumber } from '@vodyani/core';
+import { getDefaultNumber } from '@vodyani/transformer';
 
 import { ENV, PROCESS_ENV } from './common';
 
