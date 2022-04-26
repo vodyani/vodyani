@@ -1,6 +1,6 @@
 import { ArkModule } from '@vodyani/ark';
 import { DynamicModule } from '@nestjs/common';
-import { getDefaultNumber } from '@vodyani/transformer';
+import { convertNumber } from '@vodyani/transformer';
 
 import { ENV, PROCESS_ENV } from './common';
 
@@ -15,7 +15,7 @@ export class ConfigModule {
 
     const params = {
       name: process.env[PROCESS_ENV.NAME] || 'SERVER',
-      port: getDefaultNumber(process.env[PROCESS_ENV.PORT], 3000),
+      port: convertNumber(process.env[PROCESS_ENV.PORT], 3000),
     };
 
     return {

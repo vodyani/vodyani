@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { BaseLogger } from '@vodyani/winston';
-import { getDefault } from '@vodyani/transformer';
+import { convert } from '@vodyani/transformer';
 import { Injectable, NestInterceptor, Inject, ExecutionContext, CallHandler } from '@nestjs/common';
 
 import { resultIntercept } from '../method';
@@ -19,7 +19,7 @@ export class LogInterceptor implements NestInterceptor {
     const request: Request = ctx.switchToHttp().getRequest();
     const { originalUrl, body, query, method, headers } = request;
 
-    request.headers[HTTP_HEADER.RID] = getDefault(headers[HTTP_HEADER.RID], uuid());
+    request.headers[HTTP_HEADER.RID] = convert(headers[HTTP_HEADER.RID], uuid());
 
     return resultIntercept(next, (responseBody: ResponseBody<Record<string, any>>) => {
       this.logger.info(

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { isBuffer, isArrayBuffer } from 'lodash';
 import { isValidStream } from '@vodyani/validator';
-import { getDefault, getDefaultString } from '@vodyani/transformer';
+import { convert, convertString } from '@vodyani/transformer';
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 
 import { resultIntercept } from '../method';
@@ -19,14 +19,14 @@ export class ResultFormatInterceptor implements NestInterceptor {
 
       const request: Request = ctx.switchToHttp().getRequest();
       const response: Response = ctx.switchToHttp().getResponse();
-      const requestId = getDefaultString(request.headers[HTTP_HEADER.RID]);
+      const requestId = convertString(request.headers[HTTP_HEADER.RID]);
 
       const result = httpStatus.get(response.statusCode);
 
       const code = result.code;
       const responseTime = Date.now();
-      const data = getDefault(body, {});
-      const message = getDefaultString(result.message);
+      const data = convert(body, {});
+      const message = convertString(result.message);
       return { code, message, requestId, requestTime, responseTime, data };
     });
   }
