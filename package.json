@@ -57,7 +57,7 @@
     "@nestjs/platform-express": "8.4.4",
     "@vodyani/ark": "0.1.22",
     "@vodyani/core": "0.3.7",
-    "@vodyani/swagger": "0.0.7",
+    "@vodyani/swagger": "^0.1.7",
     "@vodyani/transformer": "0.5.3",
     "@vodyani/validator": "0.13.0",
     "@vodyani/winston": "0.1.9",
