@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { BaseLogger } from '@vodyani/winston';
-import { getDefault, toDeepSnakeCase } from '@vodyani/transformer';
+import { convert, toDeepSnakeCase } from '@vodyani/transformer';
 import { Catch, Inject, HttpException, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
 
 import { httpStatus, HTTP_HEADER, uuid } from '../common';
@@ -29,8 +29,8 @@ export class RequestExceptionFilter implements ExceptionFilter {
       code: result.code,
       requestTime: Date.now(),
       responseTime: Date.now(),
-      message: getDefault(exception.message, result.message),
-      requestId: getDefault(headers[HTTP_HEADER.RID], uuid()),
+      message: convert(exception.message, result.message),
+      requestId: convert(headers[HTTP_HEADER.RID], uuid()),
     };
 
     this.logger.error(

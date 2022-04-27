@@ -1,25 +1,21 @@
 import { PaginationInfo } from '@vodyani/core';
-import { getDefaultNumber } from '@vodyani/transformer';
-import { IsNotEmpty, IsNumber, Transform } from '@vodyani/validator';
+import { IsNotEmpty, IsNumber } from '@vodyani/validator';
+import { ValueTransform, convertNumber, Expose } from '@vodyani/transformer';
 
 export class PaginationDo implements PaginationInfo {
-  @Transform(it => getDefaultNumber(it.value))
-  @IsNotEmpty()
-  @IsNumber({ allowNaN: false, allowInfinity: false })
+  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
+  @Expose() @ValueTransform(convertNumber)
   public index: number;
 
-  @Transform(it => getDefaultNumber(it.value))
-  @IsNotEmpty()
-  @IsNumber({ allowNaN: false, allowInfinity: false })
+  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
+  @Expose() @ValueTransform(convertNumber)
   public size: number;
 
-  @Transform(it => getDefaultNumber(it.value))
-  @IsNotEmpty()
-  @IsNumber({ allowNaN: false, allowInfinity: false })
+  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
+  @Expose() @ValueTransform(convertNumber)
   public count: number;
 
-  @Transform(it => getDefaultNumber(it.value))
-  @IsNotEmpty()
-  @IsNumber({ allowNaN: false, allowInfinity: false })
+  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
+  @Expose() @ValueTransform(convertNumber)
   public pageCount: number;
 }

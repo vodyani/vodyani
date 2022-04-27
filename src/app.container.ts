@@ -1,12 +1,12 @@
 import { ContainerModule } from '@vodyani/core';
 import { APP_PIPE, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
-import { DefaultApi } from './api/default/module';
-import { RequestExceptionFilter } from './core/filter';
-import { ConfigModule } from './infrastructure/config/module';
-import { LoggerModule } from './infrastructure/logger/module';
-import { DtoValidatePipe, DtoCamelCasePipe } from './core/pipe';
-import { LogInterceptor, ResultFormatInterceptor, ResultSnakeCaseInterceptor } from './core/interceptor';
+import { RequestExceptionFilter } from '@/core/filter';
+import { DtoValidatePipe, DtoCamelCasePipe } from '@/core/pipe';
+import { LogInterceptor, ResultFormatInterceptor, ResultSnakeCaseInterceptor } from '@/core/interceptor';
+import { DefaultApi } from '@/api/default/module';
+import { ConfigModule } from '@/infrastructure/config/module';
+import { LoggerModule } from '@/infrastructure/logger/module';
 
 @ContainerModule({
   api: [
