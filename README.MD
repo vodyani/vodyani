@@ -13,7 +13,7 @@
 npm run install:all
 ```
 
-## Run Server
+## Run
 
 ```bash
 npm run start
