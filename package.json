@@ -61,7 +61,7 @@
     "@vodyani/winston": "^8.0.1",
     "@vodyani/transformer": "0.5.3",
     "@vodyani/validator": "0.13.0",
-    "dayjs": "1.11.0",
+    "dayjs": "1.11.3",
     "lodash": "4.17.21",
     "module-alias": "2.2.2",
     "rxjs": "7.5.5",
