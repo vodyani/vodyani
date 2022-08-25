@@ -1,6 +1,6 @@
 import { ENV } from '../enum';
 
-export interface ProcessConfig {
+export interface EnvironmentConfig {
   env: ENV;
   name: string;
   port: number;

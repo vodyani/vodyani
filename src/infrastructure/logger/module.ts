@@ -2,7 +2,7 @@ import { DynamicModule } from '@nestjs/common';
 
 import { LoggerManager } from './manager';
 
-export class LoggerModule {
+export class LoggerInfrastructure {
   static forRoot(): DynamicModule {
     const manager = new LoggerManager().create();
 
@@ -10,7 +10,7 @@ export class LoggerModule {
       global: true,
       exports: [manager],
       providers: [manager],
-      module: LoggerModule,
+      module: LoggerInfrastructure,
     };
   }
 }

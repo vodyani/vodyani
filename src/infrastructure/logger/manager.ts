@@ -1,35 +1,41 @@
-import { BaseLogger } from '@vodyani/winston';
+import { This } from '@vodyani/class-decorator';
+import { LoggerFactory } from '@vodyani/winston';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
-import { FixedContext, ProviderFactory } from '@vodyani/core';
+import { isValidArray, toDeepMerge } from '@vodyani/utils';
+import { AsyncProviderFactory, AsyncInjectable, getToken } from '@vodyani/core';
 
 import { logsPath } from '@/core/common';
 import { Configuration } from '@/infrastructure/config/common';
 
-export class LoggerManager implements ProviderFactory {
-  public static token = Symbol('LoggerManager');
-
-  @FixedContext
+@AsyncInjectable
+export class LoggerManager implements AsyncProviderFactory {
+  @This
   public create() {
     return {
-      inject: [ArkManager.token],
       useFactory: this.useFactory,
-      provide: LoggerManager.token,
+      inject: [getToken(ArkManager)],
+      provide: getToken(LoggerManager),
     };
   }
 
-  @FixedContext
+  @This
   private async useFactory(
     config: ConfigProvider<Configuration>,
   ) {
-    const env = config.discovery('env');
-    const name = config.discovery('name');
-    const options = config.discovery('logger');
+    const env = config.get('env');
+    const name = config.get('name');
+    let options = config.get('logger');
 
-    if (options.enableRotateLog && !options.rotateFileDirPath) {
-      options.rotateFileDirPath = logsPath;
-      config.set('logger', options);
+    if (isValidArray(options.mode)) {
+      if (options.mode.includes('File')) {
+        options = toDeepMerge({ fileOptions: { dirname: logsPath }}, options);
+      }
+
+      if (options.mode.includes('DailyRotateFile')) {
+        options = toDeepMerge({ dailyRotateFileOptions: { dirname: logsPath }}, options);
+      }
     }
 
-    return new BaseLogger({ env, name, ...options });
+    return new LoggerFactory().create({ env, name, ...options });
   }
 }

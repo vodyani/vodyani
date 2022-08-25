@@ -4,16 +4,21 @@ export enum HTTP_HEADER {
    */
   RID = 'x-request-id',
   /**
-   * ClientAdapter-side JWT authentication credentials
+   * ClientAdapter-side `jwt` authentication credentials.
    */
   AUTH = 'Authorization',
   /**
-   * Request Platform
+   * Request platform
    */
   PLATFORM = 'x-request-platform',
   /**
-   * The server-side API version, generally developed by the server.
-   * the client gets different interface content according to different versions
+   * The server-side api version, generally developed by the server.
+   *
+   * the client gets different interface content according to different versions.
    */
   API_VERSION = 'x-request-api-version',
+  /**
+   * Request content type.
+   */
+  CONTENT_TYPE = 'content-type',
 }

@@ -3,11 +3,6 @@
     "enable": true
   },
   "logger": {
-    "enableConsoleLog": true,
-    "enableRotateLog": true,
-    "rotateFileLevel": {
-      "access": ["log", "info", "warn"],
-      "error": ["error"]
-    }
+    "mode": ["Console"]
   }
 }

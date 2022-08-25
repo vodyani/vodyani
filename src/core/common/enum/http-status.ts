@@ -16,7 +16,7 @@ export enum HTTP_STATUS {
   /**
    * Here you can define a custom status code using the rule: `{statusCode}0000{self-incrementing}`
    *
-   * @usageNotes {HTTP_STATUS.UNPROCURABLE}0000{1} -> 42200001
+   * @tips {HTTP_STATUS.UNPROCURABLE}0000{1} -> 42200001
    */
   LOGIN_UNPROCURABLE = 42200001,
 }

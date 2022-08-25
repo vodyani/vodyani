@@ -1,27 +1,25 @@
 import { Request } from 'express';
-import { BaseLogger } from '@vodyani/winston';
-import { convert } from '@vodyani/transformer';
-import { Injectable, NestInterceptor, Inject, ExecutionContext, CallHandler } from '@nestjs/common';
+import { Logger } from '@vodyani/winston';
+import { AsyncInject } from '@vodyani/core';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 
 import { resultIntercept } from '../method';
-import { HTTP_HEADER, ResponseBody, uuid } from '../common';
+import { HTTP_HEADER, uuid } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';
 
 @Injectable()
-export class LogInterceptor implements NestInterceptor {
+export class RequestLogInterceptor implements NestInterceptor {
   constructor(
-    @Inject(LoggerManager.token)
-    private readonly logger: BaseLogger,
+    @AsyncInject(LoggerManager) private readonly logger: Logger,
   ) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler) {
     const request: Request = ctx.switchToHttp().getRequest();
     const { originalUrl, body, query, method, headers } = request;
+    request.headers[HTTP_HEADER.RID] = headers[HTTP_HEADER.RID] || uuid();
 
-    request.headers[HTTP_HEADER.RID] = convert(headers[HTTP_HEADER.RID], uuid());
-
-    return resultIntercept(next, (responseBody: ResponseBody<Record<string, any>>) => {
+    return resultIntercept(next, () => {
       this.logger.info(
         {
           request: { originalUrl, method, headers, query, body },
@@ -30,8 +28,6 @@ export class LogInterceptor implements NestInterceptor {
         },
         `${ctx.getClass().name}.${ctx.getHandler().name}`,
       );
-
-      return responseBody;
     });
   }
 }

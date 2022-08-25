@@ -1,8 +1,5 @@
 import { HTTP_STATUS } from '../enum';
 
-/**
- * Structure of a map set for typical http status codes
-*/
 export const httpStatus = new Map([
   /**
    * In the following location, declare the base status code.
@@ -21,7 +18,7 @@ export const httpStatus = new Map([
   /**
    * Here you can define a custom status code using the rule: `{statusCode}0000{self-incrementing}`
    *
-   * @usageNotes {HTTP_STATUS.UNPROCURABLE}0000{1} -> 42200001
+   * @tips {HTTP_STATUS.UNPROCURABLE}0000{1} -> 42200001
    */
   [HTTP_STATUS.LOGIN_UNPROCURABLE, { code: 42200001, statusCode: 422, message: 'LOGIN_UNPROCURABLE' }],
 ]);

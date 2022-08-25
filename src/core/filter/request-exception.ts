@@ -1,8 +1,9 @@
+import { Logger } from '@vodyani/winston';
 import { Request, Response } from 'express';
-import { BaseLogger } from '@vodyani/winston';
-import { convert, toDeepSnakeCase } from '@vodyani/transformer';
-import { Catch, Inject, HttpException, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
+import { AsyncInject } from '@vodyani/core';
+import { Catch, HttpException, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
 
+import { toDeepSnakeCase } from '../method';
 import { httpStatus, HTTP_HEADER, uuid } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';
@@ -10,8 +11,7 @@ import { LoggerManager } from '@/infrastructure/logger/manager';
 @Catch()
 export class RequestExceptionFilter implements ExceptionFilter {
   constructor(
-    @Inject(LoggerManager.token)
-    private readonly logger: BaseLogger,
+    @AsyncInject(LoggerManager) private readonly logger: Logger,
   ) {}
 
   public catch(exception: HttpException, host: ArgumentsHost) {
@@ -21,7 +21,7 @@ export class RequestExceptionFilter implements ExceptionFilter {
     const { originalUrl, body, query, method, headers } = request;
 
     const result = httpStatus.get(
-      exception instanceof HttpException ? exception.getStatus() : 500,
+      exception instanceof HttpException ? exception.getStatus() : 400,
     );
 
     const responseBody = {
@@ -29,17 +29,17 @@ export class RequestExceptionFilter implements ExceptionFilter {
       code: result.code,
       requestTime: Date.now(),
       responseTime: Date.now(),
-      message: convert(exception.message, result.message),
-      requestId: convert(headers[HTTP_HEADER.RID], uuid()),
+      message: exception.message || result.message,
+      requestId: headers[HTTP_HEADER.RID] || uuid(),
     };
 
     this.logger.error(
       exception,
-      'ExceptionFilter',
       {
         request: { originalUrl, method, headers, query, body },
         response: responseBody,
       },
+      'ExceptionFilter',
     );
 
     response

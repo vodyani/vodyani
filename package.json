@@ -1,7 +1,7 @@
 {
   "name": "@vodyani/vodyani",
   "license": "MIT",
-  "version": "8.0.0",
+  "version": "8.x",
   "author": "ChoGathK",
   "description": "🚀 A fantastic solution for nodejs server-side apps.",
   "homepage": "https://github.com/vodyani/vodyani#readme",
@@ -9,33 +9,38 @@
     "type": "git",
     "url": "git+https://github.com/vodyani/vodyani.git"
   },
+  "bugs": {
+    "url": "https://github.com/vodyani/vodyani/issues"
+  },
   "keywords": [
     "vodyani",
     "nodejs",
     "nestjs"
   ],
-  "bugs": {
-    "url": "https://github.com/vodyani/vodyani/issues"
-  },
   "scripts": {
-    "install:all": "npm i && npm run install:husky",
-    "install:husky": "npx husky install",
-    "start": "ts-node src/main",
+    "local": "npm i && npm i @vodyani/eslint-config -D && npx husky install",
     "build": "rm -rf dist && tsc",
+    "dev": "ts-node src/main",
+    "start": "npm run build && node dist/main",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint ./src && tsc",
+    "lint": "eslint ./src ./test && tsc",
     "lint:fix": "eslint --fix --ext .ts src/ test/",
-    "lint:html-report": "eslint ./src -f html -o eslint-report.html",
-    "lint:json-report": "eslint ./src -f json -o eslint-report.json"
+    "lint:html-report": "eslint ./src ./test -f html -o eslint-report.html",
+    "lint:json-report": "eslint ./src ./test -f json -o eslint-report.json",
+    "release": "npx semantic-release"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "eslintConfig": {
     "extends": "@vodyani"
+  },
+  "release": {
+    "extends": "@vodyani/semantic-release"
+  },
+  "commitlint": {
+    "extends": "@commitlint/config-conventional"
   },
   "jest": {
     "testEnvironment": "node",
@@ -52,20 +57,21 @@
     ]
   },
   "dependencies": {
-    "@nestjs/common": "8.4.4",
-    "@nestjs/core": "8.4.4",
-    "@nestjs/platform-express": "8.4.4",
-    "@vodyani/ark": "^8.0.2",
-    "@vodyani/core": "^8.0.1",
-    "@vodyani/swagger": "^8.0.1",
-    "@vodyani/winston": "^8.0.1",
-    "@vodyani/transformer": "0.5.3",
-    "@vodyani/validator": "0.13.0",
-    "dayjs": "1.11.0",
-    "lodash": "4.17.21",
-    "module-alias": "2.2.2",
-    "rxjs": "7.5.5",
-    "uuid": "8.3.2"
+    "@nestjs/common": "^8.4.4",
+    "@nestjs/core": "^8.4.4",
+    "@nestjs/platform-express": "^8.4.4",
+    "@nestjs/swagger": "^5.2.1",
+    "@vodyani/ark": "^8.4.0",
+    "@vodyani/class-decorator": "^8.1.1",
+    "@vodyani/core": "^8.5.0",
+    "@vodyani/utils": "^8.4.2",
+    "@vodyani/winston": "^8.4.7",
+    "dayjs": "^1.11.0",
+    "lodash": "^4.17.21",
+    "module-alias": "^2.2.2",
+    "rxjs": "^7.5.6",
+    "swagger-ui-express": "^4.3.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "16.2.3",
@@ -78,7 +84,8 @@
     "@types/node": "16.11.26",
     "@types/supertest": "2.0.11",
     "@types/uuid": "8.3.4",
-    "@vodyani/eslint-config": "1.0.9",
+    "@vodyani/eslint-config": "^1.0.10",
+    "@vodyani/semantic-release": "1.1.1",
     "husky": "7.0.4",
     "jest": "27.5.1",
     "supertest": "6.2.2",

@@ -1,2 +1,2 @@
-export * from './config-env';
-export * from './config-process-env';
+export * from './env';
+export * from './process-env';

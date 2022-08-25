@@ -1,8 +1,8 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Controller, Get } from '@nestjs/common';
 
-import { ApiResponseVo } from '@/core/decorator';
 import { DefaultService } from '@/domain/default/service';
+import { ApiResponseVo } from '@/infrastructure/swagger/decorator';
 
 @ApiTags('default')
 @Controller('/')

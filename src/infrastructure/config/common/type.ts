@@ -1,3 +1,3 @@
-import { LocalConfig, ProcessConfig } from './interface';
+import { EnvironmentConfig, ResourceConfig } from './interface';
 
-export type Configuration = ProcessConfig & LocalConfig;
+export type Configuration = EnvironmentConfig & ResourceConfig;

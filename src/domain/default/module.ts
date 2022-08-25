@@ -1,9 +1,8 @@
-import { DomainModule } from '@vodyani/core';
+import { Domain } from '@vodyani/core';
 
 import { DefaultService } from './service';
 
-@DomainModule({
-  exports: [DefaultService],
+@Domain({
   service: [DefaultService],
 })
 export class DefaultDomain {}

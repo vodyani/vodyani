@@ -1,3 +1,3 @@
-export * from './config-local';
-export * from './config-process';
-export * from './config-swagger';
+export * from './resource';
+export * from './environment';
+export * from './swagger';

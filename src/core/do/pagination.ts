@@ -1,21 +1,20 @@
-import { PaginationInfo } from '@vodyani/core';
-import { IsNotEmpty, IsNumber } from '@vodyani/validator';
-import { ValueTransform, convertNumber, Expose } from '@vodyani/transformer';
+import { ApiProperty } from '@nestjs/swagger';
+import { Expose } from '@vodyani/class-decorator';
 
-export class PaginationDo implements PaginationInfo {
-  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
-  @Expose() @ValueTransform(convertNumber)
+export class PageDo {
+  @Expose()
+  @ApiProperty({ name: 'index', type: Number, required: true, example: 1, description: 'index' })
   public index: number;
 
-  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
-  @Expose() @ValueTransform(convertNumber)
+  @Expose()
+  @ApiProperty({ name: 'size', type: Number, required: true, example: 10, description: 'size' })
   public size: number;
 
-  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
-  @Expose() @ValueTransform(convertNumber)
+  @Expose()
+  @ApiProperty({ name: 'count', type: Number, required: true, example: 1, description: 'count' })
   public count: number;
 
-  @IsNotEmpty() @IsNumber({ allowNaN: false, allowInfinity: false })
-  @Expose() @ValueTransform(convertNumber)
+  @Expose()
+  @ApiProperty({ name: 'page_count', type: Number, required: true, example: 1, description: 'current page count' })
   public pageCount: number;
 }
