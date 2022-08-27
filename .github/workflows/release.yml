@@ -1,0 +1,13 @@
+name: "release"
+
+on:
+  push:
+    branches: [beta, alpha, master]
+
+jobs:
+  semantic_release:
+    uses: vodyani/workflows/.github/workflows/semantic-release-project.yml@master
+    secrets:
+      GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      enable_build: false

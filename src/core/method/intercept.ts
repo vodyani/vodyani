@@ -3,7 +3,6 @@ import { CallHandler } from '@nestjs/common';
 import { isValidStream } from '@vodyani/utils';
 import { isArrayBuffer, isBuffer } from 'lodash';
 
-
 export function resultIntercept(next: CallHandler, handler: (...args: any[]) => any): Observable<any> {
   return next.handle().pipe(tap((data) => {
     handler();

@@ -27,17 +27,13 @@
     "lint": "eslint ./src ./test && tsc",
     "lint:fix": "eslint --fix --ext .ts src/ test/",
     "lint:html-report": "eslint ./src ./test -f html -o eslint-report.html",
-    "lint:json-report": "eslint ./src ./test -f json -o eslint-report.json",
-    "release": "npx semantic-release"
+    "lint:json-report": "eslint ./src ./test -f json -o eslint-report.json"
   },
   "publishConfig": {
     "access": "public"
   },
   "eslintConfig": {
     "extends": "@vodyani"
-  },
-  "release": {
-    "extends": "@vodyani/semantic-release"
   },
   "commitlint": {
     "extends": "@commitlint/config-conventional"
@@ -85,7 +81,6 @@
     "@types/supertest": "2.0.11",
     "@types/uuid": "8.3.4",
     "@vodyani/eslint-config": "^1.0.10",
-    "@vodyani/semantic-release": "1.1.1",
     "husky": "7.0.4",
     "jest": "27.5.1",
     "supertest": "6.2.2",

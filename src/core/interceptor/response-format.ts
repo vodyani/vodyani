@@ -1,4 +1,3 @@
-import { toString } from '@vodyani/utils';
 import { Request, Response } from 'express';
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 
@@ -12,7 +11,7 @@ export class ResponseFormatInterceptor implements NestInterceptor {
     const requestTime = Date.now();
     const request: Request = ctx.switchToHttp().getRequest();
     const response: Response = ctx.switchToHttp().getResponse();
-    const requestId = toString(request.headers[HTTP_HEADER.RID]);
+    const requestId = request.headers[HTTP_HEADER.RID];
 
     return responseIntercept(next, (body: any) => {
       const status = httpStatus.get(response.statusCode);
