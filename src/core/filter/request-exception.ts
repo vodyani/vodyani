@@ -2,7 +2,7 @@ import { Logger } from '@vodyani/winston';
 import { AsyncInject, Catch, HttpException, ExceptionFilter, ArgumentsHost } from '@vodyani/core';
 
 import { toDeepSnakeCase } from '../method';
-import { httpStatus, HTTP_HEADER, uuid, Req, Res } from '../common';
+import { httpStatus, HTTP_HEADER, uuid, Res } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';
 
@@ -13,9 +13,8 @@ export class RequestExceptionFilter implements ExceptionFilter {
   ) {}
 
   public catch(exception: HttpException, host: ArgumentsHost) {
-    const request = host.switchToHttp().getRequest<Req>();
     const response = host.switchToHttp().getResponse<Res>();
-    const { originalUrl, body, query, method, headers } = request;
+    const { originalUrl, body, query, method, headers } = host.switchToHttp().getRequest();
 
     const result = httpStatus.get(
       exception instanceof HttpException ? exception.getStatus() : 400,

@@ -1,8 +1,8 @@
+import { tap } from 'rxjs';
 import { Logger } from '@vodyani/winston';
 import { AsyncInject, Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
-import { resultIntercept } from '../method';
-import { HTTP_HEADER, uuid, Req } from '../common';
+import { HTTP_HEADER, uuid } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';
 
@@ -13,19 +13,17 @@ export class RequestLogInterceptor implements NestInterceptor {
   ) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler) {
-    const request: Req = ctx.switchToHttp().getRequest();
-    const { originalUrl, body, query, method, headers } = request;
-    request.headers[HTTP_HEADER.RID] = headers[HTTP_HEADER.RID] || uuid();
+    const { originalUrl, body, query, method, headers } = ctx.switchToHttp().getRequest();
 
-    return resultIntercept(next, () => {
+    headers[HTTP_HEADER.RID] = headers[HTTP_HEADER.RID] || uuid();
+
+    return next.handle().pipe(tap(result => {
       this.logger.info(
-        {
-          request: { originalUrl, method, headers, query, body },
-          handler: ctx.getHandler().name,
-          class: ctx.getClass().name,
-        },
+        { originalUrl, method, query, body, headers },
         `${ctx.getClass().name}.${ctx.getHandler().name}`,
       );
-    });
+
+      return result;
+    }));
   }
 }

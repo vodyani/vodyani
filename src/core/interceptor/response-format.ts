@@ -1,25 +1,27 @@
+import { map } from 'rxjs';
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
-import { responseIntercept } from '../method';
-import { HTTP_HEADER, httpStatus, Req, Res } from '../common';
+import { isStreamableFile } from '../method';
+import { HTTP_HEADER, httpStatus, HTTP_STATUS } from '../common';
 
 @Injectable()
 export class ResponseFormatInterceptor implements NestInterceptor {
   public intercept(ctx: ExecutionContext, next: CallHandler) {
     const requestTime = Date.now();
-    const request: Req = ctx.switchToHttp().getRequest();
-    const response: Res = ctx.switchToHttp().getResponse();
-    const requestId = request.headers[HTTP_HEADER.RID];
+    const requestId = ctx.switchToHttp().getRequest().headers[HTTP_HEADER.RID];
 
-    return responseIntercept(next, (body: any) => {
-      const status = httpStatus.get(response.statusCode);
+    return next.handle().pipe(map(result => {
+      if (isStreamableFile(result)) return result;
 
-      const data = body || {};
-      const code = status.code;
-      const message = status.message;
+      const statusCode = ctx.switchToHttp().getResponse().statusCode;
+      const status = httpStatus.get(statusCode);
+
+      const data = result || {};
       const responseTime = Date.now();
+      const message = status.message || '';
+      const code = status.code || HTTP_STATUS.BAD_SERVER;
       return { code, message, requestId, requestTime, responseTime, data };
-    });
+    }));
   }
 }
 

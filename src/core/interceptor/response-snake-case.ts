@@ -1,11 +1,14 @@
+import { map } from 'rxjs';
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
-import { responseIntercept, toDeepSnakeCase } from '../method';
+import { isStreamableFile, toDeepSnakeCase } from '../method';
 
 @Injectable()
 export class ResponseSnakeCaseInterceptor implements NestInterceptor {
   public intercept(_: ExecutionContext, next: CallHandler) {
-    return responseIntercept(next, body => toDeepSnakeCase(body));
+    return next.handle().pipe(map(result => {
+      return isStreamableFile(result) ? result : toDeepSnakeCase(result);
+    }));
   }
 }
 

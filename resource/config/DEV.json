@@ -1,1 +1,10 @@
-{}
+{
+  "logger": {
+    "mode": ["DailyRotateFile"],
+    "dailyRotateFileOptions": {
+      "maxFiles": "14d",
+      "zippedArchive": true,
+      "datePattern": "YYYY-MM-DD-HH"
+    }
+  }
+}

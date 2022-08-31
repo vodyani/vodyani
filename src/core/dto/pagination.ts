@@ -1,20 +1,21 @@
 import { ApiProperty } from '@vodyani/swagger';
-import { Expose } from '@vodyani/class-decorator';
+import { toNumber, toString } from '@vodyani/utils';
+import { Expose, TransformValue } from '@vodyani/class-decorator';
 
 export class PaginationQueryDto {
-  @Expose()
-  @ApiProperty({ name: 'index', example: '1', type: String, description: 'index' })
-  public index?: string;
+  @Expose() @TransformValue((data: string) => toNumber(data, 1))
+  @ApiProperty({ name: 'index', example: '1', default: '1', type: String, description: 'index' })
+  public index?: number;
 
-  @Expose()
-  @ApiProperty({ name: 'size', example: '20', type: String, description: 'size' })
-  public size?: string;
+  @Expose() @TransformValue((data: string) => toNumber(data, 1))
+  @ApiProperty({ name: 'size', example: '20', default: '20', type: String, description: 'size' })
+  public size?: number;
 
-  @Expose()
-  @ApiProperty({ name: 'order_by', example: 'id', type: String, description: 'pagination order by' })
+  @Expose() @TransformValue((filed: string) => toString(filed, 'id'))
+  @ApiProperty({ name: 'order_by', example: 'id', default: 'id', type: String, description: 'pagination order by' })
   public orderBy?: string;
 
-  @Expose()
-  @ApiProperty({ name: 'order_rule', example: 'desc', type: String, description: 'pagination order rule' })
-  public orderRule?: 'desc' | 'asc';
+  @Expose() @TransformValue((rule: string) => toString(rule, 'desc'))
+  @ApiProperty({ name: 'order_rule', example: 'desc', default: 'desc', type: String, description: 'pagination order rule' })
+  public orderRule?: 'desc' | 'DESC' | 'asc' | 'ASC';
 }
