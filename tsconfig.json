@@ -2,10 +2,6 @@
   "include": [
     "src",
   ],
-  "exclude": [
-    "**/*.spec.ts",
-    "node_modules"
-  ],
   "compilerOptions": {
     "baseUrl": ".",
     "lib": ["ESNext"],

@@ -2,9 +2,14 @@ name: "release"
 
 on:
   push:
-    branches: [beta, alpha, master, 8.x]
+    branches: [beta, alpha, 8.x]
 
 jobs:
+  check:
+    uses: vodyani/workflows/.github/workflows/check.yml@master
+    with:
+      enable_test: true
+
   semantic_release:
     uses: vodyani/workflows/.github/workflows/semantic-release-project.yml@master
     secrets:
