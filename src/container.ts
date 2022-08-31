@@ -1,12 +1,11 @@
-import { Container } from '@vodyani/core';
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { SwaggerInfrastructure } from '@vodyani/swagger';
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE, Container } from '@vodyani/core';
 
 import { DefaultApi } from '@/api/default/module';
 import { RequestExceptionFilter } from '@/core/filter';
 import { DtoCamelCasePipe, DtoValidatePipe } from '@/core/pipe';
 import { ConfigInfrastructure } from '@/infrastructure/config/module';
 import { LoggerInfrastructure } from '@/infrastructure/logger/module';
-import { SwaggerInfrastructure } from '@/infrastructure/swagger/module';
 import { RequestLogInterceptor, ResponseFormatInterceptor, ResponseSnakeCaseInterceptor } from '@/core/interceptor';
 
 @Container({

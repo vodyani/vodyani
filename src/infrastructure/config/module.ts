@@ -1,5 +1,5 @@
 import { ArkModule } from '@vodyani/ark';
-import { DynamicModule } from '@nestjs/common';
+import { DynamicModule } from '@vodyani/core';
 
 import { ENV, environment } from './common';
 

@@ -1,19 +1,18 @@
-import { getToken } from '@vodyani/core';
 import { Logger } from '@vodyani/winston';
-import { NestFactory } from '@nestjs/core';
+import { NestFactory } from '@vodyani/core';
+import { SwaggerProvider } from '@vodyani/swagger';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
 
 import { CoreContainer } from './container';
 
 import { Configuration } from '@/infrastructure/config/common';
 import { LoggerManager } from '@/infrastructure/logger/manager';
-import { SwaggerProvider } from '@/infrastructure/swagger/provider';
 
 export async function bootstrap() {
   const app = await NestFactory.create(CoreContainer, { cors: true, logger: ['error'] });
 
-  const config = app.get<ConfigProvider<Configuration>>(getToken(ArkManager));
-  const logger = app.get<Logger>(getToken(LoggerManager));
+  const config = app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
+  const logger = app.get<Logger>(LoggerManager.getToken());
 
   const { enable } = config.get('swagger');
   const port = config.get('port');
