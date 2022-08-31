@@ -1,6 +1,6 @@
-import { toValidateClass } from '@vodyani/class-decorator';
 import { isValid, isValidDict } from '@vodyani/utils';
-import { ArgumentMetadata, HttpException, Injectable, PipeTransform } from '@nestjs/common';
+import { toValidateClass } from '@vodyani/class-decorator';
+import { ArgumentMetadata, HttpException, Injectable, PipeTransform } from '@vodyani/core';
 
 import { isMulterFile } from '../method';
 

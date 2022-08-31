@@ -1,16 +1,14 @@
-import { Request, Response } from 'express';
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
 import { responseIntercept } from '../method';
-
-import { HTTP_HEADER, httpStatus } from '@/core/common';
+import { HTTP_HEADER, httpStatus, Req, Res } from '../common';
 
 @Injectable()
 export class ResponseFormatInterceptor implements NestInterceptor {
   public intercept(ctx: ExecutionContext, next: CallHandler) {
     const requestTime = Date.now();
-    const request: Request = ctx.switchToHttp().getRequest();
-    const response: Response = ctx.switchToHttp().getResponse();
+    const request: Req = ctx.switchToHttp().getRequest();
+    const response: Res = ctx.switchToHttp().getResponse();
     const requestId = request.headers[HTTP_HEADER.RID];
 
     return responseIntercept(next, (body: any) => {

@@ -1,4 +1,4 @@
-import { StreamableFile } from '@nestjs/common';
+import { StreamableFile } from '@vodyani/core';
 import { isValidArray, isValidBuffer } from '@vodyani/utils';
 
 export function isMulterFile(data: any) {

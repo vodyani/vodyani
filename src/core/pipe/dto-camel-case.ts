@@ -1,4 +1,4 @@
-import { Injectable, PipeTransform } from '@nestjs/common';
+import { Injectable, PipeTransform } from '@vodyani/core';
 
 import { isMulterFile, toDeepCamelCase } from '../method';
 

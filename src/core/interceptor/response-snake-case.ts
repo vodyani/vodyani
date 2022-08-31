@@ -1,4 +1,4 @@
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
 import { responseIntercept, toDeepSnakeCase } from '../method';
 

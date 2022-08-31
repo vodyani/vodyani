@@ -1,4 +1,4 @@
-import { DynamicModule } from '@nestjs/common';
+import { DynamicModule } from '@vodyani/core';
 
 import { LoggerManager } from './manager';
 

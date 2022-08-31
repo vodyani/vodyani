@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@vodyani/swagger';
 import { Expose } from '@vodyani/class-decorator';
 
 export class PageDo {

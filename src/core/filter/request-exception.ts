@@ -1,10 +1,8 @@
 import { Logger } from '@vodyani/winston';
-import { Request, Response } from 'express';
-import { AsyncInject } from '@vodyani/core';
-import { Catch, HttpException, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
+import { AsyncInject, Catch, HttpException, ExceptionFilter, ArgumentsHost } from '@vodyani/core';
 
 import { toDeepSnakeCase } from '../method';
-import { httpStatus, HTTP_HEADER, uuid } from '../common';
+import { httpStatus, HTTP_HEADER, uuid, Req, Res } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';
 
@@ -15,9 +13,8 @@ export class RequestExceptionFilter implements ExceptionFilter {
   ) {}
 
   public catch(exception: HttpException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const request = ctx.getRequest<Request>();
-    const response = ctx.getResponse<Response>();
+    const request = host.switchToHttp().getRequest<Req>();
+    const response = host.switchToHttp().getResponse<Res>();
     const { originalUrl, body, query, method, headers } = request;
 
     const result = httpStatus.get(

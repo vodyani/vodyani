@@ -1,9 +1,10 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from '@vodyani/class-decorator';
+import { ApiProperty, SwaggerEntity } from '@vodyani/swagger';
 
 import { ResponseBody } from '../common';
 
-export class ResponseBodyVo<T> implements ResponseBody {
+@SwaggerEntity
+export class ResponseBodyVo<T = any> implements ResponseBody {
   @Expose()
   @ApiProperty({ name: 'code', type: Number, required: true, description: 'response code' })
   public code: number;

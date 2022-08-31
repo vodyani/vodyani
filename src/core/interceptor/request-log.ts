@@ -1,10 +1,8 @@
-import { Request } from 'express';
 import { Logger } from '@vodyani/winston';
-import { AsyncInject } from '@vodyani/core';
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+import { AsyncInject, Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
 import { resultIntercept } from '../method';
-import { HTTP_HEADER, uuid } from '../common';
+import { HTTP_HEADER, uuid, Req } from '../common';
 
 import { LoggerManager } from '@/infrastructure/logger/manager';
 
@@ -15,7 +13,7 @@ export class RequestLogInterceptor implements NestInterceptor {
   ) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler) {
-    const request: Request = ctx.switchToHttp().getRequest();
+    const request: Req = ctx.switchToHttp().getRequest();
     const { originalUrl, body, query, method, headers } = request;
     request.headers[HTTP_HEADER.RID] = headers[HTTP_HEADER.RID] || uuid();
 
