@@ -2,7 +2,7 @@ name: "release"
 
 on:
   push:
-    branches: [beta, alpha, 8.x]
+    branches: [beta, alpha, master, 8.x]
 
 jobs:
   check:
