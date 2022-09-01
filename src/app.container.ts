@@ -26,4 +26,4 @@ import { RequestLogInterceptor, ResponseFormatInterceptor, ResponseSnakeCaseInte
     { provide: APP_INTERCEPTOR, useClass: ResponseFormatInterceptor },
   ],
 })
-export class CoreContainer {}
+export class AppContainer {}
