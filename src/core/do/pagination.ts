@@ -16,6 +16,6 @@ export class PageDo {
   public count: number;
 
   @Expose() @TransformValue(toNumber)
-  @ApiProperty({ name: 'page_count', type: Number, required: true, example: 1, description: 'current page count' })
+  @ApiProperty({ name: 'page_count', type: Number, required: true, example: 1, description: 'page count' })
   public pageCount: number;
 }
