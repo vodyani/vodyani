@@ -22,6 +22,8 @@
 |:-:|
 |[ChoGathK](https://github.com/chogathK)|
 
+![Alt](https://repobeats.axiom.co/api/embed/ee4523e4e20078ada5c2b86a1c534bddb26f1d3a.svg "Repobeats analytics image")
+
 ## License
 
 Vodyani is [MIT licensed](LICENSE).
