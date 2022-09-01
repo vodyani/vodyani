@@ -1,10 +1,10 @@
 import { ApiTags, ApiFormData, ApiResponse } from '@vodyani/swagger';
-import { Controller, Get, StreamableFile, UploadedFiles, PostFormData, Response } from '@vodyani/core';
+import { Controller, Get, StreamableFile, UploadedFiles, Response } from '@vodyani/core';
 
 import { DefaultUploadDto } from './dto';
 
-import { ApiResponseVo } from '@/core/decorator';
 import { DefaultService } from '@/domain/default/service';
+import { ApiResponseVo, PostFormData } from '@/core/decorator';
 
 @ApiTags('default')
 @Controller('/')
