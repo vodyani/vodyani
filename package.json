@@ -64,7 +64,7 @@
     "lodash": "4.17.21",
     "module-alias": "2.0.1",
     "rxjs": "7.5.6",
-    "uuid": "8.3.2"
+    "uuid": "9.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "16.3.0",
