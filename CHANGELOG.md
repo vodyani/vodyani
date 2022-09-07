@@ -1,3 +1,10 @@
+## [8.1.2](https://github.com/vodyani/vodyani/compare/v8.1.1...v8.1.2) (2022-09-07)
+
+
+### Bug Fixes
+
+* deps ([1251c2f](https://github.com/vodyani/vodyani/commit/1251c2f1f93ca659d5b3d4f978ffe5a91b9f5ede))
+
 ## [8.1.1](https://github.com/vodyani/vodyani/compare/v8.1.0...v8.1.1) (2022-09-01)
 
 
