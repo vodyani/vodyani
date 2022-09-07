@@ -18,8 +18,12 @@ export async function bootstrap() {
   const port = config.get('port');
 
   if (enable) {
+    const path = 'docs';
     const swagger = app.get(SwaggerProvider);
-    swagger.setup('docs', app, swagger.getConfigBuilder().build());
+
+    swagger.setup(path, app, swagger.getConfigBuilder().build());
+
+    logger.info(`Nest Swagger: http://localhost:${port}/${path} `);
   }
 
   process.on('uncaughtException', logger.error);
@@ -30,5 +34,5 @@ export async function bootstrap() {
 
   await app.listen(port);
 
-  logger.info(`LISTEN: http://localhost:${port} 🚀 `);
+  logger.info(`Nest Listen: http://localhost:${port} 🚀 `);
 }
