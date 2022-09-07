@@ -1,3 +1,10 @@
+## [8.1.1](https://github.com/vodyani/vodyani/compare/v8.1.0...v8.1.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* bind the express platform ([d8c17bc](https://github.com/vodyani/vodyani/commit/d8c17bcc2b45901b46a76465bced4ba6a8746810))
+
 # [8.1.0](https://github.com/vodyani/vodyani/compare/v8.0.1...v8.1.0) (2022-08-31)
 
 
