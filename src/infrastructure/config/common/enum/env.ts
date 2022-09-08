@@ -9,7 +9,7 @@ export enum ENV {
   FWS = 'FWS',
   /** Feature acceptance test environment */
   FAT = 'FAT',
-  /** User acceptance test test environment */
+  /** User acceptance test environment */
   UAT = 'UAT',
   /** Load and Performance test environment */
   LPT = 'LPT',
