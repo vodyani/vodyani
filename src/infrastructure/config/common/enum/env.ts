@@ -5,20 +5,14 @@ export enum ENV {
   LOCAL = 'LOCAL',
   /** Development environment */
   DEV = 'DEV',
-  /** Test environment */
-  TEST = 'TEST',
-  /** Feature Acceptance Test environment */
+  /** Feature web service test environment */
+  FWS = 'FWS',
+  /** Feature acceptance test environment */
   FAT = 'FAT',
-  /** System Integrate Test environment */
-  SIT = 'SIT',
-  /** Acceptance Test environment */
+  /** User acceptance test test environment */
   UAT = 'UAT',
-  /** Evaluation Test environment */
-  PET = 'PET',
-  /** Simulation environment */
-  SIM = 'SIM',
-  /** Pre environment */
-  PRE = 'PRE',
+  /** Load and Performance test environment */
+  LPT = 'LPT',
   /** Production environment */
   PRO = 'PRO',
 }

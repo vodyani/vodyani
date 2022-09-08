@@ -1,8 +1,5 @@
 {
   "swagger": {
     "enable": true
-  },
-  "logger": {
-    "mode": ["Console"]
   }
 }
