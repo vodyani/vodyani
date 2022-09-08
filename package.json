@@ -60,7 +60,7 @@
     "@vodyani/swagger": "^8.1.4",
     "@vodyani/utils": "^8.5.2",
     "@vodyani/winston": "^8.5.5",
-    "dayjs": "1.11.0",
+    "dayjs": "1.11.5",
     "lodash": "4.17.21",
     "module-alias": "2.0.1",
     "rxjs": "7.5.6",
