@@ -1,3 +1,10 @@
+## [8.1.4](https://github.com/vodyani/vodyani/compare/v8.1.3...v8.1.4) (2022-09-08)
+
+
+### Bug Fixes
+
+* namespace for environment traversal ([af7f87e](https://github.com/vodyani/vodyani/commit/af7f87e8b31caf709e6c70baad0adc4897a82d97))
+
 ## [8.1.3](https://github.com/vodyani/vodyani/compare/v8.1.2...v8.1.3) (2022-09-08)
 
 
