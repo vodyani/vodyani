@@ -1,3 +1,10 @@
+## [8.1.3](https://github.com/vodyani/vodyani/compare/v8.1.2...v8.1.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* make more reasonable adjustments to the configuration ([61c2b53](https://github.com/vodyani/vodyani/commit/61c2b53cabe5c83d03a06cd98adb25eae3751f0e))
+
 ## [8.1.2](https://github.com/vodyani/vodyani/compare/v8.1.1...v8.1.2) (2022-09-07)
 
 
