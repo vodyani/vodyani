@@ -3,13 +3,13 @@ import { NestFactory } from '@vodyani/core';
 import { SwaggerProvider } from '@vodyani/swagger';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
 
-import { CoreContainer } from './container';
+import { AppContainer } from './app.container';
 
 import { Configuration } from '@/infrastructure/config/common';
 import { LoggerManager } from '@/infrastructure/logger/manager';
 
 export async function bootstrap() {
-  const app = await NestFactory.create(CoreContainer, { cors: true, logger: ['error'] });
+  const app = await NestFactory.create(AppContainer, { cors: true, logger: ['error'] });
 
   const config = app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
   const logger = app.get<Logger>(LoggerManager.getToken());
@@ -18,8 +18,12 @@ export async function bootstrap() {
   const port = config.get('port');
 
   if (enable) {
+    const path = 'docs';
     const swagger = app.get(SwaggerProvider);
-    swagger.setup('docs', app, swagger.getConfigBuilder().build());
+
+    swagger.setup(path, app, swagger.getConfigBuilder().build());
+
+    logger.info(`Nest Swagger: http://localhost:${port}/${path} `);
   }
 
   process.on('uncaughtException', logger.error);
@@ -30,5 +34,5 @@ export async function bootstrap() {
 
   await app.listen(port);
 
-  logger.info(`LISTEN: http://localhost:${port} 🚀 `);
+  logger.info(`Nest Listen: http://localhost:${port} 🚀 `);
 }
