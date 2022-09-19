@@ -9,8 +9,8 @@
 
 ## Getting started
 
-- [使用文档 📚](https://vodyani.vercel.app)
-- [Documentation 📚](https://vodyani.vercel.app/en)
+- [使用文档 📚](https://vodyani.netlify.app)
+- [Documentation 📚](https://vodyani.netlify.app/en)
 
 ## Questions
 
