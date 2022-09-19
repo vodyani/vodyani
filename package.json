@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@nestjs/platform-express": "8.4.7",
-    "@vodyani/ark": "^8.5.1",
+    "@vodyani/ark": "^8.5.2",
     "@vodyani/class-decorator": "^8.2.2",
     "@vodyani/core": "^8.7.1",
     "@vodyani/swagger": "^8.1.4",
