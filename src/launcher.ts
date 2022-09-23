@@ -66,15 +66,16 @@ export class Launcher {
     process.on('unhandledRejection', listener('unhandledRejection'));
   }
 
-  private listenPort() {
+  private async listenPort() {
     const config = this.app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
     const logger = this.app.get<Logger>(LoggerManager.getToken());
+
     const { path } = config.get('swagger');
     const port = config.get('port');
 
-    this.app.listen(port).then(() => {
-      logger.info(`Vodyani Listen: http://localhost:${port} 🚀`);
-      logger.info(`Vodyani Swagger: http://localhost:${port}/${path} 📚`);
-    });
+    await this.app.listen(port);
+
+    logger.info(`Vodyani Listen: http://localhost:${port} 🚀`);
+    logger.info(`Vodyani Swagger: http://localhost:${port}/${path} 📚`);
   }
 }
