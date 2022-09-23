@@ -16,7 +16,7 @@ export class Launcher {
   private app: INestApplication;
 
   public async run() {
-    await this.init();
+    await this.initContainer();
 
     this.useAOP();
     this.useSwagger();
@@ -25,7 +25,7 @@ export class Launcher {
     this.listenPort();
   }
 
-  private async init() {
+  private async initContainer() {
     this.app = await NestFactory.create(Container, { cors: true, logger: ['error'] });
   }
 
