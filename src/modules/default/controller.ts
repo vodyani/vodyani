@@ -4,6 +4,7 @@ import { Controller, Get, StreamableFile, UploadedFiles, Response } from '@vodya
 import { DefaultUploadDto } from './dto';
 import { DefaultService } from './service';
 
+import { Res } from '@/core/common';
 import { ApiResponseVo, PostFormData } from '@/core/decorator';
 
 @ApiTags('default')
@@ -23,7 +24,7 @@ export class DefaultController {
   @ApiFormData({ type: DefaultUploadDto })
   @ApiResponse({ description: 'response is avatar streamable file' })
   uploadFile(
-    @Response({ passthrough: true }) res: any,
+    @Response({ passthrough: true }) res: Res,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
     const avatarFile = files.find(e => e.fieldname === 'avatar');
