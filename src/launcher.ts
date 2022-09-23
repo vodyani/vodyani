@@ -51,6 +51,7 @@ export class Launcher {
     if (enable) {
       const swagger = this.app.get<SwaggerProvider>(SwaggerProvider);
       const options = swagger.getConfigBuilder().build();
+
       swagger.setup(path, this.app, options);
     }
   }
@@ -69,13 +70,10 @@ export class Launcher {
   private async listenPort() {
     const config = this.app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
     const logger = this.app.get<Logger>(LoggerManager.getToken());
-
-    const { path } = config.get('swagger');
     const port = config.get('port');
 
     await this.app.listen(port);
 
     logger.info(`Vodyani Listen: http://localhost:${port} 🚀`);
-    logger.info(`Vodyani Swagger: http://localhost:${port}/${path} 📚`);
   }
 }
