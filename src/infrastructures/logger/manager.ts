@@ -5,7 +5,7 @@ import { isValidArray, toDeepMerge } from '@vodyani/utils';
 import { AsyncProvider, AsyncProviderFactory, AsyncInjectable } from '@vodyani/core';
 
 import { logsPath } from '@/core/common';
-import { Configuration } from '@/infrastructure/config/common';
+import { Configuration } from '@/infrastructures/config/common';
 
 @AsyncInjectable
 export class LoggerManager extends AsyncProvider implements AsyncProviderFactory {

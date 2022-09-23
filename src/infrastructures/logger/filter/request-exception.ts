@@ -1,10 +1,10 @@
 import { Logger } from '@vodyani/winston';
 import { AsyncInject, Catch, HttpException, ExceptionFilter, ArgumentsHost } from '@vodyani/core';
 
-import { toDeepSnakeCase } from '../method';
-import { httpStatus, HTTP_HEADER, uuid, Res } from '../common';
+import { LoggerManager } from '../manager';
 
-import { LoggerManager } from '@/infrastructure/logger/manager';
+import { toDeepSnakeCase } from '@/core/method';
+import { httpStatus, HTTP_HEADER, uuid, Res } from '@/core/common';
 
 @Catch()
 export class RequestExceptionFilter implements ExceptionFilter {
@@ -12,7 +12,7 @@ export class RequestExceptionFilter implements ExceptionFilter {
     @AsyncInject(LoggerManager) private readonly logger: Logger,
   ) {}
 
-  public catch(exception: HttpException, host: ArgumentsHost) {
+  catch(exception: HttpException, host: ArgumentsHost) {
     const response = host.switchToHttp().getResponse<Res>();
     const { originalUrl, body, query, method, headers } = host.switchToHttp().getRequest();
 

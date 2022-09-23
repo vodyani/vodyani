@@ -1,6 +1,6 @@
 import { Injectable, PipeTransform } from '@vodyani/core';
 
-import { isMulterFile, toDeepCamelCase } from '../method';
+import { isMulterFile, toDeepCamelCase } from '@/core/method';
 
 @Injectable()
 export class DtoCamelCasePipe implements PipeTransform<any> {

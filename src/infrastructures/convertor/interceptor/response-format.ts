@@ -1,8 +1,8 @@
 import { map } from 'rxjs';
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
-import { isStreamableFile } from '../method';
-import { HTTP_HEADER, httpStatus, HTTP_STATUS } from '../common';
+import { isStreamableFile } from '@/core/method';
+import { HTTP_HEADER, httpStatus, HTTP_STATUS } from '@/core/common';
 
 @Injectable()
 export class ResponseFormatInterceptor implements NestInterceptor {

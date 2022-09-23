@@ -2,7 +2,7 @@ import { isValid, isValidDict } from '@vodyani/utils';
 import { toValidateClass } from '@vodyani/class-decorator';
 import { ArgumentMetadata, HttpException, Injectable, PipeTransform } from '@vodyani/core';
 
-import { isMulterFile } from '../method';
+import { isMulterFile } from '@/core/method';
 
 @Injectable()
 export class DtoValidatePipe implements PipeTransform<any> {

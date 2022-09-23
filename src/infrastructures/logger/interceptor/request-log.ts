@@ -2,9 +2,9 @@ import { tap } from 'rxjs';
 import { Logger } from '@vodyani/winston';
 import { AsyncInject, Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
 
-import { HTTP_HEADER, uuid } from '../common';
+import { LoggerManager } from '../manager';
 
-import { LoggerManager } from '@/infrastructure/logger/manager';
+import { HTTP_HEADER, uuid } from '@/core/common';
 
 @Injectable()
 export class RequestLogInterceptor implements NestInterceptor {
