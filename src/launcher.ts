@@ -21,7 +21,7 @@ export class Launcher {
     this.useAOP();
     this.useSwagger();
 
-    this.listenFailedException();
+    this.uncaughtException();
     this.listenPort();
   }
 
@@ -55,7 +55,7 @@ export class Launcher {
     }
   }
 
-  private listenFailedException() {
+  private uncaughtException() {
     const logger = this.app.get<Logger>(LoggerManager.getToken());
 
     const listener = (source: string) => {
