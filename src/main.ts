@@ -8,6 +8,6 @@ addAliases({
   '@/infrastructures': resolve(__dirname, './infrastructures'),
 });
 
-import { bootstrap } from './bootstrap';
+import { Launcher } from './launcher';
 
-bootstrap();
+new Launcher().run();

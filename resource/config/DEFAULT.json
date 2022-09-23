@@ -1,5 +1,6 @@
 {
   "swagger": {
-    "enable": true
+    "enable": true,
+    "path": "docs"
   }
 }
