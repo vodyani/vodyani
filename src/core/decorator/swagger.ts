@@ -1,4 +1,4 @@
-import { Type } from '@vodyani/core';
+import { Type } from '@nestjs/common';
 import { getArrayResponseVo, getPaginationResponseVo, getResponseVo } from '@vodyani/swagger';
 
 import { ResponseBodyVo, PageVo } from '../vo';

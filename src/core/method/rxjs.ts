@@ -1,5 +1,5 @@
-import { CallHandler } from '@vodyani/core';
-import { Observable, map, tap } from 'rxjs';
+import { CallHandler } from '@nestjs/common';
+import { map, Observable, tap } from 'rxjs';
 
 import { isStreamableFile } from './validate';
 

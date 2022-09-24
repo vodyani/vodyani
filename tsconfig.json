@@ -18,10 +18,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "paths": {
-      "@/api/*": ["./src/api/*"],
       "@/core/*": ["./src/core/*"],
-      "@/domain/*": ["./src/domain/*"],
-      "@/infrastructure/*": ["./src/infrastructure/*"]
+      "@/infrastructures/*": ["./src/infrastructures/*"],
+      "@/modules/*": ["./src/modules/*"]
     }
   }
 }

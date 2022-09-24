@@ -1,3 +1,3 @@
-import * as Time from 'dayjs';
+import * as time from 'dayjs';
 
-export { Time };
+export { time };
