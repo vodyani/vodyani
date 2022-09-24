@@ -1,3 +1,12 @@
+# [8.2.0](https://github.com/vodyani/vodyani/compare/v8.1.4...v8.2.0) (2022-09-24)
+
+
+### Features
+
+* change the running mode of an initiator ([1b5945c](https://github.com/vodyani/vodyani/commit/1b5945c0828c9b0bc45cd84d386065133f322e35))
+* reduce base dependencies ([e265efd](https://github.com/vodyani/vodyani/commit/e265efded70c2666dd6dc2c509677f58b1895efb))
+* rethink the hierarchy ([761e013](https://github.com/vodyani/vodyani/commit/761e0131d3875a61e820eac717078bfd074ae19c))
+
 ## [8.1.4](https://github.com/vodyani/vodyani/compare/v8.1.3...v8.1.4) (2022-09-08)
 
 
