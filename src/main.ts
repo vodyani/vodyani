@@ -1,4 +1,13 @@
-import './app.alias';
-import { bootstrap } from './app.bootstrap';
+import { resolve } from 'path';
 
-bootstrap();
+import { addAliases } from 'module-alias';
+
+addAliases({
+  '@/core': resolve(__dirname, './core'),
+  '@/modules': resolve(__dirname, './modules'),
+  '@/infrastructures': resolve(__dirname, './infrastructures'),
+});
+
+import { Launcher } from './launcher';
+
+new Launcher().run();

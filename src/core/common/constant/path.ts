@@ -7,3 +7,4 @@ export const tempPath = `${rootPath}/temp`;
 export const logsPath = `${rootPath}/logs`;
 export const publicPath = `${rootPath}/public`;
 export const resourcePath = `${rootPath}/resource`;
+export const configPath = `${resourcePath}/config`;
