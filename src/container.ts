@@ -1,5 +1,5 @@
-import { Module } from '@vodyani/core';
-import { SwaggerInfrastructure } from '@vodyani/swagger';
+import { Module } from '@nestjs/common';
+import { SwaggerModule } from '@vodyani/swagger';
 
 import { ConfigModule } from './infrastructures/config/module';
 import { ConvertorModule } from './infrastructures/convertor/module';
@@ -12,7 +12,7 @@ const infrastructures = [
   ConvertorModule,
   LoggerModule.forRoot(),
   ValidatorModule,
-  SwaggerInfrastructure,
+  SwaggerModule,
 ];
 
 const modules = [

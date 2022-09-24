@@ -1,4 +1,4 @@
-import { Module } from '@vodyani/core';
+import { Module } from '@nestjs/common';
 
 import { DefaultController } from './controller';
 import { DefaultService } from './service';

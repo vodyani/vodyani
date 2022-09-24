@@ -1,4 +1,4 @@
-import { Injectable } from '@vodyani/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class DefaultService {

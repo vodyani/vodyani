@@ -1,5 +1,5 @@
+import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@vodyani/swagger';
-import { Controller, Get } from '@vodyani/core';
 
 import { DefaultService } from './service';
 

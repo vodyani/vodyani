@@ -1,4 +1,4 @@
-import { Module } from '@vodyani/core';
+import { Module } from '@nestjs/common';
 
 import { DtoCamelCasePipe } from './pipe';
 import { ResponseFormatInterceptor, ResponseSnakeCaseInterceptor } from './interceptor';

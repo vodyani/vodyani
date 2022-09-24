@@ -1,5 +1,6 @@
+import { INestApplication } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
-import { INestApplication, NestFactory } from '@vodyani/core';
 import { SwaggerProvider } from '@vodyani/swagger';
 import { Logger } from '@vodyani/winston';
 

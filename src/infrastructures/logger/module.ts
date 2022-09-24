@@ -1,8 +1,8 @@
-import { DynamicModule } from '@vodyani/core';
+import { DynamicModule } from '@nestjs/common';
 
-import { LoggerManager } from './manager';
 import { RequestExceptionFilter } from './filter';
 import { RequestLogInterceptor } from './interceptor';
+import { LoggerManager } from './manager';
 
 export class LoggerModule {
   static forRoot(): DynamicModule {

@@ -1,5 +1,5 @@
 import { map } from 'rxjs';
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@vodyani/core';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 
 import { isStreamableFile } from '@/core/method';
 import { HTTP_HEADER, httpStatus, HTTP_STATUS } from '@/core/common';

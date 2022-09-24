@@ -1,3 +1,3 @@
 export * from './rxjs';
-export * from './validate';
 export * from './transform';
+export * from './validate';
