@@ -1,4 +1,4 @@
-import { applyDecorators, UseInterceptors, Post } from '@nestjs/common';
+import { applyDecorators, Post, UseInterceptors } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
 /**

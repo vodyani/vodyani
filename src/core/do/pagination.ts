@@ -1,6 +1,6 @@
-import { toNumber } from '@vodyani/utils';
-import { ApiProperty } from '@vodyani/swagger';
 import { Expose, ValueTransformer } from '@vodyani/class-decorator';
+import { ApiProperty } from '@vodyani/swagger';
+import { toNumber } from '@vodyani/utils';
 
 export class PageDo {
   @Expose() @ValueTransformer(toNumber)

@@ -58,7 +58,7 @@
     "@nestjs/platform-express": "8.4.7",
     "@vodyani/ark": "^8.6.0",
     "@vodyani/class-decorator": "^8.2.3",
-    "@vodyani/core": "^8.8.0",
+    "@vodyani/core": "^8.8.1",
     "@vodyani/swagger": "^8.2.0",
     "@vodyani/utils": "^8.5.2",
     "@vodyani/winston": "^8.6.0",
