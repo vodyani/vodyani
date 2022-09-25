@@ -5,7 +5,7 @@ export const httpStatus = new Map([
    * In the following location, declare the base status code.
    */
   [HTTP_STATUS.SUCCESS, { code: 200, statusCode: 200, message: 'SUCCESS' }],
-  [HTTP_STATUS.REQUEST_SUCCESS, { code: 201, statusCode: 201, message: 'REQUEST_SUCCESS' }],
+  [HTTP_STATUS.CREATED, { code: 201, statusCode: 201, message: 'CREATED' }],
   [HTTP_STATUS.BAD_REQUEST, { code: 400, statusCode: 400, message: 'BAD_REQUEST' }],
   [HTTP_STATUS.UNAUTHORIZED, { code: 401, statusCode: 401, message: 'UNAUTHORIZED' }],
   [HTTP_STATUS.FORBIDDEN, { code: 403, statusCode: 403, message: 'FORBIDDEN' }],

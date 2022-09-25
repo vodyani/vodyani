@@ -1,2 +1,2 @@
-export * from './multer-file';
+export * from './form-data';
 export * from './swagger';
