@@ -1,3 +1,10 @@
+# [8.3.0](https://github.com/vodyani/vodyani/compare/v8.2.0...v8.3.0) (2022-09-25)
+
+
+### Features
+
+* resolved where post defaults to 201 ([671d1df](https://github.com/vodyani/vodyani/commit/671d1df4466f78f93db425ce484466fe0e5ed127))
+
 # [8.2.0](https://github.com/vodyani/vodyani/compare/v8.1.4...v8.2.0) (2022-09-24)
 
 
