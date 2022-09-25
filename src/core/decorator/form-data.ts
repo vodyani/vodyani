@@ -1,6 +1,5 @@
-import { applyDecorators, UseInterceptors } from '@nestjs/common';
+import { applyDecorators, Post, UseInterceptors } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
-import { Post } from '@vodyani/core';
 
 /**
  * Route handler (method) Decorator. Routes HTTP POST FormData requests to the specified path.

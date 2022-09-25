@@ -1,6 +1,6 @@
+import { Expose, ValueTransformer } from '@vodyani/class-decorator';
 import { ApiProperty } from '@vodyani/swagger';
 import { toNumber, toString } from '@vodyani/utils';
-import { Expose, ValueTransformer } from '@vodyani/class-decorator';
 
 export class PaginationQueryDto {
   @Expose() @ValueTransformer((data: string) => toNumber(data, 1))

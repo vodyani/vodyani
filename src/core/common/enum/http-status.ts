@@ -3,7 +3,7 @@ export enum HTTP_STATUS {
    * In the following location, declare the base status code.
    */
   SUCCESS = 200,
-  REQUEST_SUCCESS = 201,
+  CREATED = 201,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   FORBIDDEN = 403,
