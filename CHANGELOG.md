@@ -1,3 +1,10 @@
+## [8.4.2](https://github.com/vodyani/vodyani/compare/v8.4.1...v8.4.2) (2022-10-16)
+
+
+### Bug Fixes
+
+* modify the application initialization process ([6a5aa93](https://github.com/vodyani/vodyani/commit/6a5aa93210b9999ddf23cb9bc9d053b200f600ce))
+
 ## [8.4.1](https://github.com/vodyani/vodyani/compare/v8.4.0...v8.4.1) (2022-10-16)
 
 
