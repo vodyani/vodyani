@@ -22,9 +22,9 @@ export class LoggerManager extends AsyncProviderFactory {
   private async useFactory(
     config: ConfigProvider<Configuration>,
   ) {
-    const env = config.get('env');
-    const name = config.get('name');
-    let options = config.get('logger');
+    const env = config.search('env');
+    const name = config.search('name');
+    let options = config.search('logger');
 
     if (isValidArray(options.mode)) {
       if (options.mode.includes('File')) {

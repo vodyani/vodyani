@@ -61,7 +61,7 @@
     "@vodyani/core": "^8.9.8",
     "@vodyani/swagger": "^8.2.2",
     "@vodyani/utils": "^8.7.1",
-    "@vodyani/winston": "^8.6.0",
+    "@vodyani/winston": "^8.7.0",
     "dayjs": "1.11.5",
     "lodash": "4.17.21",
     "module-alias": "2.2.2",
