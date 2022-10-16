@@ -1,6 +1,6 @@
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
 import { This } from '@vodyani/class-decorator';
-import { AsyncInjectable, AsyncProvider, AsyncProviderFactory } from '@vodyani/core';
+import { AsyncInjectable, AsyncProviderFactory } from '@vodyani/core';
 import { isValidArray, toDeepMerge } from '@vodyani/utils';
 import { LoggerFactory } from '@vodyani/winston';
 
@@ -8,7 +8,7 @@ import { logsPath } from '@/core/common';
 import { Configuration } from '@/infrastructures/config/common';
 
 @AsyncInjectable
-export class LoggerManager extends AsyncProvider implements AsyncProviderFactory {
+export class LoggerManager extends AsyncProviderFactory {
   @This
   public create() {
     return {

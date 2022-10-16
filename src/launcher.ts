@@ -1,17 +1,18 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
-import { SwaggerProvider } from '@vodyani/swagger';
+import { DocumentBuilder, SwaggerProvider } from '@vodyani/swagger';
 import { Logger } from '@vodyani/winston';
 
 import { Container } from './container';
-import { Configuration } from './infrastructures/config/common';
-import { ResponseFormatInterceptor, ResponseSnakeCaseInterceptor } from './infrastructures/convertor/interceptor';
-import { DtoCamelCasePipe } from './infrastructures/convertor/pipe';
-import { RequestExceptionFilter } from './infrastructures/logger/filter';
-import { RequestLogInterceptor } from './infrastructures/logger/interceptor';
-import { LoggerManager } from './infrastructures/logger/manager';
-import { DtoValidatePipe } from './infrastructures/validator/pipe';
+
+import { Configuration } from '@/infrastructures/config/common';
+import { ResponseFormatInterceptor, ResponseSnakeCaseInterceptor } from '@/infrastructures/convertor/interceptor';
+import { DtoCamelCasePipe } from '@/infrastructures/convertor/pipe';
+import { RequestExceptionFilter } from '@/infrastructures/logger/filter';
+import { RequestLogInterceptor } from '@/infrastructures/logger/interceptor';
+import { LoggerManager } from '@/infrastructures/logger/manager';
+import { DtoValidatePipe } from '@/infrastructures/validator/pipe';
 
 export class Launcher {
   private app: INestApplication;
@@ -31,9 +32,9 @@ export class Launcher {
   }
 
   private useAOP() {
+    const logger = this.app.get(LoggerManager.getToken());
     const dtoValidatePipe = this.app.get(DtoValidatePipe);
     const dtoCamelCasePipe = this.app.get(DtoCamelCasePipe);
-    const logger = this.app.get<Logger>(LoggerManager.getToken());
     const requestLogInterceptor = this.app.get(RequestLogInterceptor);
     const requestExceptionFilter = this.app.get(RequestExceptionFilter);
     const responseFormatInterceptor = this.app.get(ResponseFormatInterceptor);
@@ -50,10 +51,12 @@ export class Launcher {
     const { enable, path } = config.get('swagger');
 
     if (enable) {
-      const swagger = this.app.get<SwaggerProvider>(SwaggerProvider);
-      const options = swagger.getConfigBuilder().build();
-
-      swagger.setup(path, this.app, options);
+      this.app
+        .get<SwaggerProvider>(SwaggerProvider)
+        .setConfig(new DocumentBuilder().build())
+        .setNestApplication(this.app)
+        .setPath(path)
+        .setup();
     }
   }
 
