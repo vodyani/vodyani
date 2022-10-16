@@ -1,3 +1,10 @@
+# [8.4.0](https://github.com/vodyani/vodyani/compare/v8.3.0...v8.4.0) (2022-10-16)
+
+
+### Features
+
+* optimized frame loading speed using new versions of ark and swagger ([06f5973](https://github.com/vodyani/vodyani/commit/06f59737fcdb6be27a75bfd75d4ed61f4d64aba6))
+
 # [8.3.0](https://github.com/vodyani/vodyani/compare/v8.2.0...v8.3.0) (2022-09-25)
 
 
