@@ -80,10 +80,15 @@ export class Launcher {
   private async start() {
     const config = this.app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
     const logger = this.app.get<Logger>(LoggerManager.getToken());
+    const { enable, path } = config.search('swagger');
     const port = config.search('port');
 
     await this.app.listen(port);
 
     logger.info(`Vodyani Listen: http://localhost:${port} 🚀`);
+
+    if (enable) {
+      logger.info(`Vodyani Swagger: http://localhost:${port}/${path} 📚`);
+    }
   }
 }
