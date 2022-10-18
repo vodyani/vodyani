@@ -1,6 +1,5 @@
 {
-  "swagger": {
-    "enable": true,
-    "path": "docs"
+  "logger": {
+    "mode": ["Console"]
   }
 }

@@ -1,7 +1,4 @@
 {
-  "swagger": {
-    "enable": false
-  },
   "logger": {
     "mode": ["DailyRotateFile"],
     "dailyRotateFileOptions": {
