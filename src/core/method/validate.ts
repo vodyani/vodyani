@@ -1,12 +1,27 @@
 import { StreamableFile } from '@nestjs/common';
-import { isValidArray, isValidBuffer } from '@vodyani/utils';
+import { isValid, isValidArray, isValidArrayBuffer, isValidBuffer, isValidStream } from '@vodyani/utils';
 
-export function isMulterFile(data: any) {
-  return isValidArray(data)
-    ? data.findIndex((e: Express.Multer.File) => isValidBuffer(e.buffer)) !== -1
-    : isValidBuffer(data.buffer);
-}
+export function hasStreamable(data: any): boolean {
+  if (!isValid(data)) {
+    return false;
+  }
 
-export function isStreamableFile(data: any) {
-  return data instanceof StreamableFile;
+  const cases = [
+    isValidBuffer,
+    isValidStream,
+    isValidArrayBuffer,
+    (data: any) => data instanceof StreamableFile,
+  ];
+
+  for (const fn of cases) {
+    if (fn(data)) {
+      return true;
+    }
+  }
+
+  if (isValidArray(data)) {
+    return (data as any[]).findIndex(e => hasStreamable(e)) !== -1;
+  }
+
+  return false;
 }
