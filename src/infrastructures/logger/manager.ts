@@ -4,7 +4,7 @@ import { AsyncInjectable, AsyncProviderFactory } from '@vodyani/core';
 import { isValidArray, toDeepMerge } from '@vodyani/utils';
 import { LoggerFactory } from '@vodyani/winston';
 
-import { logsPath } from '@/core/common';
+import { tempLogPath } from '@/core/common';
 import { Configuration } from '@/infrastructures/config/common';
 
 @AsyncInjectable
@@ -28,11 +28,11 @@ export class LoggerManager extends AsyncProviderFactory {
 
     if (isValidArray(options.mode)) {
       if (options.mode.includes('File')) {
-        options = toDeepMerge({ fileOptions: { dirname: logsPath }}, options);
+        options = toDeepMerge({ fileOptions: { dirname: tempLogPath }}, options);
       }
 
       if (options.mode.includes('DailyRotateFile')) {
-        options = toDeepMerge({ dailyRotateFileOptions: { dirname: logsPath }}, options);
+        options = toDeepMerge({ dailyRotateFileOptions: { dirname: tempLogPath }}, options);
       }
     }
 

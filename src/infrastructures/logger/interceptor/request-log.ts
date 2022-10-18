@@ -16,7 +16,7 @@ export class RequestLogInterceptor implements NestInterceptor {
   public intercept(ctx: ExecutionContext, next: CallHandler) {
     const { originalUrl, body, query, method, headers } = ctx.switchToHttp().getRequest();
 
-    headers[HTTP_HEADER.RID] = headers[HTTP_HEADER.RID] || uuid();
+    headers[HTTP_HEADER.REQUEST_ID] = headers[HTTP_HEADER.REQUEST_ID] || uuid();
 
     return next.handle().pipe(tap(result => {
       this.logger.info(

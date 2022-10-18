@@ -4,7 +4,7 @@ import { Logger } from '@vodyani/winston';
 
 import { LoggerManager } from '../manager';
 
-import { httpStatus, HTTP_HEADER, Res, uuid } from '@/core/common';
+import { httpStatus, HTTP_HEADER, uuid } from '@/core/common';
 import { toDeepSnakeCase } from '@/core/method';
 
 @Catch()
@@ -14,7 +14,7 @@ export class RequestExceptionFilter implements ExceptionFilter {
   ) {}
 
   catch(exception: HttpException, host: ArgumentsHost) {
-    const response = host.switchToHttp().getResponse<Res>();
+    const response = host.switchToHttp().getResponse();
     const { originalUrl, body, query, method, headers } = host.switchToHttp().getRequest();
 
     const result = httpStatus.get(
@@ -27,7 +27,7 @@ export class RequestExceptionFilter implements ExceptionFilter {
       requestTime: Date.now(),
       responseTime: Date.now(),
       message: exception.message || result.message,
-      requestId: headers[HTTP_HEADER.RID] || uuid(),
+      requestId: headers[HTTP_HEADER.REQUEST_ID] || uuid(),
     };
 
     this.logger.error(

@@ -1,19 +1,22 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { map } from 'rxjs';
+import { IResponseBody } from '@vodyani/core';
 
-import { httpStatus, HTTP_HEADER, HTTP_STATUS, Req, Res } from '@/core/common';
-import { isStreamableFile } from '@/core/method';
+import { httpStatus, HTTP_HEADER, HTTP_STATUS } from '@/core/common';
+import { hasStreamable } from '@/core/method';
 
 @Injectable()
 export class ResponseFormatInterceptor implements NestInterceptor {
   public intercept(ctx: ExecutionContext, next: CallHandler) {
     const requestTime = Date.now();
-    const requestId = ctx.switchToHttp().getRequest<Req>().headers[HTTP_HEADER.RID];
+    const requestId = ctx.switchToHttp().getRequest().headers[HTTP_HEADER.REQUEST_ID];
 
     return next.handle().pipe(map(result => {
-      if (isStreamableFile(result)) return result;
+      if (hasStreamable(result)) {
+        return result;
+      }
 
-      const res = ctx.switchToHttp().getResponse<Res>();
+      const res = ctx.switchToHttp().getResponse();
 
       // Resolved where `POST` defaults to 201.
       if (res.statusCode === HTTP_STATUS.CREATED) {
@@ -27,7 +30,7 @@ export class ResponseFormatInterceptor implements NestInterceptor {
       const message = status.message || '';
       const code = status.code || HTTP_STATUS.BAD_SERVER;
 
-      return { code, message, requestId, requestTime, responseTime, data };
+      return { code, message, requestId, requestTime, responseTime, data } as IResponseBody;
     }));
   }
 }
