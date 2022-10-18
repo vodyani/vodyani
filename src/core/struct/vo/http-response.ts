@@ -5,19 +5,19 @@ import { ApiProperty, SwaggerEntity } from '@vodyani/swagger';
 @SwaggerEntity
 export class ResponsePageVO implements IPage {
   @Expose()
-  @ApiProperty({ name: 'index', type: Number, example: 1, required: true })
+  @ApiProperty({ name: 'index', type: Number, required: true, description: 'page index' })
   public index: number;
 
   @Expose()
-  @ApiProperty({ name: 'size', type: Number, example: 20, required: true })
+  @ApiProperty({ name: 'size', type: Number, required: true, description: 'page size' })
   public size: number;
 
   @Expose()
-  @ApiProperty({ name: 'count', type: Number, example: 2333, required: true })
+  @ApiProperty({ name: 'count', type: Number, required: true, description: 'total count' })
   public count: number;
 
   @Expose()
-  @ApiProperty({ name: 'size', type: Number, example: 233, required: true })
+  @ApiProperty({ name: 'size', type: Number, required: true, description: 'total page count' })
   public pageCount: number;
 }
 
