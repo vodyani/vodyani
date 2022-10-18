@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ArkManager, ConfigProvider } from '@vodyani/ark';
 import { Logger } from '@vodyani/winston';
+import { DocumentBuilder, SwaggerProvider } from '@vodyani/swagger';
 
 import { Container } from './app.container';
 
@@ -22,6 +23,7 @@ export class Launcher {
     this.uncaughtException();
     this.useGlobalLogger();
     this.useGlobalAOP();
+    this.useSwagger();
     this.start();
   }
 
@@ -36,6 +38,21 @@ export class Launcher {
     const logger = this.app.get(LoggerManager.getToken());
 
     this.app.useLogger(logger);
+  }
+
+  private useSwagger() {
+    const config = this.app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
+    const swagger = this.app.get(SwaggerProvider);
+
+    const { enable, path } = config.search('swagger');
+
+    if (enable) {
+      swagger
+        .setConfig(new DocumentBuilder().build())
+        .setNestApplication(this.app)
+        .setPath(path)
+        .setup();
+    }
   }
 
   private useGlobalAOP() {
@@ -65,10 +82,15 @@ export class Launcher {
   private async start() {
     const config = this.app.get<ConfigProvider<Configuration>>(ArkManager.getToken());
     const logger = this.app.get<Logger>(LoggerManager.getToken());
+    const { enable, path } = config.search('swagger');
     const port = config.search('port');
 
     await this.app.listen(port);
 
     logger.info(`Vodyani Listen: http://localhost:${port} 🚀`);
+
+    if (enable) {
+      logger.info(`Vodyani Swagger: http://localhost:${port}/${path} 📚`);
+    }
   }
 }

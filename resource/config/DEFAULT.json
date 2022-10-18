@@ -1,4 +1,7 @@
 {
+  "swagger": {
+    "enable": false
+  },
   "logger": {
     "mode": ["Console"]
   }

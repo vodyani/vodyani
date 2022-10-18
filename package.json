@@ -59,6 +59,7 @@
     "@vodyani/ark": "^8.7.7",
     "@vodyani/class-decorator": "^8.2.3",
     "@vodyani/core": "^8.10.0",
+    "@vodyani/swagger": "^8.2.4",
     "@vodyani/utils": "^8.8.1",
     "@vodyani/winston": "^8.7.0",
     "dayjs": "1.11.5",
