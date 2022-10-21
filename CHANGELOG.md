@@ -1,3 +1,10 @@
+## [8.5.1](https://github.com/vodyani/vodyani/compare/v8.5.0...v8.5.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* fix the ark deps ([f60a2fb](https://github.com/vodyani/vodyani/commit/f60a2fb3ddc591920496b809cea3cc57230aff2d))
+
 # [8.5.0](https://github.com/vodyani/vodyani/compare/v8.4.2...v8.5.0) (2022-10-18)
 
 
