@@ -10,7 +10,8 @@ import { toDeepSnakeCase } from '@/core/method';
 @Catch()
 export class RequestExceptionFilter implements ExceptionFilter {
   constructor(
-    @AsyncInject(LoggerManager) private readonly logger: Logger,
+    @AsyncInject(LoggerManager)
+    private readonly logger: Logger,
   ) {}
 
   catch(exception: HttpException, host: ArgumentsHost) {
