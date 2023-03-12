@@ -80,7 +80,7 @@
     "@types/supertest": "2.0.12",
     "@types/uuid": "^8.3.4",
     "@vodyani/eslint-config": "^1.1.0",
-    "husky": "7.0.4",
+    "husky": "8.0.3",
     "jest": "27.5.1",
     "supertest": "6.2.4",
     "ts-jest": "27.1.5",
