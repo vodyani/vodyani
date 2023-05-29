@@ -1,3 +1,24 @@
+## [8.5.1](https://github.com/vodyani/vodyani/compare/v8.5.0...v8.5.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* fix the ark deps ([f60a2fb](https://github.com/vodyani/vodyani/commit/f60a2fb3ddc591920496b809cea3cc57230aff2d))
+
+# [8.5.0](https://github.com/vodyani/vodyani/compare/v8.4.2...v8.5.0) (2022-10-18)
+
+
+### Bug Fixes
+
+* modify method dependencies ([a604fc5](https://github.com/vodyani/vodyani/commit/a604fc52ff022cd75763d556c90b6ad83394708b))
+
+
+### Features
+
+* adopt easy mode without adding swagger ([34c1793](https://github.com/vodyani/vodyani/commit/34c17936c04507418edb97cb75ac1bf0f2f4e3d8))
+* remove the common top-level interface and remove the swagger dependencies ([573ff3c](https://github.com/vodyani/vodyani/commit/573ff3ce4ffb7335d8f8505704daa573b17c28ca))
+* streamline the code 😁 ([fd8eb08](https://github.com/vodyani/vodyani/commit/fd8eb083ba75bc5c5eccc2f3739f2d931bbe8744))
+
 ## [8.4.2](https://github.com/vodyani/vodyani/compare/v8.4.1...v8.4.2) (2022-10-16)
 
 

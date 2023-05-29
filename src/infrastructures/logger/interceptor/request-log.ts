@@ -10,7 +10,8 @@ import { HTTP_HEADER, uuid } from '@/core/common';
 @Injectable()
 export class RequestLogInterceptor implements NestInterceptor {
   constructor(
-    @AsyncInject(LoggerManager) private readonly logger: Logger,
+    @AsyncInject(LoggerManager)
+    private readonly logger: Logger,
   ) {}
 
   public intercept(ctx: ExecutionContext, next: CallHandler) {
